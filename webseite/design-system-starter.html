@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="favicon.svg?v=3" rel="icon" type="image/svg+xml">
+  <link href="favicon.svg?v=3" rel="shortcut icon" type="image/svg+xml">
+  <title>Design System — Starter</title>
+  <style>
+    :root {
+      --bg: #f7f7fa;
+      --surface: #fff;
+      --text: #111827;
+      --muted: #6b7280;
+      --primary: #2563eb;
+      --radius: 8px;
+      --gap: 16px;
+    }
+    [data-theme="dark"] {
+      --bg:#0b1220;
+      --surface:#0f1724;
+      --text:#e6eef8;
+      --muted:#9aa6bf;
+      --primary:#60a5fa;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text);padding:24px;margin:0}
+    .container{max-width:960px;margin:0 auto;background:var(--surface);padding:24px;border-radius:var(--radius);box-shadow:0 2px 8px rgba(0,0,0,0.06);gap:var(--gap);display:flex;flex-direction:column}
+    .header{display:flex;justify-content:space-between;align-items:center}
+    .controls{display:flex;gap:8px;align-items:center}
+    .btn{background:var(--primary);color:white;padding:10px 14px;border-radius:6px;border:0;cursor:pointer}
+    .btn.ghost{background:transparent;border:1px solid rgba(0,0,0,0.08);color:var(--text)}
+    .input{padding:10px;border-radius:6px;border:1px solid rgba(0,0,0,0.08);width:220px}
+    .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .swatches{display:flex;gap:8px;align-items:center}
+    .swatch{width:40px;height:40px;border-radius:6px;border:1px solid rgba(0,0,0,0.06)}
+    .kv{font-size:12px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="container" id="app">
+    <div class="header">
+      <h1>Design System — Starter</h1>
+      <div class="controls">
+        <button class="btn" id="themeToggle">Toggle Theme</button>
+      </div>
+    </div>
+
+    <section>
+      <h2>Buttons</h2>
+      <div class="row">
+        <button class="btn">Primary</button>
+        <button class="btn ghost">Ghost</button>
+        <button class="btn" style="background:#10b981">Success</button>
+        <button class="btn" style="background:#ef4444">Danger</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Form Controls</h2>
+      <div class="row">
+        <input class="input" placeholder="Text input">
+        <select class="input">
+          <option>Option A</option><option>Option B</option>
+        </select>
+      </div>
+    </section>
+
+    <section>
+      <h2>Color Tokens</h2>
+      <div class="row swatches">
+        <div><div class="swatch" style="background:var(--primary)"></div><div class="kv">--primary</div></div>
+        <div><div class="swatch" style="background:var(--surface)"></div><div class="kv">--surface</div></div>
+        <div><div class="swatch" style="background:var(--bg)"></div><div class="kv">--bg</div></div>
+      </div>
+    </section>
+
+    <footer style="margin-top:18px;color:var(--muted);font-size:13px">Starter template — erweitere Komponenten nach Bedarf.</footer>
+  </div>
+
+  <script>
+    const btn=document.getElementById('themeToggle');
+    btn.addEventListener('click', ()=>{
+      const el=document.documentElement;
+      if(el.getAttribute('data-theme')==='dark'){
+        el.removeAttribute('data-theme');
+      } else {
+        el.setAttribute('data-theme','dark');
+      }
+    });
+  </script>
+</body>
+</html>

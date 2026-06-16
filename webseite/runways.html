@@ -1,0 +1,489 @@
+<!-- Dashboard - Vereisungserkennung -->
+<!DOCTYPE html>
+
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flughafen ANR - Runways Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#161b22",
+                        "on-secondary-container": "#91f294",
+                        "on-secondary-fixed": "#002106",
+                        "outline": "#8f9095",
+                        "surface": "#0b141c",
+                        "outline-variant": "#45474b",
+                        "primary": "#c2c7d0",
+                        "surface-dim": "#0b141c",
+                        "on-primary": "#2c3138",
+                        "surface-container-lowest": "#060f16",
+                        "tertiary-fixed": "#ffdeaa",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#fabc45",
+                        "surface-container-high": "#222b33",
+                        "on-tertiary-fixed": "#271900",
+                        "surface-container": "#182028",
+                        "inverse-on-surface": "#29313a",
+                        "secondary-container": "#007124",
+                        "tertiary": "#fabc45",
+                        "secondary": "#7bdb80",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#2d363e",
+                        "on-tertiary-fixed-variant": "#5f4100",
+                        "on-tertiary-container": "#ac7a00",
+                        "surface-container-highest": "#2d363e",
+                        "primary-fixed": "#dee2ec",
+                        "secondary-fixed": "#97f999",
+                        "inverse-primary": "#5a5f67",
+                        "surface-tint": "#c2c7d0",
+                        "inverse-surface": "#dae3ee",
+                        "surface-bright": "#313a43",
+                        "on-surface": "#dae3ee",
+                        "secondary-fixed-dim": "#7bdb80",
+                        "on-surface-variant": "#c5c6cb",
+                        "tertiary-container": "#261800",
+                        "primary-fixed-dim": "#c2c7d0",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#42474f",
+                        "background": "#0b141c",
+                        "on-secondary": "#00390e",
+                        "surface-container-low": "#141c24",
+                        "on-background": "#dae3ee",
+                        "on-primary-container": "#7f838c",
+                        "on-tertiary": "#422c00",
+                        "on-error": "#690005",
+                        "on-primary-fixed": "#171c23",
+                        "on-secondary-fixed-variant": "#005319"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xl": "40px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "base": "4px",
+                        "margin-desktop": "32px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "data-display": ["JetBrains Mono"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "data-label": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "data-display": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "data-label": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0b141c;
+            color: #dae3ee;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .risk-glow-red { box-shadow: 0 0 12px rgba(255, 180, 171, 0.3); }
+        .risk-glow-yellow { box-shadow: 0 0 12px rgba(250, 188, 69, 0.3); }
+        .risk-glow-green { box-shadow: 0 0 12px rgba(123, 219, 128, 0.3); }
+        
+        /* Custom scrollbar for technical UI */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0b141c; }
+        ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #45474b; }
+
+        .runway-segment {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .runway-segment:hover {
+            filter: brightness(1.2);
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen">
+<!-- TopNavBar -->
+<nav class="flex justify-between items-center px-lg w-full sticky top-0 z-50 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant w-full h-16">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface">Flughafen ANR</span>
+<div class="h-6 w-px bg-outline-variant mx-sm"></div>
+<span class="font-headline-sm text-headline-sm text-primary dark:text-primary">Winterdienst-Leitstelle</span>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:scale-95 transition-colors hover:bg-surface-container-highest p-2 rounded-lg">schedule</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:scale-95 transition-colors hover:bg-surface-container-highest p-2 rounded-lg">sensors</span>
+</div>
+<div class="flex items-center gap-sm bg-surface-container-highest px-md py-sm rounded-lg cursor-pointer active:scale-95 transition-all">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface">CHIEF SAFETY OFFICER</span>
+</div>
+</div>
+</nav>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="flex flex-col h-screen pt-4 bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant h-full w-64 shrink-0">
+<div class="px-md mb-xl">
+<div class="flex items-center gap-sm mb-xs">
+<span class="material-symbols-outlined text-secondary">ac_unit</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">ANR-System</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant opacity-70">PRECISION MONITORING</span>
+</div>
+<nav class="flex flex-col gap-xs flex-1">
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">DASHBOARD</span>
+</a>
+<a class="text-secondary font-bold border-l-4 border-secondary bg-surface-container-highest px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">flight_takeoff</span>
+<span class="font-label-caps text-label-caps">RUNWAYS</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">router</span>
+<span class="font-label-caps text-label-caps">SENSORS</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-caps text-label-caps">ALARMS</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-caps text-label-caps">HISTORY</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-caps text-label-caps">REPORTS</span>
+</a>
+<div class="mt-auto pb-lg">
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">SETTINGS</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto p-lg bg-surface">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Bahnbetriebszustand</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+                        Echtzeit-Analyse der Start- und Landebahnen für den Winterdienst. Priorisierung basierend auf Risiko-Score und Oberflächenmetriken.
+                    </p>
+</div>
+<div class="flex gap-sm">
+<button class="bg-secondary-container text-on-secondary-container px-lg py-sm rounded-lg flex items-center gap-sm font-label-caps text-label-caps border border-transparent hover:brightness-110 transition-all">
+<span class="material-symbols-outlined text-sm">edit_road</span>
+                        EINSATZPLANUNG
+                    </button>
+<button class="bg-surface-container-high text-on-surface px-lg py-sm rounded-lg border border-outline-variant font-label-caps text-label-caps hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined text-sm">refresh</span>
+                        AKTUALISIEREN
+                    </button>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Runway 07/25 Panel -->
+<div class="col-span-12 bg-surface-container rounded-xl border border-outline-variant overflow-hidden">
+<div class="p-md flex justify-between items-center border-b border-outline-variant bg-surface-container-high">
+<div class="flex items-center gap-md">
+<span class="font-headline-sm text-headline-sm text-on-surface">Runway 07 / 25</span>
+<span class="bg-error-container text-on-error-container px-sm py-xs rounded font-label-caps text-label-caps flex items-center gap-xs">
+<span class="material-symbols-outlined text-xs">warning</span>
+                                KRITISCH
+                            </span>
+</div>
+<div class="flex items-center gap-lg">
+<div class="text-right">
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">Trend (2h)</p>
+<div class="h-6 w-32 flex items-end gap-1">
+<!-- Simple Sparkline Representation -->
+<div class="bg-error h-3/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-4/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-5/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-6/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-5/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-4/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-3/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-2/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-3/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-4/6 w-1 rounded-t-sm"></div>
+</div>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<div class="text-right">
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">Schnitt Temp.</p>
+<p class="font-data-display text-data-display text-error">-2.4°C</p>
+</div>
+</div>
+</div>
+<!-- Visual Representation -->
+<div class="p-lg relative">
+<div class="h-16 w-full bg-[#161B22] rounded flex items-stretch gap-1 relative overflow-hidden border border-[#30363D]">
+<!-- Runway Markings -->
+<div class="absolute inset-x-0 top-1/2 -translate-y-1/2 border-t border-dashed border-outline-variant opacity-30 h-px w-full"></div>
+<!-- Segments -->
+<div class="runway-segment flex-1 bg-secondary-container/20 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+<div class="hidden group-hover:block absolute -top-12 left-1/2 -translate-x-1/2 bg-surface-container-highest p-2 rounded shadow-xl border border-outline-variant z-20 w-32">
+<p class="font-label-caps text-[9px] text-on-secondary">ZONE A: SICHER</p>
+<p class="font-data-label text-data-label">Temp: +0.5°C</p>
+</div>
+</div>
+<div class="runway-segment flex-1 bg-tertiary-container/30 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-tertiary"></div>
+</div>
+<div class="runway-segment flex-1 bg-error-container/40 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-error risk-glow-red"></div>
+</div>
+<div class="runway-segment flex-1 bg-error-container/50 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-error risk-glow-red"></div>
+</div>
+<div class="runway-segment flex-1 bg-error-container/40 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-error risk-glow-red"></div>
+</div>
+<div class="runway-segment flex-1 bg-tertiary-container/30 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-tertiary"></div>
+</div>
+<div class="runway-segment flex-1 bg-secondary-container/20 relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+</div>
+<span class="absolute left-2 top-1/2 -translate-y-1/2 font-data-label text-on-surface-variant opacity-50 select-none">07</span>
+<span class="absolute right-2 top-1/2 -translate-y-1/2 font-data-label text-on-surface-variant opacity-50 select-none">25</span>
+</div>
+<!-- Zone Data Row -->
+<div class="grid grid-cols-7 gap-sm mt-md">
+<div class="p-sm text-center border-t border-outline-variant">
+<p class="font-data-label text-data-label text-on-surface-variant">Zone 1</p>
+<p class="font-data-display text-[14px] text-secondary">+0.5°C</p>
+<p class="font-label-caps text-[9px] text-outline">Feuchte: 12%</p>
+</div>
+<div class="p-sm text-center border-t border-outline-variant">
+<p class="font-data-label text-data-label text-on-surface-variant">Zone 2</p>
+<p class="font-data-display text-[14px] text-tertiary">-0.2°C</p>
+<p class="font-label-caps text-[9px] text-outline">Feuchte: 45%</p>
+</div>
+<div class="p-sm text-center border-t border-outline-variant bg-error-container/10">
+<p class="font-data-label text-data-label text-on-surface-variant">TDZ</p>
+<p class="font-data-display text-[14px] text-error">-2.8°C</p>
+<p class="font-label-caps text-[9px] text-error-container">Feuchte: 88%</p>
+</div>
+<div class="p-sm text-center border-t border-outline-variant bg-error-container/10">
+<p class="font-data-label text-data-label text-on-surface-variant">Center</p>
+<p class="font-data-display text-[14px] text-error">-3.1°C</p>
+<p class="font-label-caps text-[9px] text-error-container">Feuchte: 92%</p>
+</div>
+<div class="p-sm text-center border-t border-outline-variant bg-error-container/10">
+<p class="font-data-label text-data-label text-on-surface-variant">Zone 5</p>
+<p class="font-data-display text-[14px] text-error">-2.9°C</p>
+<p class="font-label-caps text-[9px] text-error-container">Feuchte: 85%</p>
+</div>
+<div class="p-sm text-center border-t border-outline-variant">
+<p class="font-data-label text-data-label text-on-surface-variant">Zone 6</p>
+<p class="font-data-display text-[14px] text-tertiary">-0.8°C</p>
+<p class="font-label-caps text-[9px] text-outline">Feuchte: 52%</p>
+</div>
+<div class="p-sm text-center border-t border-outline-variant">
+<p class="font-data-label text-data-label text-on-surface-variant">Zone 7</p>
+<p class="font-data-display text-[14px] text-secondary">+0.2°C</p>
+<p class="font-label-caps text-[9px] text-outline">Feuchte: 18%</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Runway 11/29 Panel -->
+<div class="col-span-12 bg-surface-container rounded-xl border border-outline-variant overflow-hidden">
+<div class="p-md flex justify-between items-center border-b border-outline-variant bg-surface-container-high">
+<div class="flex items-center gap-md">
+<span class="font-headline-sm text-headline-sm text-on-surface">Runway 11 / 29</span>
+<span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded font-label-caps text-label-caps flex items-center gap-xs">
+<span class="material-symbols-outlined text-xs">check_circle</span>
+                                NOMINAL
+                            </span>
+</div>
+<div class="flex items-center gap-lg">
+<div class="text-right">
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">Trend (2h)</p>
+<div class="h-6 w-32 flex items-end gap-1">
+<div class="bg-secondary h-2/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-3/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-4/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-3/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-2/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-3/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-4/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-5/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-4/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-5/6 w-1 rounded-t-sm"></div>
+</div>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<div class="text-right">
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">Schnitt Temp.</p>
+<p class="font-data-display text-data-display text-secondary">+1.2°C</p>
+</div>
+</div>
+</div>
+<!-- Visual Representation -->
+<div class="p-lg">
+<div class="h-16 w-full bg-[#161B22] rounded flex items-stretch gap-1 relative overflow-hidden border border-[#30363D]">
+<div class="absolute inset-x-0 top-1/2 -translate-y-1/2 border-t border-dashed border-outline-variant opacity-30 h-px w-full"></div>
+<!-- All Green Segments -->
+<div class="runway-segment flex-1 bg-secondary-container/20 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+</div>
+<div class="runway-segment flex-1 bg-secondary-container/20 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+</div>
+<div class="runway-segment flex-1 bg-secondary-container/20 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+</div>
+<div class="runway-segment flex-1 bg-secondary-container/20 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+</div>
+<div class="runway-segment flex-1 bg-secondary-container/20 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+</div>
+<div class="runway-segment flex-1 bg-secondary-container/20 relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+</div>
+<span class="absolute left-2 top-1/2 -translate-y-1/2 font-data-label text-on-surface-variant opacity-50 select-none">11</span>
+<span class="absolute right-2 top-1/2 -translate-y-1/2 font-data-label text-on-surface-variant opacity-50 select-none">29</span>
+</div>
+</div>
+</div>
+<!-- Secondary Data Cards -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container rounded-xl border border-outline-variant p-md">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-sm">ac_unit</span>
+                        STREUMITTEL-BESTAND
+                    </h3>
+<div class="space-y-md">
+<div>
+<div class="flex justify-between mb-xs">
+<span class="font-body-md text-body-md text-on-surface">NaCl (Flüssig)</span>
+<span class="font-data-label text-data-label text-on-surface">82%</span>
+</div>
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[82%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-xs">
+<span class="font-body-md text-body-md text-on-surface">Formiat (Granulat)</span>
+<span class="font-data-label text-data-label text-on-surface">45%</span>
+</div>
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[45%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 bg-surface-container rounded-xl border border-outline-variant p-md">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-sm">thermometer</span>
+                        METEOROLOGIE
+                    </h3>
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-surface-variant p-sm rounded border border-outline-variant">
+<p class="font-label-caps text-[10px] text-outline uppercase">Taupunkt</p>
+<p class="font-data-display text-data-display text-on-surface">-4.1°C</p>
+</div>
+<div class="bg-surface-variant p-sm rounded border border-outline-variant">
+<p class="font-label-caps text-[10px] text-outline uppercase">Wind (Bft)</p>
+<p class="font-data-display text-data-display text-on-surface">18 KT NW</p>
+</div>
+<div class="bg-surface-variant p-sm rounded border border-outline-variant">
+<p class="font-label-caps text-[10px] text-outline uppercase">Sichtweite</p>
+<p class="font-data-display text-data-display text-secondary">8000m</p>
+</div>
+<div class="bg-surface-variant p-sm rounded border border-outline-variant">
+<p class="font-label-caps text-[10px] text-outline uppercase">Niederschlag</p>
+<p class="font-data-display text-data-display text-on-surface">Leichter Schnee</p>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 bg-surface-container rounded-xl border border-outline-variant p-md">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-sm">hail</span>
+                        GEFRIERPROGNOSE (1H)
+                    </h3>
+<div class="flex items-center gap-lg">
+<div class="relative w-20 h-20 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90">
+<circle class="text-surface-variant" cx="40" cy="40" fill="transparent" r="34" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-error" cx="40" cy="40" fill="transparent" r="34" stroke="currentColor" stroke-dasharray="213" stroke-dashoffset="64" stroke-width="6"></circle>
+</svg>
+<span class="absolute font-data-display text-data-display text-error">70%</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Gefahr von Eisregen</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Erhöhtes Risiko ab 23:15 Uhr Lokalzeit.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer Status Bar -->
+<footer class="h-8 bg-surface-container-lowest border-t border-outline-variant flex items-center px-lg justify-between shrink-0">
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">System Online</span>
+</div>
+<div class="h-3 w-px bg-outline-variant"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Sensoren: 124/124 Aktiv</span>
+</div>
+<div class="flex items-center gap-md">
+<span class="font-data-label text-[10px] text-on-surface-variant">Letztes Update: 22:42:05 UTC</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">security</span>
+</div>
+</footer>
+<script>
+        // Micro-interaction logic for segment highlighting
+        document.querySelectorAll('.runway-segment').forEach(segment => {
+            segment.addEventListener('mouseenter', () => {
+                // Potential to update a central data display or context panel
+            });
+        });
+    </script>
+<script src="navigation.js"></script>
+</body></html>

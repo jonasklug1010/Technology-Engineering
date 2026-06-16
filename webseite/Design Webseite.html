@@ -1,0 +1,1907 @@
+<!-- Design System -->
+<!DOCTYPE html>
+
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMwYjE0MWMiLz4KICA8cGF0aCBmaWxsPSIjN2JkYjgwIiBkPSJNNTEuOCAyOS4yYzIuMyAxIDMuNyAyLjIgMy43IDMuOHMtMS40IDIuOC0zLjcgMy44TDM3LjYgNDNsLTIuOCAxMS42Yy0uMyAxLjEtMS43IDEuNS0yLjUuN2wtNS43LTYuNi04LjkgMy44Yy0xLjQuNi0yLjktLjYtMi42LTIuMWwyLjQtMTAuM0w4LjIgMzYuOGMtMi4zLTEtMy43LTIuMi0zLjctMy44czEuNC0yLjggMy43LTMuOGw5LjMtMy4zLTIuNC0xMC4zYy0uMy0xLjUgMS4yLTIuNyAyLjYtMi4xbDguOSAzLjggNS43LTYuNmMuOC0uOCAyLjItLjQgMi41LjdMMzcuNiAyM2wxNC4yIDYuMloiLz4KICA8cGF0aCBmaWxsPSIjMGIxNDFjIiBkPSJNNTAuMSAzMyAzNCAzMC40IDI5LjcgMTZsLTQuOSAxMC43TDEwLjIgMzNsMTQuNiA2LjNMMjkuNyA1MCAzNCAzNS42IDUwLjEgMzNaIiBvcGFjaXR5PSIuMjgiLz4KPC9zdmc+Cg==" rel="icon" type="image/svg+xml"/>
+<link href="favicon.svg?v=3" rel="icon" type="image/svg+xml"/>
+<link href="favicon.svg?v=3" rel="shortcut icon" type="image/svg+xml"/>
+<meta content="0; url=dashboard.html" http-equiv="refresh"/>
+<title>VLP Coburg EDQC - Dashboard</title>
+<script>
+  window.location.replace('dashboard.html');
+</script>
+<script defer src="navigation.js"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#161b22",
+                    "on-secondary-container": "#91f294",
+                    "on-secondary-fixed": "#002106",
+                    "outline": "#8f9095",
+                    "surface": "#0b141c",
+                    "outline-variant": "#45474b",
+                    "primary": "#c2c7d0",
+                    "surface-dim": "#0b141c",
+                    "on-primary": "#2c3138",
+                    "surface-container-lowest": "#060f16",
+                    "tertiary-fixed": "#ffdeaa",
+                    "error-container": "#93000a",
+                    "tertiary-fixed-dim": "#fabc45",
+                    "surface-container-high": "#222b33",
+                    "on-tertiary-fixed": "#271900",
+                    "surface-container": "#182028",
+                    "inverse-on-surface": "#29313a",
+                    "secondary-container": "#007124",
+                    "tertiary": "#fabc45",
+                    "secondary": "#7bdb80",
+                    "error": "#ffb4ab",
+                    "surface-variant": "#2d363e",
+                    "on-tertiary-fixed-variant": "#5f4100",
+                    "on-tertiary-container": "#ac7a00",
+                    "surface-container-highest": "#2d363e",
+                    "primary-fixed": "#dee2ec",
+                    "secondary-fixed": "#97f999",
+                    "inverse-primary": "#5a5f67",
+                    "surface-tint": "#c2c7d0",
+                    "inverse-surface": "#dae3ee",
+                    "surface-bright": "#313a43",
+                    "on-surface": "#dae3ee",
+                    "secondary-fixed-dim": "#7bdb80",
+                    "on-surface-variant": "#c5c6cb",
+                    "tertiary-container": "#261800",
+                    "primary-fixed-dim": "#c2c7d0",
+                    "on-error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#42474f",
+                    "background": "#0b141c",
+                    "on-secondary": "#00390e",
+                    "surface-container-low": "#141c24",
+                    "on-background": "#dae3ee",
+                    "on-primary-container": "#7f838c",
+                    "on-tertiary": "#422c00",
+                    "on-error": "#690005",
+                    "on-primary-fixed": "#171c23",
+                    "on-secondary-fixed-variant": "#005319"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "xl": "40px",
+                    "xs": "4px",
+                    "margin-mobile": "16px",
+                    "gutter": "16px",
+                    "sm": "8px",
+                    "base": "4px",
+                    "margin-desktop": "32px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "data-display": ["JetBrains Mono"],
+                    "headline-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "data-label": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "data-display": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "data-label": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        background-color: #0d1117;
+        color: #dae3ee;
+        overflow-x: hidden;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        vertical-align: middle;
+      }
+      .critical-glow {
+        box-shadow: 0 0 12px rgba(123, 219, 128, 0.4);
+      }
+      .runway-zone:hover {
+        background-color: #21262d;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #30363d;
+        border-radius: 2px;
+      }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- Sidebar Navigation Shell -->
+<aside class="h-full w-64 fixed left-0 top-0 bg-surface-container border-r border-outline-variant z-50 flex flex-col pt-16">
+<div class="px-lg mb-xl">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">EDQC-System</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Precision Monitoring</p>
+</div>
+<nav class="flex-1">
+<ul class="flex flex-col gap-xs">
+<!-- Dashboard Active -->
+<li>
+<a class="text-secondary font-bold border-l-4 border-secondary bg-surface-container-highest px-4 py-3 flex items-center gap-md active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-variant px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">flight_takeoff</span>
+<span class="font-label-caps text-label-caps">Runways</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-variant px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">router</span>
+<span class="font-label-caps text-label-caps">Sensors</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-variant px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-caps text-label-caps">Alarms</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-variant px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-caps text-label-caps">History</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-variant px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-caps text-label-caps">Reports</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-variant px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="p-md flex items-center gap-sm border-t border-outline-variant">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-xs">
+                OK
+            </div>
+<div>
+<p class="text-xs font-bold">System Status</p>
+<p class="text-[10px] text-on-surface-variant">Live-Abgleich aktiv</p>
+</div>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="flex justify-between items-center px-lg w-full sticky top-0 z-[60] bg-surface h-16 border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-extrabold text-on-surface tracking-tight">VLP Coburg EDQC</span>
+<div class="h-6 w-[1px] bg-outline-variant hidden md:block ml-md"></div>
+<div class="hidden md:flex gap-md ml-md">
+<span class="font-label-caps text-label-caps text-secondary font-bold">MONITORING</span>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex gap-sm">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95 text-on-surface-variant">
+<span class="material-symbols-outlined">schedule</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95 text-on-surface-variant">
+<span class="material-symbols-outlined">sensors</span>
+</button>
+</div>
+<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-highest p-1 rounded-lg transition-colors active:scale-95">
+<img alt="Chief Safety Officer Profile" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZIGWY65ddl-yF9-uDAPKrO1kur-UaZV0VW_mUb--ALipPDVxkpnCT4jN_985h4IyjGD5Igp_qIxlq7V5Clo1_xEnJ_0jcQGFo8a-tn1SChEKOrHku-fPCgVZNMA2nh7Sk572rwYOwIv3j-uK_mcAMFzeToKWmkV39Sku2Bg3-lZPDltLXLjbxWedoDoE6QvQHrIs55OGybDITvLrh1rMn-_erZOa2UpiLpCCxAEUucM22M8LQPI8OL5iwy7rrCzzCADfi8OkPYcT4"/>
+<span class="font-label-caps text-label-caps text-on-surface hidden lg:block">Profile</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pl-64 min-h-screen">
+<div class="p-md md:p-lg space-y-md">
+<!-- Alert Banner: High Contrast Risk State -->
+<section class="w-full bg-[#161B22] border border-[#30363D] p-md rounded-xl flex flex-col md:flex-row items-center justify-between gap-md critical-glow">
+<div class="flex items-center gap-lg">
+<div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-secondary border-2 border-secondary/20">
+<span class="material-symbols-outlined !text-4xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">VEREISUNGSRISIKO: <span class="text-secondary">NIEDRIG</span></h1>
+<p class="text-on-surface-variant font-body-md">Aktualisiert vor 12 Sekunden • Standort: 50.265179, 10.992805 • Alle Sensoren liefern nominale Werte.</p>
+</div>
+</div>
+<button class="bg-[#238636] text-white px-lg py-sm rounded-lg font-bold hover:brightness-110 active:scale-95 transition-all flex items-center gap-sm">
+<span class="material-symbols-outlined">done_all</span>
+                    BESTÄTIGEN
+                </button>
+</section>
+<!-- Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Left Column: Weather Cards -->
+<div class="col-span-12 lg:col-span-3 space-y-gutter">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-xs">WETTERDATEN</h3>
+<!-- Temp Card -->
+<div class="bg-[#161B22] border border-[#30363D] p-sm rounded-lg">
+<div class="flex justify-between items-start mb-sm">
+<span class="text-on-surface-variant text-[10px] font-bold">LUFTTEMP.</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">thermostat</span>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-data-display text-headline-lg text-on-surface">1.2</span>
+<span class="text-on-surface-variant font-data-label">°C</span>
+</div>
+<div class="h-8 w-full mt-sm flex items-end gap-[1px]">
+<div class="bg-secondary-container w-full h-[60%] opacity-40"></div>
+<div class="bg-secondary-container w-full h-[55%] opacity-40"></div>
+<div class="bg-secondary-container w-full h-[50%] opacity-40"></div>
+<div class="bg-secondary-container w-full h-[45%] opacity-50"></div>
+<div class="bg-secondary-container w-full h-[48%] opacity-60"></div>
+<div class="bg-secondary-container w-full h-[52%] opacity-80"></div>
+<div class="bg-secondary-container w-full h-[55%]"></div>
+</div>
+</div>
+<!-- Surface Temp Card -->
+<div class="bg-[#161B22] border border-[#30363D] p-sm rounded-lg">
+<div class="flex justify-between items-start mb-sm">
+<span class="text-on-surface-variant text-[10px] font-bold">OBERFLÄCHENTEMP.</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">layers</span>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-data-display text-headline-lg text-secondary">0.8</span>
+<span class="text-on-surface-variant font-data-label">°C</span>
+</div>
+</div>
+<!-- Dew Point Card -->
+<div class="bg-[#161B22] border border-[#30363D] p-sm rounded-lg">
+<div class="flex justify-between items-start mb-sm">
+<span class="text-on-surface-variant text-[10px] font-bold">TAUPUNKT</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">water_drop</span>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-data-display text-headline-lg text-on-surface">-0.4</span>
+<span class="text-on-surface-variant font-data-label">°C</span>
+</div>
+</div>
+<!-- Precipitation Card -->
+<div class="bg-[#161B22] border border-[#30363D] p-sm rounded-lg">
+<div class="flex justify-between items-start mb-sm">
+<span class="text-on-surface-variant text-[10px] font-bold">NIEDERSCHLAG</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">rainy</span>
+</div>
+<div class="flex items-baseline gap-xs">
+<span class="font-data-display text-headline-lg text-on-surface">Keiner</span>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-xs">Luftfeuchtigkeit: 84%</p>
+</div>
+</div>
+<!-- Center Column: Runway Visualization -->
+<div class="col-span-12 lg:col-span-6 space-y-gutter">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-xs">STARTBAHN-ÜBERSICHT (RWY 12/30)</h3>
+<div class="bg-[#161B22] border border-[#30363D] p-lg rounded-xl h-[500px] flex flex-col justify-center relative overflow-hidden">
+<!-- Technical Map Background Pattern -->
+<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(#30363D 1px, transparent 1px); background-size: 20px 20px;"></div>
+<div class="relative z-10 flex flex-col items-center gap-xl w-full">
+<!-- Runway Body -->
+<div class="w-full h-24 bg-[#0d141c] border-y-2 border-[#30363D] flex relative">
+<!-- Zone A -->
+<div class="runway-zone flex-1 border-r border-outline-variant/30 flex flex-col items-center justify-center group cursor-crosshair transition-colors relative">
+<span class="absolute top-2 left-2 text-[10px] font-bold text-outline">ZONE A</span>
+<div class="w-3 h-3 bg-secondary rounded-full critical-glow"></div>
+<div class="mt-2 text-center">
+<p class="text-[10px] font-mono text-on-surface-variant">SENS-01</p>
+<p class="font-data-label text-secondary">0.9°C</p>
+</div>
+</div>
+<!-- Zone B -->
+<div class="runway-zone flex-1 border-r border-outline-variant/30 flex flex-col items-center justify-center group cursor-crosshair transition-colors relative">
+<span class="absolute top-2 left-2 text-[10px] font-bold text-outline">ZONE B</span>
+<div class="w-3 h-3 bg-secondary rounded-full critical-glow"></div>
+<div class="mt-2 text-center">
+<p class="text-[10px] font-mono text-on-surface-variant">SENS-02</p>
+<p class="font-data-label text-secondary">0.7°C</p>
+</div>
+</div>
+<!-- Zone C -->
+<div class="runway-zone flex-1 flex flex-col items-center justify-center group cursor-crosshair transition-colors relative">
+<span class="absolute top-2 left-2 text-[10px] font-bold text-outline">ZONE C</span>
+<div class="w-3 h-3 bg-secondary rounded-full critical-glow"></div>
+<div class="mt-2 text-center">
+<p class="text-[10px] font-mono text-on-surface-variant">SENS-03</p>
+<p class="font-data-label text-secondary">0.8°C</p>
+</div>
+</div>
+<!-- Centerline Markings -->
+<div class="absolute top-1/2 left-0 w-full h-[2px] border-t-2 border-dashed border-outline-variant/40 -translate-y-1/2"></div>
+</div>
+<!-- Dashboard Info Underneath -->
+<div class="grid grid-cols-3 gap-md w-full">
+<div class="text-center">
+<span class="font-label-caps text-[10px] text-on-surface-variant">ZUSTAND</span>
+<div class="flex items-center justify-center gap-xs text-secondary">
+<span class="material-symbols-outlined text-sm">check</span>
+<span class="font-bold text-xs uppercase">Trocken</span>
+</div>
+</div>
+<div class="text-center">
+<span class="font-label-caps text-[10px] text-on-surface-variant">GRIP-LEVEL</span>
+<div class="text-on-surface font-bold text-xs">0.82 μ</div>
+</div>
+<div class="text-center">
+<span class="font-label-caps text-[10px] text-on-surface-variant">SENSORKALIB.</span>
+<div class="text-on-surface font-bold text-xs">Nominal</div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-4 right-4 flex gap-sm">
+<span class="bg-[#161B22] border border-[#30363D] text-[10px] px-2 py-1 rounded">Vollbild</span>
+<span class="bg-[#161B22] border border-[#30363D] text-[10px] px-2 py-1 rounded">3D Ansicht</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Alarms & Status -->
+<div class="col-span-12 lg:col-span-3 space-y-gutter">
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-xs">LETZTE ALARME</h3>
+<div class="bg-[#161B22] border border-[#30363D] rounded-lg overflow-hidden divide-y divide-[#30363D]">
+<div class="p-sm flex items-start gap-sm hover:bg-[#21262D] transition-colors">
+<div class="w-1.5 h-1.5 rounded-full bg-error mt-2"></div>
+<div class="flex-1">
+<p class="text-xs font-bold text-on-surface">Warnung: Reifansatz Zone B</p>
+<p class="text-[10px] text-on-surface-variant">Vor 45 Min • Behoben</p>
+</div>
+</div>
+<div class="p-sm flex items-start gap-sm hover:bg-[#21262D] transition-colors">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary mt-2"></div>
+<div class="flex-1">
+<p class="text-xs font-bold text-on-surface">Wartung fällig: SENS-04</p>
+<p class="text-[10px] text-on-surface-variant">Vor 2 Std • Ausstehend</p>
+</div>
+</div>
+<div class="p-sm text-center">
+<button class="text-[10px] font-bold text-secondary-fixed hover:underline">Alle Alarme anzeigen</button>
+</div>
+</div>
+</div>
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-xs">SENSORSTATUS</h3>
+<div class="bg-[#161B22] border border-[#30363D] rounded-lg p-sm space-y-sm max-h-[300px] overflow-y-auto custom-scrollbar">
+<div class="flex justify-between items-center text-xs">
+<span class="text-on-surface-variant font-mono">SENS-ZONE-A-01</span>
+<span class="bg-secondary-container/20 text-secondary px-xs py-[2px] rounded text-[10px] font-bold">ONLINE</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-on-surface-variant font-mono">SENS-ZONE-B-02</span>
+<span class="bg-secondary-container/20 text-secondary px-xs py-[2px] rounded text-[10px] font-bold">ONLINE</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-on-surface-variant font-mono">SENS-ZONE-C-03</span>
+<span class="bg-secondary-container/20 text-secondary px-xs py-[2px] rounded text-[10px] font-bold">ONLINE</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-on-surface-variant font-mono">SENS-WETTER-01</span>
+<span class="bg-secondary-container/20 text-secondary px-xs py-[2px] rounded text-[10px] font-bold">ONLINE</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="text-on-surface-variant font-mono">SENS-GRIP-MTR</span>
+<span class="bg-surface-variant text-on-surface-variant px-xs py-[2px] rounded text-[10px] font-bold">OFFLINE</span>
+</div>
+</div>
+</div>
+<!-- Small Live Action Card -->
+<div class="bg-secondary-container/10 border border-secondary/20 p-sm rounded-lg">
+<div class="flex items-center gap-sm">
+<div class="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
+<p class="text-[10px] font-bold text-secondary uppercase tracking-widest">Live Übertragung</p>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-xs">Frequenz: 128.680 MHz • ATIS: 120.100 MHz</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Micro-Interaction Script -->
+<script>
+        // Simulate real-time sensor jitter for a technical feel
+        function updateSensors() {
+            const dataValues = document.querySelectorAll('.font-data-display');
+            dataValues.forEach(el => {
+                if (el.textContent.includes('.')) {
+                    let val = parseFloat(el.textContent);
+                    let change = (Math.random() - 0.5) * 0.1;
+                    el.textContent = (val + change).toFixed(1);
+                }
+            });
+        }
+        setInterval(updateSensors, 3000);
+    </script>
+</body></html>
+
+<!-- Dashboard - Vereisungserkennung -->
+<!DOCTYPE html>
+
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VLP Coburg EDQC - Runways Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#161b22",
+                        "on-secondary-container": "#91f294",
+                        "on-secondary-fixed": "#002106",
+                        "outline": "#8f9095",
+                        "surface": "#0b141c",
+                        "outline-variant": "#45474b",
+                        "primary": "#c2c7d0",
+                        "surface-dim": "#0b141c",
+                        "on-primary": "#2c3138",
+                        "surface-container-lowest": "#060f16",
+                        "tertiary-fixed": "#ffdeaa",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#fabc45",
+                        "surface-container-high": "#222b33",
+                        "on-tertiary-fixed": "#271900",
+                        "surface-container": "#182028",
+                        "inverse-on-surface": "#29313a",
+                        "secondary-container": "#007124",
+                        "tertiary": "#fabc45",
+                        "secondary": "#7bdb80",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#2d363e",
+                        "on-tertiary-fixed-variant": "#5f4100",
+                        "on-tertiary-container": "#ac7a00",
+                        "surface-container-highest": "#2d363e",
+                        "primary-fixed": "#dee2ec",
+                        "secondary-fixed": "#97f999",
+                        "inverse-primary": "#5a5f67",
+                        "surface-tint": "#c2c7d0",
+                        "inverse-surface": "#dae3ee",
+                        "surface-bright": "#313a43",
+                        "on-surface": "#dae3ee",
+                        "secondary-fixed-dim": "#7bdb80",
+                        "on-surface-variant": "#c5c6cb",
+                        "tertiary-container": "#261800",
+                        "primary-fixed-dim": "#c2c7d0",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#42474f",
+                        "background": "#0b141c",
+                        "on-secondary": "#00390e",
+                        "surface-container-low": "#141c24",
+                        "on-background": "#dae3ee",
+                        "on-primary-container": "#7f838c",
+                        "on-tertiary": "#422c00",
+                        "on-error": "#690005",
+                        "on-primary-fixed": "#171c23",
+                        "on-secondary-fixed-variant": "#005319"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xl": "40px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "base": "4px",
+                        "margin-desktop": "32px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "data-display": ["JetBrains Mono"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "data-label": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "data-display": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "data-label": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0b141c;
+            color: #dae3ee;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .risk-glow-red { box-shadow: 0 0 12px rgba(255, 180, 171, 0.3); }
+        .risk-glow-yellow { box-shadow: 0 0 12px rgba(250, 188, 69, 0.3); }
+        .risk-glow-green { box-shadow: 0 0 12px rgba(123, 219, 128, 0.3); }
+        
+        /* Custom scrollbar for technical UI */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0b141c; }
+        ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #45474b; }
+
+        .runway-segment {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .runway-segment:hover {
+            filter: brightness(1.2);
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen">
+<!-- TopNavBar -->
+<nav class="flex justify-between items-center px-lg w-full sticky top-0 z-50 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant w-full h-16">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface">VLP Coburg EDQC</span>
+<div class="h-6 w-px bg-outline-variant mx-sm"></div>
+<span class="font-headline-sm text-headline-sm text-primary dark:text-primary">Winterdienst-Leitstelle</span>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:scale-95 transition-colors hover:bg-surface-container-highest p-2 rounded-lg">schedule</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:scale-95 transition-colors hover:bg-surface-container-highest p-2 rounded-lg">sensors</span>
+</div>
+<div class="flex items-center gap-sm bg-surface-container-highest px-md py-sm rounded-lg cursor-pointer active:scale-95 transition-all">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface">CHIEF SAFETY OFFICER</span>
+</div>
+</div>
+</nav>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="flex flex-col h-screen pt-4 bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant h-full w-64 shrink-0">
+<div class="px-md mb-xl">
+<div class="flex items-center gap-sm mb-xs">
+<span class="material-symbols-outlined text-secondary">ac_unit</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">EDQC-System</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant opacity-70">PRECISION MONITORING</span>
+</div>
+<nav class="flex flex-col gap-xs flex-1">
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">DASHBOARD</span>
+</a>
+<a class="text-secondary font-bold border-l-4 border-secondary bg-surface-container-highest px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">flight_takeoff</span>
+<span class="font-label-caps text-label-caps">RUNWAYS</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">router</span>
+<span class="font-label-caps text-label-caps">SENSORS</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-caps text-label-caps">ALARMS</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-caps text-label-caps">HISTORY</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-caps text-label-caps">REPORTS</span>
+</a>
+<div class="mt-auto pb-lg">
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">SETTINGS</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto p-lg bg-surface">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Bahnbetriebszustand</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+                        Echtzeit-Analyse der Start- und Landebahnen für den Winterdienst. Priorisierung basierend auf Risiko-Score und Oberflächenmetriken.
+                    </p>
+</div>
+<div class="flex gap-sm">
+<button class="bg-secondary-container text-on-secondary-container px-lg py-sm rounded-lg flex items-center gap-sm font-label-caps text-label-caps border border-transparent hover:brightness-110 transition-all">
+<span class="material-symbols-outlined text-sm">edit_road</span>
+                        EINSATZPLANUNG
+                    </button>
+<button class="bg-surface-container-high text-on-surface px-lg py-sm rounded-lg border border-outline-variant font-label-caps text-label-caps hover:bg-surface-variant transition-all">
+<span class="material-symbols-outlined text-sm">refresh</span>
+                        AKTUALISIEREN
+                    </button>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Runway 12/30 Panel -->
+<div class="col-span-12 bg-surface-container rounded-xl border border-outline-variant overflow-hidden">
+<div class="p-md flex justify-between items-center border-b border-outline-variant bg-surface-container-high">
+<div class="flex items-center gap-md">
+<span class="font-headline-sm text-headline-sm text-on-surface">Runway 12 / 30</span>
+<span class="bg-error-container text-on-error-container px-sm py-xs rounded font-label-caps text-label-caps flex items-center gap-xs">
+<span class="material-symbols-outlined text-xs">warning</span>
+                                KRITISCH
+                            </span>
+</div>
+<div class="flex items-center gap-lg">
+<div class="text-right">
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">Trend (2h)</p>
+<div class="h-6 w-32 flex items-end gap-1">
+<!-- Simple Sparkline Representation -->
+<div class="bg-error h-3/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-4/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-5/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-6/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-5/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-4/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-3/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-2/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-3/6 w-1 rounded-t-sm"></div>
+<div class="bg-error h-4/6 w-1 rounded-t-sm"></div>
+</div>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<div class="text-right">
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">Schnitt Temp.</p>
+<p class="font-data-display text-data-display text-error">-2.4°C</p>
+</div>
+</div>
+</div>
+<!-- Visual Representation -->
+<div class="p-lg relative">
+<div class="h-16 w-full bg-[#161B22] rounded flex items-stretch gap-1 relative overflow-hidden border border-[#30363D]">
+<!-- Runway Markings -->
+<div class="absolute inset-x-0 top-1/2 -translate-y-1/2 border-t border-dashed border-outline-variant opacity-30 h-px w-full"></div>
+<!-- Segments -->
+<div class="runway-segment flex-1 bg-secondary-container/20 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+<div class="hidden group-hover:block absolute -top-12 left-1/2 -translate-x-1/2 bg-surface-container-highest p-2 rounded shadow-xl border border-outline-variant z-20 w-32">
+<p class="font-label-caps text-[9px] text-on-secondary">ZONE A: SICHER</p>
+<p class="font-data-label text-data-label">Temp: +0.5°C</p>
+</div>
+</div>
+<div class="runway-segment flex-1 bg-tertiary-container/30 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-tertiary"></div>
+</div>
+<div class="runway-segment flex-1 bg-error-container/40 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-error risk-glow-red"></div>
+</div>
+<div class="runway-segment flex-1 bg-error-container/50 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-error risk-glow-red"></div>
+</div>
+<div class="runway-segment flex-1 bg-error-container/40 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-error risk-glow-red"></div>
+</div>
+<div class="runway-segment flex-1 bg-tertiary-container/30 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-tertiary"></div>
+</div>
+<div class="runway-segment flex-1 bg-secondary-container/20 relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+</div>
+<span class="absolute left-2 top-1/2 -translate-y-1/2 font-data-label text-on-surface-variant opacity-50 select-none">07</span>
+<span class="absolute right-2 top-1/2 -translate-y-1/2 font-data-label text-on-surface-variant opacity-50 select-none">25</span>
+</div>
+<!-- Zone Data Row -->
+<div class="grid grid-cols-7 gap-sm mt-md">
+<div class="p-sm text-center border-t border-outline-variant">
+<p class="font-data-label text-data-label text-on-surface-variant">Zone 1</p>
+<p class="font-data-display text-[14px] text-secondary">+0.5°C</p>
+<p class="font-label-caps text-[9px] text-outline">Feuchte: 12%</p>
+</div>
+<div class="p-sm text-center border-t border-outline-variant">
+<p class="font-data-label text-data-label text-on-surface-variant">Zone 2</p>
+<p class="font-data-display text-[14px] text-tertiary">-0.2°C</p>
+<p class="font-label-caps text-[9px] text-outline">Feuchte: 45%</p>
+</div>
+<div class="p-sm text-center border-t border-outline-variant bg-error-container/10">
+<p class="font-data-label text-data-label text-on-surface-variant">TDZ</p>
+<p class="font-data-display text-[14px] text-error">-2.8°C</p>
+<p class="font-label-caps text-[9px] text-error-container">Feuchte: 88%</p>
+</div>
+<div class="p-sm text-center border-t border-outline-variant bg-error-container/10">
+<p class="font-data-label text-data-label text-on-surface-variant">Center</p>
+<p class="font-data-display text-[14px] text-error">-3.1°C</p>
+<p class="font-label-caps text-[9px] text-error-container">Feuchte: 92%</p>
+</div>
+<div class="p-sm text-center border-t border-outline-variant bg-error-container/10">
+<p class="font-data-label text-data-label text-on-surface-variant">Zone 5</p>
+<p class="font-data-display text-[14px] text-error">-2.9°C</p>
+<p class="font-label-caps text-[9px] text-error-container">Feuchte: 85%</p>
+</div>
+<div class="p-sm text-center border-t border-outline-variant">
+<p class="font-data-label text-data-label text-on-surface-variant">Zone 6</p>
+<p class="font-data-display text-[14px] text-tertiary">-0.8°C</p>
+<p class="font-label-caps text-[9px] text-outline">Feuchte: 52%</p>
+</div>
+<div class="p-sm text-center border-t border-outline-variant">
+<p class="font-data-label text-data-label text-on-surface-variant">Zone 7</p>
+<p class="font-data-display text-[14px] text-secondary">+0.2°C</p>
+<p class="font-label-caps text-[9px] text-outline">Feuchte: 18%</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Apron / Taxiway Panel -->
+<div class="col-span-12 bg-surface-container rounded-xl border border-outline-variant overflow-hidden">
+<div class="p-md flex justify-between items-center border-b border-outline-variant bg-surface-container-high">
+<div class="flex items-center gap-md">
+<span class="font-headline-sm text-headline-sm text-on-surface">Vorfeld / Rollwege</span>
+<span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded font-label-caps text-label-caps flex items-center gap-xs">
+<span class="material-symbols-outlined text-xs">check_circle</span>
+                                NOMINAL
+                            </span>
+</div>
+<div class="flex items-center gap-lg">
+<div class="text-right">
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">Trend (2h)</p>
+<div class="h-6 w-32 flex items-end gap-1">
+<div class="bg-secondary h-2/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-3/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-4/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-3/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-2/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-3/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-4/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-5/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-4/6 w-1 rounded-t-sm"></div>
+<div class="bg-secondary h-5/6 w-1 rounded-t-sm"></div>
+</div>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<div class="text-right">
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest">Schnitt Temp.</p>
+<p class="font-data-display text-data-display text-secondary">+1.2°C</p>
+</div>
+</div>
+</div>
+<!-- Visual Representation -->
+<div class="p-lg">
+<div class="h-16 w-full bg-[#161B22] rounded flex items-stretch gap-1 relative overflow-hidden border border-[#30363D]">
+<div class="absolute inset-x-0 top-1/2 -translate-y-1/2 border-t border-dashed border-outline-variant opacity-30 h-px w-full"></div>
+<!-- All Green Segments -->
+<div class="runway-segment flex-1 bg-secondary-container/20 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+</div>
+<div class="runway-segment flex-1 bg-secondary-container/20 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+</div>
+<div class="runway-segment flex-1 bg-secondary-container/20 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+</div>
+<div class="runway-segment flex-1 bg-secondary-container/20 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+</div>
+<div class="runway-segment flex-1 bg-secondary-container/20 border-r border-outline-variant relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+</div>
+<div class="runway-segment flex-1 bg-secondary-container/20 relative group">
+<div class="absolute bottom-0 left-0 w-full h-1 bg-secondary"></div>
+</div>
+<span class="absolute left-2 top-1/2 -translate-y-1/2 font-data-label text-on-surface-variant opacity-50 select-none">11</span>
+<span class="absolute right-2 top-1/2 -translate-y-1/2 font-data-label text-on-surface-variant opacity-50 select-none">29</span>
+</div>
+</div>
+</div>
+<!-- Secondary Data Cards -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container rounded-xl border border-outline-variant p-md">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-sm">ac_unit</span>
+                        STREUMITTEL-BESTAND
+                    </h3>
+<div class="space-y-md">
+<div>
+<div class="flex justify-between mb-xs">
+<span class="font-body-md text-body-md text-on-surface">NaCl (Flüssig)</span>
+<span class="font-data-label text-data-label text-on-surface">82%</span>
+</div>
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[82%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-xs">
+<span class="font-body-md text-body-md text-on-surface">Formiat (Granulat)</span>
+<span class="font-data-label text-data-label text-on-surface">45%</span>
+</div>
+<div class="h-2 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[45%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 bg-surface-container rounded-xl border border-outline-variant p-md">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-sm">thermometer</span>
+                        METEOROLOGIE
+                    </h3>
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-surface-variant p-sm rounded border border-outline-variant">
+<p class="font-label-caps text-[10px] text-outline uppercase">Taupunkt</p>
+<p class="font-data-display text-data-display text-on-surface">-4.1°C</p>
+</div>
+<div class="bg-surface-variant p-sm rounded border border-outline-variant">
+<p class="font-label-caps text-[10px] text-outline uppercase">Wind (Bft)</p>
+<p class="font-data-display text-data-display text-on-surface">18 KT NW</p>
+</div>
+<div class="bg-surface-variant p-sm rounded border border-outline-variant">
+<p class="font-label-caps text-[10px] text-outline uppercase">Sichtweite</p>
+<p class="font-data-display text-data-display text-secondary">8000m</p>
+</div>
+<div class="bg-surface-variant p-sm rounded border border-outline-variant">
+<p class="font-label-caps text-[10px] text-outline uppercase">Niederschlag</p>
+<p class="font-data-display text-data-display text-on-surface">Leichter Schnee</p>
+</div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-4 bg-surface-container rounded-xl border border-outline-variant p-md">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-sm">hail</span>
+                        GEFRIERPROGNOSE (1H)
+                    </h3>
+<div class="flex items-center gap-lg">
+<div class="relative w-20 h-20 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90">
+<circle class="text-surface-variant" cx="40" cy="40" fill="transparent" r="34" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-error" cx="40" cy="40" fill="transparent" r="34" stroke="currentColor" stroke-dasharray="213" stroke-dashoffset="64" stroke-width="6"></circle>
+</svg>
+<span class="absolute font-data-display text-data-display text-error">70%</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Gefahr von Eisregen</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Erhöhtes Risiko ab 23:15 Uhr Lokalzeit.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer Status Bar -->
+<footer class="h-8 bg-surface-container-lowest border-t border-outline-variant flex items-center px-lg justify-between shrink-0">
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">System Online</span>
+</div>
+<div class="h-3 w-px bg-outline-variant"></div>
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Sensoren: 124/124 Aktiv</span>
+</div>
+<div class="flex items-center gap-md">
+<span class="font-data-label text-[10px] text-on-surface-variant">Letztes Update: 22:42:05 UTC</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">security</span>
+</div>
+</footer>
+<script>
+        // Micro-interaction logic for segment highlighting
+        document.querySelectorAll('.runway-segment').forEach(segment => {
+            segment.addEventListener('mouseenter', () => {
+                // Potential to update a central data display or context panel
+            });
+        });
+    </script>
+</body></html>
+
+<!-- Startbahnen-Details -->
+<!DOCTYPE html>
+
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alarms - VLP Coburg EDQC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#161b22",
+                        "on-secondary-container": "#91f294",
+                        "on-secondary-fixed": "#002106",
+                        "outline": "#8f9095",
+                        "surface": "#0b141c",
+                        "outline-variant": "#45474b",
+                        "primary": "#c2c7d0",
+                        "surface-dim": "#0b141c",
+                        "on-primary": "#2c3138",
+                        "surface-container-lowest": "#060f16",
+                        "tertiary-fixed": "#ffdeaa",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#fabc45",
+                        "surface-container-high": "#222b33",
+                        "on-tertiary-fixed": "#271900",
+                        "surface-container": "#182028",
+                        "inverse-on-surface": "#29313a",
+                        "secondary-container": "#007124",
+                        "tertiary": "#fabc45",
+                        "secondary": "#7bdb80",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#2d363e",
+                        "on-tertiary-fixed-variant": "#5f4100",
+                        "on-tertiary-container": "#ac7a00",
+                        "surface-container-highest": "#2d363e",
+                        "primary-fixed": "#dee2ec",
+                        "secondary-fixed": "#97f999",
+                        "inverse-primary": "#5a5f67",
+                        "surface-tint": "#c2c7d0",
+                        "inverse-surface": "#dae3ee",
+                        "surface-bright": "#313a43",
+                        "on-surface": "#dae3ee",
+                        "secondary-fixed-dim": "#7bdb80",
+                        "on-surface-variant": "#c5c6cb",
+                        "tertiary-container": "#261800",
+                        "primary-fixed-dim": "#c2c7d0",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#42474f",
+                        "background": "#0b141c",
+                        "on-secondary": "#00390e",
+                        "surface-container-low": "#141c24",
+                        "on-background": "#dae3ee",
+                        "on-primary-container": "#7f838c",
+                        "on-tertiary": "#422c00",
+                        "on-error": "#690005",
+                        "on-primary-fixed": "#171c23",
+                        "on-secondary-fixed-variant": "#005319"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xl": "40px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "base": "4px",
+                        "margin-desktop": "32px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "data-display": ["JetBrains Mono"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "data-label": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "data-display": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "data-label": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0b141c;
+            color: #dae3ee;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        .status-glow-critical {
+            box-shadow: 0px 0px 8px rgba(255, 180, 171, 0.4);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0b141c;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #30363D;
+            border-radius: 2px;
+        }
+
+        .alarm-row:hover {
+            background-color: #182028;
+        }
+    </style>
+</head>
+<body class="flex">
+<!-- SideNavBar -->
+<aside class="flex flex-col h-screen pt-16 h-full w-64 fixed left-0 top-0 bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant z-50">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-sm text-headline-sm text-on-surface">EDQC-System</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Precision Monitoring</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">flight_takeoff</span>
+<span class="font-label-caps text-label-caps">Runways</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">router</span>
+<span class="font-label-caps text-label-caps">Sensors</span>
+</a>
+<a class="text-secondary font-bold border-l-4 border-secondary bg-surface-container-highest px-4 py-3 flex items-center gap-md cursor-pointer" href="#">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-caps text-label-caps">Alarms</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-caps text-label-caps">History</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-caps text-label-caps">Reports</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all cursor-pointer" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-md border-t border-outline-variant">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary text-sm">check_circle</span>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">System Status</p>
+<p class="text-[10px] text-secondary">Nominal Operation</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 ml-64 min-h-screen">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center px-lg w-full h-16 sticky top-0 z-40 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface">VLP Coburg EDQC</span>
+<div class="h-6 w-[1px] bg-outline-variant mx-sm"></div>
+<h2 class="font-headline-sm text-headline-sm text-primary">Alarmcenter</h2>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer active:scale-95">schedule</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer active:scale-95">sensors</button>
+</div>
+<div class="flex items-center gap-sm hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors cursor-pointer px-sm py-xs rounded">
+<img alt="Chief Safety Officer Profile" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZnbZlmV88hReLgW9qdLDdCDmKQ4iB7iPRyQS40vmfI22-QbEKuv_F3W5-MMcfzzQLPDfDhiyPmnLBf4UEP8Lk68Ym35o-wYFLnnPOion77Iebp4noM1Jc6MKYlSobbN-_v8SssYhFy2coRgSdnBAZKdCTRuGkEvYubCQ5920p3niG30L65TL0y7hbySxmzioCkzS0YZVjIttwYFmrjSlf8y2v7PwengUQhwhHIui06vPDDLJRQbpKm99RZb7rMOy8SAnb_X978JaX"/>
+<span class="text-on-surface font-medium font-body-md">Profile</span>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-lg space-y-lg">
+<!-- Stats Bar / Quick Filters -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md">
+<div class="bg-surface-container border border-outline-variant p-md flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">AKTIVE ALARME</span>
+<div class="flex items-end justify-between">
+<span class="font-data-display text-headline-lg text-error">12</span>
+<span class="material-symbols-outlined text-error text-xl" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-md flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">KRITISCHE PRIORITÄT</span>
+<div class="flex items-end justify-between">
+<span class="font-data-display text-headline-lg text-tertiary">04</span>
+<span class="material-symbols-outlined text-tertiary text-xl">priority_high</span>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-md flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">DURCHSCHN. REAKTIONSZEIT</span>
+<div class="flex items-end justify-between">
+<span class="font-data-display text-headline-lg text-secondary">2.4m</span>
+<span class="material-symbols-outlined text-secondary text-xl">timer</span>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-md flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">SYSTEMZUSTAND</span>
+<div class="flex items-end justify-between">
+<span class="font-data-display text-headline-lg text-on-surface">99.8%</span>
+<span class="material-symbols-outlined text-on-surface-variant text-xl">health_and_safety</span>
+</div>
+</div>
+</div>
+<!-- Filter Toolbar -->
+<section class="bg-surface-container border border-outline-variant p-md flex flex-wrap items-center justify-between gap-md">
+<div class="flex items-center gap-lg flex-wrap">
+<div class="flex flex-col gap-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">PRIORITÄT</label>
+<select class="bg-surface border border-outline-variant text-on-surface font-body-md px-md py-xs rounded focus:ring-1 focus:ring-secondary outline-none">
+<option>Alle Prioritäten</option>
+<option>Kritisch</option>
+<option>Warnung</option>
+<option>Information</option>
+</select>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">ZEITRAUM</label>
+<div class="flex items-center gap-xs">
+<input class="bg-surface border border-outline-variant text-on-surface font-body-md px-md py-xs rounded focus:ring-1 focus:ring-secondary outline-none" type="datetime-local"/>
+<span class="text-on-surface-variant">bis</span>
+<input class="bg-surface border border-outline-variant text-on-surface font-body-md px-md py-xs rounded focus:ring-1 focus:ring-secondary outline-none" type="datetime-local"/>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">BETROFFENE BAHN</label>
+<select class="bg-surface border border-outline-variant text-on-surface font-body-md px-md py-xs rounded focus:ring-1 focus:ring-secondary outline-none">
+<option>Alle Bahnen</option>
+<option>Runway 12/30</option>
+<option>Vorfeld / Rollwege</option>
+<option>Taxiway A4</option>
+</select>
+</div>
+</div>
+<button class="bg-surface border border-outline-variant hover:bg-surface-container-highest px-lg py-sm flex items-center gap-sm transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span class="font-label-caps text-label-caps">FILTER ANWENDEN</span>
+</button>
+</section>
+<!-- Active Alarms Table -->
+<section class="bg-surface-container border border-outline-variant overflow-hidden">
+<div class="p-md border-b border-outline-variant flex items-center justify-between bg-surface-container-high">
+<h3 class="font-headline-sm text-headline-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">emergency</span>
+                        Aktuelle Systemwarnungen
+                    </h3>
+<span class="text-on-surface-variant font-data-label text-data-label">Echtzeit-Aktualisierung aktiv</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant">ZEITSTEMPEL</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant">TYP</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant">PRIORITÄT</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant">BETROFFENE BAHN</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant">STATUS</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant text-right">AKTION</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Alarm Row 1 -->
+<tr class="alarm-row transition-colors group">
+<td class="px-md py-md font-data-label text-data-label text-on-surface">14:22:15.004</td>
+<td class="px-md py-md font-body-md text-on-surface">Oberflächenvereisung</td>
+<td class="px-md py-md">
+<span class="inline-flex items-center gap-xs bg-error-container text-on-error-container px-sm py-1 rounded status-glow-critical border border-error/20">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">error</span>
+<span class="font-label-caps text-[10px]">KRITISCH</span>
+</span>
+</td>
+<td class="px-md py-md font-body-md text-on-surface">RWY 12/30 (Sektor B)</td>
+<td class="px-md py-md">
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="font-body-md text-error">Unbestätigt</span>
+</div>
+</td>
+<td class="px-md py-md text-right">
+<button class="bg-secondary-container text-on-secondary-container hover:bg-secondary border border-outline-variant px-md py-sm font-label-caps text-label-caps transition-all active:scale-95">QUITTIEREN</button>
+</td>
+</tr>
+<!-- Alarm Row 2 -->
+<tr class="alarm-row transition-colors">
+<td class="px-md py-md font-data-label text-data-label text-on-surface">14:18:42.128</td>
+<td class="px-md py-md font-body-md text-on-surface">Fremdkörper erkannt (FOD)</td>
+<td class="px-md py-md">
+<span class="inline-flex items-center gap-xs bg-tertiary-container text-tertiary px-sm py-1 rounded border border-tertiary/20">
+<span class="material-symbols-outlined text-xs">warning</span>
+<span class="font-label-caps text-[10px]">WARNUNG</span>
+</span>
+</td>
+<td class="px-md py-md font-body-md text-on-surface">RWY 12/30</td>
+<td class="px-md py-md">
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-body-md text-tertiary">In Bearbeitung</span>
+</div>
+</td>
+<td class="px-md py-md text-right">
+<button class="bg-secondary-container text-on-secondary-container hover:bg-secondary border border-outline-variant px-md py-sm font-label-caps text-label-caps transition-all active:scale-95">QUITTIEREN</button>
+</td>
+</tr>
+<!-- Alarm Row 3 -->
+<tr class="alarm-row transition-colors">
+<td class="px-md py-md font-data-label text-data-label text-on-surface">14:05:01.884</td>
+<td class="px-md py-md font-body-md text-on-surface">Sensorausfall (H7)</td>
+<td class="px-md py-md">
+<span class="inline-flex items-center gap-xs bg-surface-variant text-on-surface-variant px-sm py-1 rounded border border-outline-variant">
+<span class="material-symbols-outlined text-xs">info</span>
+<span class="font-label-caps text-[10px]">INFO</span>
+</span>
+</td>
+<td class="px-md py-md font-body-md text-on-surface">Taxiway Alpha 4</td>
+<td class="px-md py-md">
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-on-surface-variant"></span>
+<span class="font-body-md text-on-surface-variant">Warteschlange</span>
+</div>
+</td>
+<td class="px-md py-md text-right">
+<button class="bg-secondary-container text-on-secondary-container hover:bg-secondary border border-outline-variant px-md py-sm font-label-caps text-label-caps transition-all active:scale-95">QUITTIEREN</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- History Section -->
+<section class="bg-surface-container-low border border-outline-variant overflow-hidden opacity-80">
+<div class="p-md border-b border-outline-variant flex items-center justify-between bg-surface-container">
+<h3 class="font-headline-sm text-headline-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant">history</span>
+                        Historische Alarme (Letzte 24h)
+                    </h3>
+</div>
+<div class="overflow-x-auto max-h-64 custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-md py-sm font-data-label text-data-label text-on-surface-variant w-40">11:55:04.221</td>
+<td class="px-md py-sm font-body-md text-on-surface-variant">Windgeschw. Grenzwert</td>
+<td class="px-md py-sm w-40">
+<span class="font-label-caps text-[10px] text-tertiary">WARNUNG (QUITT.)</span>
+</td>
+<td class="px-md py-sm font-body-md text-on-surface-variant">Global</td>
+<td class="px-md py-sm font-body-md text-on-surface-variant italic">Erledigt durch: Admin (ID: 442)</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-md py-sm font-data-label text-data-label text-on-surface-variant">10:30:12.990</td>
+<td class="px-md py-sm font-body-md text-on-surface-variant">Befeuerung Störung</td>
+<td class="px-md py-sm">
+<span class="font-label-caps text-[10px] text-error">KRITISCH (QUITT.)</span>
+</td>
+<td class="px-md py-sm font-body-md text-on-surface-variant">RWY 12/30</td>
+<td class="px-md py-sm font-body-md text-on-surface-variant italic">Erledigt durch: Technischer Dienst</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-md py-sm font-data-label text-data-label text-on-surface-variant">08:12:33.412</td>
+<td class="px-md py-sm font-body-md text-on-surface-variant">Feuchtealarm</td>
+<td class="px-md py-sm">
+<span class="font-label-caps text-[10px] text-on-surface-variant">INFO (QUITT.)</span>
+</td>
+<td class="px-md py-sm font-body-md text-on-surface-variant">Taxiway Charlie</td>
+<td class="px-md py-sm font-body-md text-on-surface-variant italic">Automatisch Archiviert</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- System Visualization / Atmospheric Element -->
+<div class="fixed bottom-0 right-0 p-lg pointer-events-none opacity-20">
+<div class="w-64 h-64 relative border border-secondary/20 rounded-full flex items-center justify-center">
+<div class="absolute inset-0 animate-spin" style="animation-duration: 20s;">
+<div class="w-1 h-1 bg-secondary rounded-full absolute top-0 left-1/2 -translate-x-1/2"></div>
+</div>
+<div class="absolute inset-8 border border-secondary/10 rounded-full"></div>
+<div class="absolute inset-16 border border-secondary/5 rounded-full"></div>
+<span class="font-data-label text-[10px] text-secondary">RADAR SCAN</span>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interaction: Update timestamp live
+        setInterval(() => {
+            const now = new Date();
+            const timeString = now.getHours().toString().padStart(2, '0') + ':' + 
+                             now.getMinutes().toString().padStart(2, '0') + ':' + 
+                             now.getSeconds().toString().padStart(2, '0') + '.' +
+                             Math.floor(now.getMilliseconds()/10).toString().padStart(2, '0');
+            
+            // Logic to update a hypothetical 'latest sync' element if it existed
+        }, 100);
+
+        // Simple button click effect for "Quittieren"
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(this.innerText === 'QUITTIEREN') {
+                    const row = this.closest('tr');
+                    row.style.opacity = '0.5';
+                    this.innerText = 'BESTÄTIGT';
+                    this.classList.remove('bg-secondary-container');
+                    this.classList.add('bg-surface-variant');
+                }
+            });
+        });
+    </script>
+</body></html>
+
+<!-- Alarmcenter -->
+<!DOCTYPE html>
+
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sensors - VLP Coburg EDQC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .status-glow-red {
+            box-shadow: 0 0 8px #DA3633;
+        }
+        .status-glow-green {
+            box-shadow: 0 0 8px #238636;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d1117;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #30363d;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #45474b;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-container": "#161b22",
+                      "on-secondary-container": "#91f294",
+                      "on-secondary-fixed": "#002106",
+                      "outline": "#8f9095",
+                      "surface": "#0b141c",
+                      "outline-variant": "#45474b",
+                      "primary": "#c2c7d0",
+                      "surface-dim": "#0b141c",
+                      "on-primary": "#2c3138",
+                      "surface-container-lowest": "#060f16",
+                      "tertiary-fixed": "#ffdeaa",
+                      "error-container": "#93000a",
+                      "tertiary-fixed-dim": "#fabc45",
+                      "surface-container-high": "#222b33",
+                      "on-tertiary-fixed": "#271900",
+                      "surface-container": "#182028",
+                      "inverse-on-surface": "#29313a",
+                      "secondary-container": "#007124",
+                      "tertiary": "#fabc45",
+                      "secondary": "#7bdb80",
+                      "error": "#ffb4ab",
+                      "surface-variant": "#2d363e",
+                      "on-tertiary-fixed-variant": "#5f4100",
+                      "on-tertiary-container": "#ac7a00",
+                      "surface-container-highest": "#2d363e",
+                      "primary-fixed": "#dee2ec",
+                      "secondary-fixed": "#97f999",
+                      "inverse-primary": "#5a5f67",
+                      "surface-tint": "#c2c7d0",
+                      "inverse-surface": "#dae3ee",
+                      "surface-bright": "#313a43",
+                      "on-surface": "#dae3ee",
+                      "secondary-fixed-dim": "#7bdb80",
+                      "on-surface-variant": "#c5c6cb",
+                      "tertiary-container": "#261800",
+                      "primary-fixed-dim": "#c2c7d0",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-fixed-variant": "#42474f",
+                      "background": "#0b141c",
+                      "on-secondary": "#00390e",
+                      "surface-container-low": "#141c24",
+                      "on-background": "#dae3ee",
+                      "on-primary-container": "#7f838c",
+                      "on-tertiary": "#422c00",
+                      "on-error": "#690005",
+                      "on-primary-fixed": "#171c23",
+                      "on-secondary-fixed-variant": "#005319"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "xl": "40px",
+                      "xs": "4px",
+                      "margin-mobile": "16px",
+                      "gutter": "16px",
+                      "sm": "8px",
+                      "base": "4px",
+                      "margin-desktop": "32px",
+                      "lg": "24px"
+              },
+              "fontFamily": {
+                      "data-display": ["JetBrains Mono"],
+                      "headline-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-sm": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "label-caps": ["Inter"],
+                      "data-label": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "data-display": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "data-label": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden h-screen flex">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-screen pt-16 bg-surface-container dark:bg-surface-container h-full w-64 fixed left-0 top-0 border-r border-outline-variant dark:border-outline-variant z-40">
+<div class="px-lg pb-lg">
+<h1 class="font-headline-sm text-headline-sm text-on-surface">EDQC-System</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant opacity-70">Precision Monitoring</p>
+</div>
+<nav class="flex-1 space-y-xs">
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant dark:hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant dark:hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">flight_takeoff</span>
+<span class="font-label-caps text-label-caps">Runways</span>
+</a>
+<!-- Active Tab: Sensors -->
+<a class="text-secondary font-bold border-l-4 border-secondary bg-surface-container-highest px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">router</span>
+<span class="font-label-caps text-label-caps">Sensors</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant dark:hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-label-caps text-label-caps">Alarms</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant dark:hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-caps text-label-caps">History</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant dark:hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-caps text-label-caps">Reports</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant dark:hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</nav>
+<div class="p-lg border-t border-outline-variant flex items-center gap-md">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+</div>
+<div>
+<p class="text-xs font-bold">CSO Status</p>
+<p class="text-[10px] text-secondary">Aktiv • System Sicher</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-64 flex flex-col h-screen overflow-hidden">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-lg w-full sticky top-0 z-50 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant h-16">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface">VLP Coburg EDQC</span>
+<div class="h-6 w-[1px] bg-outline-variant"></div>
+<span class="font-headline-sm text-headline-sm text-primary dark:text-primary">Sensors</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex gap-sm">
+<button class="p-2 rounded hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">schedule</span>
+</button>
+<button class="p-2 rounded hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">sensors</span>
+</button>
+</div>
+<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-highest p-1 rounded transition-colors">
+<span class="text-right hidden sm:block">
+<p class="text-xs font-bold leading-tight">Chief Safety Officer</p>
+<p class="text-[10px] text-on-surface-variant">Profile</p>
+</span>
+<img alt="Chief Safety Officer Profile" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ-MCmUFpDrEZgg4VQ-s3JFNpvdwwYydXsTx_V_9o1diVkZsMXx_f27XD3cf6OlN8qa41C9wjYfhJZpQHWxANgXYLPNOgLy-zD_ksvPvbSK4ikSm1mkKIYNc9NJbPzb66PeZtW41_0UaYPx9xFgLssgDBeT1M2eQ4BxmW35R5slJ9DR_FAKWQ5hQ_P68LZ1QZUW_QQ4Xn5SmFZSH3VTu7s1dk8s45QBa8xcaWkuvTo__pfXpLSDcbRibIGxw98FOkaU2kKLEO9-1i8"/>
+</div>
+</div>
+</header>
+<!-- Scrollable Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-md lg:p-lg space-y-gutter bg-background">
+<!-- Sensor Status Overview (Bento Grid Style) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Map Section -->
+<div class="md:col-span-8 bg-surface-container-low border border-outline-variant p-sm flex flex-col min-h-[400px]">
+<div class="flex justify-between items-center px-sm py-xs mb-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">map</span>
+<span class="font-label-caps text-label-caps">Geografische Sensor-Verteilung</span>
+</div>
+<div class="flex gap-xs">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> 42 Online
+                            </span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container text-[10px] font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error status-glow-red"></span> 3 Fehler
+                            </span>
+</div>
+</div>
+<!-- Mock Runway Map Integration -->
+<div class="flex-1 bg-surface-container relative overflow-hidden flex items-center justify-center">
+<img alt="Runway Layout Map" class="absolute inset-0 w-full h-full object-cover opacity-20" data-alt="An architectural top-down technical schematic of a major international airport runway system at night. The view is clinical and high-contrast, featuring dark charcoal tarmac surfaces against a deep black background. Neon green and tactical red glowing markers represent operational and defective sensor locations along the landing strip. The lighting is digital and moody, emphasizing technical precision and a mission-critical safety environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnS19Q00NpoOJjtMNHNg45s8ATbqSn8UC-Ao-o9gIq0NYsMRch8AsZq8d1B6tvh1ezre8M38VQriKQvdr56hBH0eRS1hKYX1takzJPoxaU3CuxkStTi-8Wl1UbM4PoxA5aLrU9WqxrcRFUQReFiX6IKfkOJdPpcJuBorpNrsCeEZGCXrOkhUXc6aLFPOnzGFUt4A3-s2K-iH-ASQ0jf655Xdh8GBwCEdxg2Nq8hKv2i84DtDOMm_V9nEqaMisGxjOUv9lYLnHxMe3B"/>
+<!-- Hotspots (Simulated Sensors) -->
+<div class="relative w-full h-full pointer-events-none">
+<!-- Green Sensor -->
+<div class="absolute top-1/3 left-1/4 w-3 h-3 bg-secondary rounded-full status-glow-green pointer-events-auto cursor-help group" title="Sensor R1-A: Online">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-surface-container-highest border border-outline-variant p-2 rounded text-[10px] w-32 z-10">
+<p class="font-bold">R1-A (Ost)</p>
+<p class="text-on-surface-variant">Temp: -1.2°C</p>
+<p class="text-secondary">Signal: 98%</p>
+</div>
+</div>
+<!-- Red Sensor (Defekt) -->
+<div class="absolute top-1/2 left-1/2 w-4 h-4 bg-error rounded-full animate-pulse status-glow-red pointer-events-auto cursor-help group" title="Sensor R2-F: KRITISCH">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-surface-container-highest border border-error-container p-2 rounded text-[10px] w-32 z-10">
+<p class="font-bold text-error">R2-F (Zentral)</p>
+<p class="text-on-surface-variant">Status: OFFLINE</p>
+<p class="text-error">Fehler: Stromausfall</p>
+</div>
+</div>
+<!-- Yellow Sensor -->
+<div class="absolute bottom-1/4 right-1/3 w-3 h-3 bg-tertiary rounded-full pointer-events-auto cursor-help group" title="Sensor R1-E: Warnung">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block bg-surface-container-highest border border-outline-variant p-2 rounded text-[10px] w-32 z-10">
+<p class="font-bold">R1-E (West)</p>
+<p class="text-tertiary">Hohe Feuchtigkeit</p>
+</div>
+</div>
+</div>
+<!-- Scale / Legend Overlay -->
+<div class="absolute bottom-4 left-4 bg-surface-container-lowest p-2 border border-outline-variant text-[10px] font-data-label">
+<p>M_SCALE: 1:5000</p>
+<p>COORD: 50.265179, 10.992805</p>
+</div>
+</div>
+</div>
+<!-- Status Panel (Right) -->
+<div class="md:col-span-4 space-y-gutter">
+<!-- Critical Metrics -->
+<div class="bg-surface-container p-md border border-outline-variant">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-md">Zustands-Monitor</span>
+<div class="grid grid-cols-2 gap-sm">
+<div class="bg-background p-sm border border-outline-variant flex flex-col">
+<span class="text-[10px] text-on-surface-variant">Schnitt Temp.</span>
+<span class="font-data-display text-data-display text-secondary">-2.4°C</span>
+<div class="mt-2 h-1 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-2/3"></div>
+</div>
+</div>
+<div class="bg-background p-sm border border-outline-variant flex flex-col">
+<span class="text-[10px] text-on-surface-variant">Luftfeuchte</span>
+<span class="font-data-display text-data-display">84.2%</span>
+<div class="mt-2 h-1 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[84%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Defect List -->
+<div class="bg-surface-container-high border border-outline-variant p-md flex-1">
+<div class="flex justify-between items-center mb-md">
+<span class="font-label-caps text-label-caps text-error">Defekte Sensoren (3)</span>
+<span class="material-symbols-outlined text-error text-sm">warning</span>
+</div>
+<div class="space-y-sm">
+<!-- Error Item 1 -->
+<div class="bg-surface-container-lowest border-l-4 border-error p-sm flex justify-between items-center">
+<div>
+<p class="text-xs font-bold">R2-F-Zentral</p>
+<p class="text-[10px] text-on-surface-variant">Seit 12:44 • Keine Daten</p>
+</div>
+<button class="bg-error px-2 py-1 text-[10px] font-bold text-white uppercase rounded-sm">Fix</button>
+</div>
+<!-- Error Item 2 -->
+<div class="bg-surface-container-lowest border-l-4 border-error p-sm flex justify-between items-center">
+<div>
+<p class="text-xs font-bold">R1-K-Anflug</p>
+<p class="text-[10px] text-on-surface-variant">Seit 08:12 • Kurzschluss</p>
+</div>
+<button class="bg-error px-2 py-1 text-[10px] font-bold text-white uppercase rounded-sm">Fix</button>
+</div>
+<!-- Error Item 3 -->
+<div class="bg-surface-container-lowest border-l-4 border-error p-sm flex justify-between items-center">
+<div>
+<p class="text-xs font-bold">W4-G-Taxiway</p>
+<p class="text-[10px] text-on-surface-variant">Seit 01:20 • Akku kritisch</p>
+</div>
+<button class="bg-error px-2 py-1 text-[10px] font-bold text-white uppercase rounded-sm">Fix</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Trend Analysis (Charts) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Temp Trend -->
+<div class="bg-surface-container border border-outline-variant p-md">
+<div class="flex justify-between items-start mb-lg">
+<div>
+<p class="font-label-caps text-label-caps">Temperaturverlauf (24h)</p>
+<p class="text-xs text-on-surface-variant">Schnittstelle: Runway South</p>
+</div>
+<span class="material-symbols-outlined text-secondary">thermostat</span>
+</div>
+<div class="h-32 flex items-end gap-1">
+<!-- Simplified Bar Chart -->
+<div class="flex-1 bg-surface-variant h-[40%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-variant h-[50%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary h-[35%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary h-[30%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary h-[25%] rounded-t-sm"></div>
+<div class="flex-1 bg-error h-[10%] rounded-t-sm"></div>
+<div class="flex-1 bg-error h-[15%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary h-[30%] rounded-t-sm"></div>
+<div class="flex-1 bg-secondary h-[45%] rounded-t-sm"></div>
+<div class="flex-1 bg-surface-variant h-[60%] rounded-t-sm"></div>
+</div>
+<div class="flex justify-between mt-sm text-[10px] font-data-label text-on-surface-variant">
+<span>00:00</span>
+<span>08:00</span>
+<span>16:00</span>
+<span>Jetzt</span>
+</div>
+</div>
+<!-- Ice Risk -->
+<div class="bg-surface-container border border-outline-variant p-md">
+<div class="flex justify-between items-start mb-lg">
+<div>
+<p class="font-label-caps text-label-caps">Vereisungsrisiko</p>
+<p class="text-xs text-on-surface-variant">Kalkulierte Prognose</p>
+</div>
+<span class="material-symbols-outlined text-tertiary">ac_unit</span>
+</div>
+<div class="relative h-32 flex items-center justify-center">
+<div class="absolute inset-0 border-4 border-surface-variant rounded-full border-t-tertiary rotate-[45deg]"></div>
+<div class="text-center">
+<p class="font-data-display text-headline-md text-tertiary">48%</p>
+<p class="text-[10px] text-on-surface-variant uppercase">Mittel</p>
+</div>
+</div>
+</div>
+<!-- Last Transmission Details -->
+<div class="bg-surface-container border border-outline-variant p-md flex flex-col">
+<p class="font-label-caps text-label-caps mb-md">Letzte Übertragung</p>
+<div class="flex-1 space-y-sm">
+<div class="flex justify-between text-xs py-1 border-b border-outline-variant">
+<span class="text-on-surface-variant">Paket-ID:</span>
+<span class="font-data-label">#XF-992-01</span>
+</div>
+<div class="flex justify-between text-xs py-1 border-b border-outline-variant">
+<span class="text-on-surface-variant">Zeitstempel:</span>
+<span class="font-data-label">14:05:22 UTC</span>
+</div>
+<div class="flex justify-between text-xs py-1 border-b border-outline-variant">
+<span class="text-on-surface-variant">Latenz:</span>
+<span class="font-data-label text-secondary">12ms</span>
+</div>
+<div class="flex justify-between text-xs py-1 border-b border-outline-variant">
+<span class="text-on-surface-variant">Gateways:</span>
+<span class="font-data-label">Alpha-4, Beta-1</span>
+</div>
+<div class="flex justify-between text-xs py-1">
+<span class="text-on-surface-variant">Datenvolumen:</span>
+<span class="font-data-label">124 KB/s</span>
+</div>
+</div>
+<button class="mt-md w-full py-2 bg-surface-container-highest border border-outline-variant text-[10px] font-bold hover:bg-surface-variant transition-colors">
+                        KOMPLETTER AUDIT-LOG
+                    </button>
+</div>
+</div>
+<!-- Detailed Data Grid -->
+<div class="bg-surface-container-low border border-outline-variant">
+<div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container">
+<span class="font-label-caps text-label-caps">Sensor-Audit-Liste</span>
+<div class="flex gap-sm">
+<input class="bg-background border border-outline-variant text-[10px] px-2 py-1 w-48 focus:border-secondary outline-none" placeholder="Suchen..." type="text"/>
+<button class="bg-secondary-container text-on-secondary-container p-1 rounded">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container sticky top-0 z-10">
+<tr>
+<th class="p-md text-[10px] font-bold text-on-surface-variant border-b border-outline-variant">SENSOR ID</th>
+<th class="p-md text-[10px] font-bold text-on-surface-variant border-b border-outline-variant">STANDORT</th>
+<th class="p-md text-[10px] font-bold text-on-surface-variant border-b border-outline-variant">STATUS</th>
+<th class="p-md text-[10px] font-bold text-on-surface-variant border-b border-outline-variant">TEMP.</th>
+<th class="p-md text-[10px] font-bold text-on-surface-variant border-b border-outline-variant">FEUCHTE</th>
+<th class="p-md text-[10px] font-bold text-on-surface-variant border-b border-outline-variant">LETZTES SIGNAL</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer group">
+<td class="p-md font-data-label text-xs">RUN-S-101</td>
+<td class="p-md text-xs">Runway South (Entrance)</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 text-[10px] text-secondary font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> ONLINE
+                                    </span>
+</td>
+<td class="p-md font-data-label text-xs">-1.4°C</td>
+<td class="p-md font-data-label text-xs">76%</td>
+<td class="p-md text-[10px] text-on-surface-variant">Gerade eben</td>
+</tr>
+<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer bg-error-container/10">
+<td class="p-md font-data-label text-xs">RUN-N-402</td>
+<td class="p-md text-xs">Runway North (Zentral)</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 text-[10px] text-error font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span> OFFLINE
+                                    </span>
+</td>
+<td class="p-md font-data-label text-xs">N/A</td>
+<td class="p-md font-data-label text-xs">N/A</td>
+<td class="p-md text-[10px] text-on-surface-variant">14 Min. her</td>
+</tr>
+<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer">
+<td class="p-md font-data-label text-xs">TAXI-W-03</td>
+<td class="p-md text-xs">Taxiway West G4</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 text-[10px] text-secondary font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> ONLINE
+                                    </span>
+</td>
+<td class="p-md font-data-label text-xs">+0.2°C</td>
+<td class="p-md font-data-label text-xs">89%</td>
+<td class="p-md text-[10px] text-on-surface-variant">vor 3 Sek.</td>
+</tr>
+<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer">
+<td class="p-md font-data-label text-xs">GATE-B-08</td>
+<td class="p-md text-xs">Terminal B (Vorfeld)</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 text-[10px] text-tertiary font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> WARNUNG
+                                    </span>
+</td>
+<td class="p-md font-data-label text-xs">-2.1°C</td>
+<td class="p-md font-data-label text-xs">94%</td>
+<td class="p-md text-[10px] text-on-surface-variant">vor 12 Sek.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Sticky FAB for Action -->
+<div class="fixed bottom-lg right-lg z-50">
+<button class="bg-secondary p-4 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all text-on-secondary flex items-center gap-2 group">
+<span class="material-symbols-outlined" data-weight="fill">add_circle</span>
+<span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 font-bold text-xs uppercase whitespace-nowrap">Neuer Sensor</span>
+</button>
+</div>
+</main>
+<!-- Mobile BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface-container border-t border-outline-variant flex justify-around items-center z-50">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px]">Dash</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">flight_takeoff</span>
+<span class="text-[10px]">Runways</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-secondary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">router</span>
+<span class="text-[10px] font-bold">Sensors</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="text-[10px]">Alarms</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px]">Profil</span>
+</a>
+</nav>
+<script>
+        // Simple micro-interaction for chart animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const bars = document.querySelectorAll('.bg-secondary, .bg-error');
+            bars.forEach(bar => {
+                const originalHeight = bar.style.height;
+                bar.style.height = '0px';
+                setTimeout(() => {
+                    bar.style.transition = 'height 1s cubic-bezier(0.17, 0.67, 0.83, 0.67)';
+                    bar.style.height = originalHeight;
+                }, 200);
+            });
+        });
+    </script>
+</body></html>
