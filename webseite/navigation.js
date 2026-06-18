@@ -10,6 +10,192 @@ function getRoute(element) {
   return null;
 }
 
+const profileChoices = [
+  { name: 'IT', subtitle: 'Technischer Betrieb', icon: 'dns', image: 'assets/profiles/it.png' },
+  { name: 'Management', subtitle: 'Leitung', icon: 'business_center', image: 'assets/profiles/management.png' },
+  { name: 'Winterdienst', subtitle: 'Einsatzleitung Schnee', icon: 'ac_unit', image: 'assets/profiles/winterdienst.png' },
+  { name: 'Fluglotsen', subtitle: 'Tower / Funk', icon: 'settings_input_antenna', image: 'assets/profiles/fluglotsen.png' },
+  { name: 'Controlling', subtitle: 'Kennzahlen', icon: 'query_stats', image: 'assets/profiles/controlling.png' },
+  { name: 'Luftfahrtbehörde', subtitle: 'Aufsicht', icon: 'gavel', image: 'assets/profiles/luftfahrtbehoerde.png' },
+  { name: 'Entwicklungsteam', subtitle: 'Software', icon: 'code', image: 'assets/profiles/entwicklungsteam.png' },
+  { name: 'Sicherheitsabteilung', subtitle: 'Safety / Security', icon: 'shield', image: 'assets/profiles/sicherheitsabteilung.png' }
+];
+
+function getStoredProfile() {
+  return profileChoices.find((profile) => profile.name === localStorage.getItem('selectedProfile')) || profileChoices[0];
+}
+
+function requestProfilePassword(profile) {
+  return new Promise((resolve) => {
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 z-[60] flex items-center justify-center bg-scrim/75 px-md';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.innerHTML = `
+      <form class="w-full max-w-md rounded-xl border border-outline-variant bg-surface-container shadow-2xl overflow-hidden" data-password-form>
+        <div class="flex items-center justify-between border-b border-outline-variant p-md">
+          <div>
+            <p class="font-label-caps text-label-caps text-secondary">Geschütztes Profil</p>
+            <h2 class="font-headline-sm text-headline-sm text-on-surface">${profile.name}</h2>
+          </div>
+          <button class="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-surface-container-highest text-on-surface-variant" type="button" data-password-cancel aria-label="Abbrechen">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="p-md space-y-md">
+          <label class="block">
+            <span class="font-label-caps text-label-caps text-on-surface-variant">Passwort</span>
+            <input class="mt-xs w-full rounded-lg border border-outline-variant bg-surface px-md py-sm text-on-surface outline-none focus:border-secondary" type="password" autocomplete="off" data-password-input>
+          </label>
+          <p class="hidden rounded-lg border border-error/30 bg-error-container/30 px-sm py-xs text-sm text-error" data-password-error>Falsches Passwort. Bitte erneut versuchen.</p>
+          <button class="w-full rounded-lg bg-secondary px-md py-sm font-bold text-on-secondary hover:brightness-110 active:scale-[0.98] transition-all" type="submit">Bestätigen</button>
+        </div>
+      </form>
+    `;
+
+    const form = modal.querySelector('[data-password-form]');
+    const input = modal.querySelector('[data-password-input]');
+    const cancelButton = modal.querySelector('[data-password-cancel]');
+    const error = modal.querySelector('[data-password-error]');
+
+    function close(result) {
+      modal.remove();
+      resolve(result);
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (input.value.trim() === profile.name) {
+        close(true);
+        return;
+      }
+      error.classList.remove('hidden');
+      input.select();
+      input.focus();
+    });
+
+    cancelButton.addEventListener('click', () => close(false));
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) close(false);
+    });
+    modal.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') close(false);
+    });
+
+    document.body.appendChild(modal);
+    input.focus();
+  });
+}
+
+function createProfileModal(onSelect) {
+  const modal = document.createElement('div');
+  modal.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-scrim/70 px-md';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.innerHTML = `
+    <div class="w-full max-w-4xl rounded-xl border border-outline-variant bg-surface-container shadow-2xl overflow-hidden">
+      <div class="flex items-center justify-between border-b border-outline-variant p-md">
+        <div>
+          <p class="font-label-caps text-label-caps text-primary">Profil wechseln</p>
+          <h2 class="font-headline-md text-headline-md text-on-surface">Rolle auswählen</h2>
+        </div>
+        <button class="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-surface-container-highest text-on-surface-variant" type="button" data-profile-close aria-label="Schließen">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-sm p-md" data-profile-options></div>
+    </div>
+  `;
+
+  const closeButton = modal.querySelector('[data-profile-close]');
+  const optionGrid = modal.querySelector('[data-profile-options]');
+
+  profileChoices.forEach((profile) => {
+    const button = document.createElement('button');
+    button.className = 'rounded-lg border border-outline-variant bg-surface p-md text-left hover:bg-surface-variant active:scale-[0.98] transition-all';
+    button.type = 'button';
+    button.innerHTML = `
+      <img class="w-20 h-20 rounded-xl border border-outline-variant mb-sm object-cover bg-surface-container-high" alt="${profile.name} Profilbild" src="${profile.image}">
+      <div class="flex items-center gap-xs text-on-surface">
+        <span class="material-symbols-outlined text-sm">${profile.icon}</span>
+        <span class="font-bold text-sm">${profile.name}</span>
+      </div>
+      <p class="text-[11px] text-on-surface-variant mt-xs">${profile.subtitle}</p>
+    `;
+    button.addEventListener('click', async () => {
+      if (!await requestProfilePassword(profile)) return;
+      onSelect(profile);
+      closeProfileModal(modal);
+    });
+    optionGrid.appendChild(button);
+  });
+
+  closeButton.addEventListener('click', () => closeProfileModal(modal));
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) closeProfileModal(modal);
+  });
+
+  document.body.appendChild(modal);
+  return modal;
+}
+
+function openProfileModal(modal) {
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+}
+
+function closeProfileModal(modal) {
+  modal.classList.add('hidden');
+  modal.classList.remove('flex');
+}
+
+function initSharedProfiles() {
+  const triggers = document.querySelectorAll('[data-profile-trigger]');
+  if (!triggers.length) return;
+
+  let modal;
+
+  function applyProfile(profile) {
+    localStorage.setItem('selectedProfile', profile.name);
+    triggers.forEach((trigger) => {
+      const image = trigger.querySelector('[data-profile-image]');
+      const name = trigger.querySelector('[data-profile-name]');
+
+      if (image) {
+        image.src = profile.image;
+        image.alt = `${profile.name} Profil`;
+      }
+
+      if (name) {
+        name.textContent = profile.name;
+      }
+    });
+  }
+
+  triggers.forEach((trigger) => {
+    trigger.setAttribute('role', 'button');
+    trigger.setAttribute('tabindex', '0');
+    trigger.setAttribute('aria-haspopup', 'dialog');
+    trigger.addEventListener('click', () => {
+      if (!modal) modal = createProfileModal(applyProfile);
+      openProfileModal(modal);
+    });
+    trigger.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        if (!modal) modal = createProfileModal(applyProfile);
+        openProfileModal(modal);
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal) closeProfileModal(modal);
+  });
+
+  applyProfile(getStoredProfile());
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('a, button').forEach((element) => {
     const href = getRoute(element);
@@ -25,4 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = href;
     });
   });
+
+  initSharedProfiles();
 });

@@ -731,6 +731,81 @@
             return profile.image;
         }
 
+        function applySelectedProfile(profile, shouldStore = true) {
+            activeProfileImage.src = profileImageUrl(profile);
+            activeProfileImage.alt = `${profile.name} Profil`;
+            activeProfileName.textContent = profile.name;
+            if (shouldStore) {
+                localStorage.setItem('selectedProfile', profile.name);
+            }
+        }
+
+        function getSelectedProfile() {
+            return profiles.find((profile) => profile.name === localStorage.getItem('selectedProfile')) || profiles[0];
+        }
+
+        function requestProfilePassword(profile) {
+            return new Promise((resolve) => {
+                const modal = document.createElement('div');
+                modal.className = 'fixed inset-0 z-[60] flex items-center justify-center bg-scrim/75 px-md';
+                modal.setAttribute('role', 'dialog');
+                modal.setAttribute('aria-modal', 'true');
+                modal.innerHTML = `
+                    <form class="w-full max-w-md rounded-xl border border-outline-variant bg-surface-container shadow-2xl overflow-hidden" data-password-form>
+                        <div class="flex items-center justify-between border-b border-outline-variant p-md">
+                            <div>
+                                <p class="font-label-caps text-label-caps text-secondary">Geschütztes Profil</p>
+                                <h2 class="font-headline-sm text-headline-sm text-on-surface">${profile.name}</h2>
+                            </div>
+                            <button class="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-surface-container-highest text-on-surface-variant" type="button" data-password-cancel aria-label="Abbrechen">
+                                <span class="material-symbols-outlined">close</span>
+                            </button>
+                        </div>
+                        <div class="p-md space-y-md">
+                            <label class="block">
+                                <span class="font-label-caps text-label-caps text-on-surface-variant">Passwort</span>
+                                <input class="mt-xs w-full rounded-lg border border-outline-variant bg-surface px-md py-sm text-on-surface outline-none focus:border-secondary" type="password" autocomplete="off" data-password-input>
+                            </label>
+                            <p class="hidden rounded-lg border border-error/30 bg-error-container/30 px-sm py-xs text-sm text-error" data-password-error>Falsches Passwort. Bitte erneut versuchen.</p>
+                            <button class="w-full rounded-lg bg-secondary px-md py-sm font-bold text-on-secondary hover:brightness-110 active:scale-[0.98] transition-all" type="submit">Bestätigen</button>
+                        </div>
+                    </form>
+                `;
+
+                const form = modal.querySelector('[data-password-form]');
+                const input = modal.querySelector('[data-password-input]');
+                const cancelButton = modal.querySelector('[data-password-cancel]');
+                const error = modal.querySelector('[data-password-error]');
+
+                function close(result) {
+                    modal.remove();
+                    resolve(result);
+                }
+
+                form.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    if (input.value.trim() === profile.name) {
+                        close(true);
+                        return;
+                    }
+                    error.classList.remove('hidden');
+                    input.select();
+                    input.focus();
+                });
+
+                cancelButton.addEventListener('click', () => close(false));
+                modal.addEventListener('click', (event) => {
+                    if (event.target === modal) close(false);
+                });
+                modal.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape') close(false);
+                });
+
+                document.body.appendChild(modal);
+                input.focus();
+            });
+        }
+
         function renderProfiles() {
             profileOptions.innerHTML = '';
             profiles.forEach((profile) => {
@@ -745,10 +820,9 @@
                     </div>
                     <p class="text-[11px] text-on-surface-variant mt-xs">${profile.subtitle}</p>
                 `;
-                button.addEventListener('click', () => {
-                    activeProfileImage.src = profileImageUrl(profile);
-                    activeProfileImage.alt = `${profile.name} Profil`;
-                    activeProfileName.textContent = profile.name;
+                button.addEventListener('click', async () => {
+                    if (!await requestProfilePassword(profile)) return;
+                    applySelectedProfile(profile);
                     closeProfileModal();
                 });
                 profileOptions.appendChild(button);
@@ -967,6 +1041,7 @@
         });
 
         renderProfiles();
+        applySelectedProfile(getSelectedProfile(), false);
         setRunwaySignal('green');
         updateFlightChecks();
         setInterval(updateFlightChecks, 1000);

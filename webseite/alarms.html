@@ -184,14 +184,18 @@
 <div class="h-6 w-[1px] bg-outline-variant mx-sm"></div>
 <h2 class="font-headline-sm text-headline-sm text-primary">Alarmcenter</h2>
 </div>
-<div class="flex items-center gap-lg">
 <div class="flex items-center gap-md">
-<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer active:scale-95">schedule</button>
-<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer active:scale-95">sensors</button>
+<div class="flex gap-sm">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95 text-on-surface-variant">
+<span class="material-symbols-outlined">schedule</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95 text-on-surface-variant">
+<span class="material-symbols-outlined">sensors</span>
+</button>
 </div>
-<div class="flex items-center gap-sm hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors cursor-pointer px-sm py-xs rounded">
-<img alt="Chief Safety Officer Profile" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZnbZlmV88hReLgW9qdLDdCDmKQ4iB7iPRyQS40vmfI22-QbEKuv_F3W5-MMcfzzQLPDfDhiyPmnLBf4UEP8Lk68Ym35o-wYFLnnPOion77Iebp4noM1Jc6MKYlSobbN-_v8SssYhFy2coRgSdnBAZKdCTRuGkEvYubCQ5920p3niG30L65TL0y7hbySxmzioCkzS0YZVjIttwYFmrjSlf8y2v7PwengUQhwhHIui06vPDDLJRQbpKm99RZb7rMOy8SAnb_X978JaX"/>
-<span class="text-on-surface font-medium font-body-md">Profile</span>
+<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-highest p-1 rounded-lg transition-colors active:scale-95" data-profile-trigger>
+<img alt="IT Profil" class="w-9 h-9 rounded-full border-2 border-outline-variant object-cover bg-surface-container-high" data-profile-image src="assets/profiles/it.png"/>
+<span class="font-label-caps text-label-caps text-on-surface hidden lg:block" data-profile-name>IT</span>
 </div>
 </div>
 </header>

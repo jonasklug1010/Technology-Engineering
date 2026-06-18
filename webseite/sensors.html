@@ -179,19 +179,16 @@
 </div>
 <div class="flex items-center gap-md">
 <div class="flex gap-sm">
-<button class="p-2 rounded hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95">
-<span class="material-symbols-outlined text-on-surface-variant">schedule</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95 text-on-surface-variant">
+<span class="material-symbols-outlined">schedule</span>
 </button>
-<button class="p-2 rounded hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95">
-<span class="material-symbols-outlined text-on-surface-variant">sensors</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95 text-on-surface-variant">
+<span class="material-symbols-outlined">sensors</span>
 </button>
 </div>
-<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-highest p-1 rounded transition-colors">
-<span class="text-right hidden sm:block">
-<p class="text-xs font-bold leading-tight">Chief Safety Officer</p>
-<p class="text-[10px] text-on-surface-variant">Profile</p>
-</span>
-<img alt="Chief Safety Officer Profile" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJ-MCmUFpDrEZgg4VQ-s3JFNpvdwwYydXsTx_V_9o1diVkZsMXx_f27XD3cf6OlN8qa41C9wjYfhJZpQHWxANgXYLPNOgLy-zD_ksvPvbSK4ikSm1mkKIYNc9NJbPzb66PeZtW41_0UaYPx9xFgLssgDBeT1M2eQ4BxmW35R5slJ9DR_FAKWQ5hQ_P68LZ1QZUW_QQ4Xn5SmFZSH3VTu7s1dk8s45QBa8xcaWkuvTo__pfXpLSDcbRibIGxw98FOkaU2kKLEO9-1i8"/>
+<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-highest p-1 rounded-lg transition-colors active:scale-95" data-profile-trigger>
+<img alt="IT Profil" class="w-9 h-9 rounded-full border-2 border-outline-variant object-cover bg-surface-container-high" data-profile-image src="assets/profiles/it.png"/>
+<span class="font-label-caps text-label-caps text-on-surface hidden lg:block" data-profile-name>IT</span>
 </div>
 </div>
 </header>
@@ -253,26 +250,6 @@
 </div>
 <!-- Status Panel (Right) -->
 <div class="md:col-span-4 space-y-gutter">
-<!-- Critical Metrics -->
-<div class="bg-surface-container p-md border border-outline-variant">
-<span class="font-label-caps text-label-caps text-on-surface-variant block mb-md">Zustands-Monitor</span>
-<div class="grid grid-cols-2 gap-sm">
-<div class="bg-background p-sm border border-outline-variant flex flex-col">
-<span class="text-[10px] text-on-surface-variant">Schnitt Temp.</span>
-<span class="font-data-display text-data-display text-secondary">-2.4°C</span>
-<div class="mt-2 h-1 bg-surface-variant rounded-full overflow-hidden">
-<div class="h-full bg-secondary w-2/3"></div>
-</div>
-</div>
-<div class="bg-background p-sm border border-outline-variant flex flex-col">
-<span class="text-[10px] text-on-surface-variant">Luftfeuchte</span>
-<span class="font-data-display text-data-display">84.2%</span>
-<div class="mt-2 h-1 bg-surface-variant rounded-full overflow-hidden">
-<div class="h-full bg-tertiary w-[84%]"></div>
-</div>
-</div>
-</div>
-</div>
 <!-- Defect List -->
 <div class="bg-surface-container-high border border-outline-variant p-md flex-1">
 <div class="flex justify-between items-center mb-md">
@@ -308,83 +285,82 @@
 </div>
 </div>
 </div>
-<!-- Trend Analysis (Charts) -->
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
-<!-- Temp Trend -->
-<div class="bg-surface-container border border-outline-variant p-md">
-<div class="flex justify-between items-start mb-lg">
-<div>
-<p class="font-label-caps text-label-caps">Temperaturverlauf (24h)</p>
-<p class="text-xs text-on-surface-variant">Schnittstelle: Runway South</p>
+<!-- Sensor Types -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<section class="bg-surface-container border border-outline-variant p-md">
+<div class="flex items-center justify-between mb-md">
+<span class="font-label-caps text-label-caps">Sensorarten im System</span>
+<span class="material-symbols-outlined text-primary">sensors</span>
 </div>
-<span class="material-symbols-outlined text-secondary">thermostat</span>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+<div class="bg-background border border-outline-variant p-sm">
+<div class="flex items-center gap-xs mb-xs">
+<span class="material-symbols-outlined text-secondary text-sm">device_thermostat</span>
+<p class="text-xs font-bold">Oberflächentemperatur</p>
 </div>
-<div class="h-32 flex items-end gap-1">
-<!-- Simplified Bar Chart -->
-<div class="flex-1 bg-surface-variant h-[40%] rounded-t-sm"></div>
-<div class="flex-1 bg-surface-variant h-[50%] rounded-t-sm"></div>
-<div class="flex-1 bg-secondary h-[35%] rounded-t-sm"></div>
-<div class="flex-1 bg-secondary h-[30%] rounded-t-sm"></div>
-<div class="flex-1 bg-secondary h-[25%] rounded-t-sm"></div>
-<div class="flex-1 bg-error h-[10%] rounded-t-sm"></div>
-<div class="flex-1 bg-error h-[15%] rounded-t-sm"></div>
-<div class="flex-1 bg-secondary h-[30%] rounded-t-sm"></div>
-<div class="flex-1 bg-secondary h-[45%] rounded-t-sm"></div>
-<div class="flex-1 bg-surface-variant h-[60%] rounded-t-sm"></div>
+<p class="text-[11px] text-on-surface-variant">Misst die Temperatur direkt in oder auf der Startbahnoberfläche. Wichtig für Frost- und Eisbildung.</p>
 </div>
-<div class="flex justify-between mt-sm text-[10px] font-data-label text-on-surface-variant">
-<span>00:00</span>
-<span>08:00</span>
-<span>16:00</span>
-<span>Jetzt</span>
+<div class="bg-background border border-outline-variant p-sm">
+<div class="flex items-center gap-xs mb-xs">
+<span class="material-symbols-outlined text-tertiary text-sm">humidity_percentage</span>
+<p class="text-xs font-bold">Feuchte / Taupunkt</p>
 </div>
+<p class="text-[11px] text-on-surface-variant">Erkennt hohe Luftfeuchte, Taupunktnähe und Kondensation als Frühindikator für Vereisung.</p>
 </div>
-<!-- Ice Risk -->
-<div class="bg-surface-container border border-outline-variant p-md">
-<div class="flex justify-between items-start mb-lg">
-<div>
-<p class="font-label-caps text-label-caps">Vereisungsrisiko</p>
-<p class="text-xs text-on-surface-variant">Kalkulierte Prognose</p>
+<div class="bg-background border border-outline-variant p-sm">
+<div class="flex items-center gap-xs mb-xs">
+<span class="material-symbols-outlined text-primary text-sm">air</span>
+<p class="text-xs font-bold">Wind &amp; Böen</p>
 </div>
-<span class="material-symbols-outlined text-tertiary">ac_unit</span>
+<p class="text-[11px] text-on-surface-variant">Liefert Windrichtung, mittlere Windstärke und Böen für Landefreigaben und Räumplanung.</p>
 </div>
-<div class="relative h-32 flex items-center justify-center">
-<div class="absolute inset-0 border-4 border-surface-variant rounded-full border-t-tertiary rotate-[45deg]"></div>
-<div class="text-center">
-<p class="font-data-display text-headline-md text-tertiary">48%</p>
-<p class="text-[10px] text-on-surface-variant uppercase">Mittel</p>
+<div class="bg-background border border-outline-variant p-sm">
+<div class="flex items-center gap-xs mb-xs">
+<span class="material-symbols-outlined text-secondary text-sm">water_drop</span>
+<p class="text-xs font-bold">Niederschlag</p>
 </div>
+<p class="text-[11px] text-on-surface-variant">Unterscheidet Regen, Schneeregen und Schnee. Unterstützt die Entscheidung für Streu- oder Räumfahrten.</p>
 </div>
+<div class="bg-background border border-outline-variant p-sm">
+<div class="flex items-center gap-xs mb-xs">
+<span class="material-symbols-outlined text-tertiary text-sm">ac_unit</span>
+<p class="text-xs font-bold">Eisdetektion</p>
 </div>
-<!-- Last Transmission Details -->
-<div class="bg-surface-container border border-outline-variant p-md flex flex-col">
-<p class="font-label-caps text-label-caps mb-md">Letzte Übertragung</p>
-<div class="flex-1 space-y-sm">
-<div class="flex justify-between text-xs py-1 border-b border-outline-variant">
-<span class="text-on-surface-variant">Paket-ID:</span>
-<span class="font-data-label">#XF-992-01</span>
+<p class="text-[11px] text-on-surface-variant">Meldet direkte Eisbildung auf kritischen Bahnsegmenten und priorisiert rote Warnpunkte.</p>
 </div>
-<div class="flex justify-between text-xs py-1 border-b border-outline-variant">
-<span class="text-on-surface-variant">Zeitstempel:</span>
-<span class="font-data-label">14:05:22 UTC</span>
+<div class="bg-background border border-outline-variant p-sm">
+<div class="flex items-center gap-xs mb-xs">
+<span class="material-symbols-outlined text-primary text-sm">visibility</span>
+<p class="text-xs font-bold">Sichtweite</p>
 </div>
-<div class="flex justify-between text-xs py-1 border-b border-outline-variant">
-<span class="text-on-surface-variant">Latenz:</span>
-<span class="font-data-label text-secondary">12ms</span>
-</div>
-<div class="flex justify-between text-xs py-1 border-b border-outline-variant">
-<span class="text-on-surface-variant">Gateways:</span>
-<span class="font-data-label">Alpha-4, Beta-1</span>
-</div>
-<div class="flex justify-between text-xs py-1">
-<span class="text-on-surface-variant">Datenvolumen:</span>
-<span class="font-data-label">124 KB/s</span>
+<p class="text-[11px] text-on-surface-variant">Überwacht Nebel, Schneefall und Sichtverschlechterung im Anflug- und Bahnbereich.</p>
 </div>
 </div>
-<button class="mt-md w-full py-2 bg-surface-container-highest border border-outline-variant text-[10px] font-bold hover:bg-surface-variant transition-colors">
-                        KOMPLETTER AUDIT-LOG
-                    </button>
+</section>
+<section class="bg-surface-container border border-outline-variant p-md">
+<div class="flex items-center justify-between mb-md">
+<span class="font-label-caps text-label-caps">Handlungsempfehlungen</span>
+<span class="material-symbols-outlined text-tertiary">rule</span>
 </div>
+<div class="space-y-sm">
+<div class="bg-error-container/20 border border-error/30 p-sm">
+<p class="text-xs font-bold text-error">Sofort prüfen: R2-F-Zentral</p>
+<p class="text-[11px] text-on-surface-variant">Keine Daten seit 12:44. Stromversorgung und Gateway Alpha-4 vor nächster Landung prüfen.</p>
+</div>
+<div class="bg-tertiary-container/20 border border-tertiary/30 p-sm">
+<p class="text-xs font-bold text-tertiary">Wartung in 48 h: Feuchtesensoren West</p>
+<p class="text-[11px] text-on-surface-variant">Kalibrierung empfohlen, weil mehrere Werte über 90% liegen und die Taupunktprognose empfindlicher wird.</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-sm">
+<p class="text-xs font-bold">Batteriewechsel planen: Taxiway W4-G</p>
+<p class="text-[11px] text-on-surface-variant">Akkustand kritisch. Ersatzmodul in die nächste Winterdienst-Runde aufnehmen.</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-sm">
+<p class="text-xs font-bold">Neue Sensorposition vorschlagen</p>
+<p class="text-[11px] text-on-surface-variant">Zwischen RWY Mitte und West fehlt ein redundanter Eisdetektor. Standortprüfung mit Koordinaten ergänzen.</p>
+</div>
+</div>
+</section>
 </div>
 <!-- Detailed Data Grid -->
 <div class="bg-surface-container-low border border-outline-variant">
@@ -409,7 +385,7 @@
 <th class="p-md text-[10px] font-bold text-on-surface-variant border-b border-outline-variant">LETZTES SIGNAL</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-outline-variant">
+<tbody class="divide-y divide-outline-variant" id="sensorAuditBody">
 <tr class="hover:bg-surface-container-highest transition-colors cursor-pointer group">
 <td class="p-md font-data-label text-xs">RUN-S-101</td>
 <td class="p-md text-xs">Runway South (Entrance)</td>
@@ -465,10 +441,77 @@
 </div>
 <!-- Sticky FAB for Action -->
 <div class="fixed bottom-lg right-lg z-50">
-<button class="bg-secondary p-4 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all text-on-secondary flex items-center gap-2 group">
+<button class="bg-secondary p-4 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all text-on-secondary flex items-center gap-2 group" id="addSensorButton" type="button">
 <span class="material-symbols-outlined" data-weight="fill">add_circle</span>
 <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 font-bold text-xs uppercase whitespace-nowrap">Neuer Sensor</span>
 </button>
+</div>
+<div class="fixed inset-0 z-[60] hidden items-center justify-center bg-scrim/75 px-md" id="addSensorModal" role="dialog" aria-modal="true">
+<form class="w-full max-w-3xl rounded-xl border border-outline-variant bg-surface-container shadow-2xl overflow-hidden" id="addSensorForm">
+<div class="flex items-center justify-between border-b border-outline-variant p-md">
+<div>
+<p class="font-label-caps text-label-caps text-secondary">Sensor hinzufügen</p>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Neue Messstelle anlegen</h2>
+</div>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-surface-container-highest text-on-surface-variant" id="addSensorClose" type="button" aria-label="Schließen">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-md grid grid-cols-1 md:grid-cols-2 gap-md">
+<label class="block">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Sensorname</span>
+<input class="mt-xs w-full rounded-lg border border-outline-variant bg-background px-md py-sm text-on-surface outline-none focus:border-secondary" name="sensorName" placeholder="RWY West Eisdetektor" required type="text"/>
+</label>
+<label class="block">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Sensor-ID</span>
+<input class="mt-xs w-full rounded-lg border border-outline-variant bg-background px-md py-sm text-on-surface outline-none focus:border-secondary" name="sensorId" placeholder="ICE-W-204" required type="text"/>
+</label>
+<label class="block">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Sensortyp</span>
+<select class="mt-xs w-full rounded-lg border border-outline-variant bg-background px-md py-sm text-on-surface outline-none focus:border-secondary" name="sensorType" required>
+<option value="Eisdetektion">Eisdetektion</option>
+<option value="Oberflächentemperatur">Oberflächentemperatur</option>
+<option value="Feuchte / Taupunkt">Feuchte / Taupunkt</option>
+<option value="Wind &amp; Böen">Wind &amp; Böen</option>
+<option value="Niederschlag">Niederschlag</option>
+<option value="Sichtweite">Sichtweite</option>
+</select>
+</label>
+<label class="block">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Standort</span>
+<input class="mt-xs w-full rounded-lg border border-outline-variant bg-background px-md py-sm text-on-surface outline-none focus:border-secondary" name="location" placeholder="RWY 12/30 West" required type="text"/>
+</label>
+<label class="block">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Latitude</span>
+<input class="mt-xs w-full rounded-lg border border-outline-variant bg-background px-md py-sm text-on-surface outline-none focus:border-secondary" name="latitude" placeholder="50.265179" required type="text"/>
+</label>
+<label class="block">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Longitude</span>
+<input class="mt-xs w-full rounded-lg border border-outline-variant bg-background px-md py-sm text-on-surface outline-none focus:border-secondary" name="longitude" placeholder="10.992805" required type="text"/>
+</label>
+<label class="block">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Gateway</span>
+<input class="mt-xs w-full rounded-lg border border-outline-variant bg-background px-md py-sm text-on-surface outline-none focus:border-secondary" name="gateway" placeholder="Alpha-4" required type="text"/>
+</label>
+<label class="block">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Wartungsintervall</span>
+<select class="mt-xs w-full rounded-lg border border-outline-variant bg-background px-md py-sm text-on-surface outline-none focus:border-secondary" name="maintenance">
+<option>30 Tage</option>
+<option>60 Tage</option>
+<option>90 Tage</option>
+<option>180 Tage</option>
+</select>
+</label>
+<label class="block md:col-span-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Notiz</span>
+<textarea class="mt-xs w-full rounded-lg border border-outline-variant bg-background px-md py-sm text-on-surface outline-none focus:border-secondary" name="note" placeholder="Montagehinweis, Verantwortlicher, Besonderheiten" rows="3"></textarea>
+</label>
+</div>
+<div class="flex justify-end gap-sm border-t border-outline-variant p-md">
+<button class="rounded-lg border border-outline-variant bg-surface-container-high px-md py-sm font-label-caps text-label-caps hover:bg-surface-variant active:scale-95 transition-all" id="addSensorCancel" type="button">Abbrechen</button>
+<button class="rounded-lg bg-secondary px-md py-sm font-bold text-on-secondary hover:brightness-110 active:scale-95 transition-all" type="submit">Sensor speichern</button>
+</div>
+</form>
 </div>
 </main>
 <!-- Mobile BottomNavBar -->
@@ -491,16 +534,55 @@
 </a>
 </nav>
 <script>
-        // Simple micro-interaction for chart animation
         document.addEventListener('DOMContentLoaded', () => {
-            const bars = document.querySelectorAll('.bg-secondary, .bg-error');
-            bars.forEach(bar => {
-                const originalHeight = bar.style.height;
-                bar.style.height = '0px';
-                setTimeout(() => {
-                    bar.style.transition = 'height 1s cubic-bezier(0.17, 0.67, 0.83, 0.67)';
-                    bar.style.height = originalHeight;
-                }, 200);
+            const addSensorButton = document.getElementById('addSensorButton');
+            const addSensorModal = document.getElementById('addSensorModal');
+            const addSensorForm = document.getElementById('addSensorForm');
+            const addSensorClose = document.getElementById('addSensorClose');
+            const addSensorCancel = document.getElementById('addSensorCancel');
+            const sensorAuditBody = document.getElementById('sensorAuditBody');
+
+            function openAddSensorModal() {
+                addSensorModal.classList.remove('hidden');
+                addSensorModal.classList.add('flex');
+                addSensorForm.querySelector('input[name="sensorName"]').focus();
+            }
+
+            function closeAddSensorModal() {
+                addSensorModal.classList.add('hidden');
+                addSensorModal.classList.remove('flex');
+            }
+
+            addSensorButton.addEventListener('click', openAddSensorModal);
+            addSensorClose.addEventListener('click', closeAddSensorModal);
+            addSensorCancel.addEventListener('click', closeAddSensorModal);
+            addSensorModal.addEventListener('click', (event) => {
+                if (event.target === addSensorModal) closeAddSensorModal();
+            });
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') closeAddSensorModal();
+            });
+
+            addSensorForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(addSensorForm);
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-surface-container-highest transition-colors cursor-pointer bg-secondary-container/10';
+                row.innerHTML = `
+                    <td class="p-md font-data-label text-xs">${formData.get('sensorId')}</td>
+                    <td class="p-md text-xs">${formData.get('location')}</td>
+                    <td class="p-md">
+                        <span class="inline-flex items-center gap-1 text-[10px] text-secondary font-bold">
+                            <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> NEU
+                        </span>
+                    </td>
+                    <td class="p-md font-data-label text-xs">--</td>
+                    <td class="p-md font-data-label text-xs">--</td>
+                    <td class="p-md text-[10px] text-on-surface-variant">${formData.get('sensorType')} • ${formData.get('gateway')}</td>
+                `;
+                sensorAuditBody.prepend(row);
+                addSensorForm.reset();
+                closeAddSensorModal();
             });
         });
     </script>
