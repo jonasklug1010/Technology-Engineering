@@ -28,7 +28,8 @@ function getStoredProfile() {
 function requestProfilePassword(profile) {
   return new Promise((resolve) => {
     const modal = document.createElement('div');
-    modal.className = 'fixed inset-0 z-[60] flex items-center justify-center bg-scrim/75 px-md';
+    modal.className = 'fixed inset-0 flex items-center justify-center bg-scrim/75 px-md';
+    modal.style.zIndex = '9999';
     modal.setAttribute('role', 'dialog');
     modal.setAttribute('aria-modal', 'true');
     modal.innerHTML = `

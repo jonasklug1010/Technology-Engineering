@@ -631,7 +631,8 @@
         function requestProfilePassword(profile) {
             return new Promise((resolve) => {
                 const modal = document.createElement('div');
-                modal.className = 'fixed inset-0 z-[60] flex items-center justify-center bg-scrim/75 px-md';
+                modal.className = 'fixed inset-0 flex items-center justify-center bg-scrim/75 px-md';
+                modal.style.zIndex = '9999';
                 modal.setAttribute('role', 'dialog');
                 modal.setAttribute('aria-modal', 'true');
                 modal.innerHTML = `
@@ -2124,161 +2125,111 @@
 </div>
 </div>
 </div>
+<!-- Audit Log -->
+<div class="bg-surface-container-low border border-outline-variant p-md">
+<div class="flex items-center justify-between mb-md">
+<span class="font-label-caps text-label-caps">Sensor-Auditlog</span>
+<span class="material-symbols-outlined text-primary text-sm">manage_search</span>
+</div>
+<div class="space-y-xs" id="sensorAuditBody">
+<div class="bg-background border border-outline-variant p-sm">
+<div class="flex items-center justify-between gap-sm">
+<p class="text-xs font-bold">RUN-S-101</p>
+<span class="inline-flex items-center gap-1 text-[10px] text-secondary font-bold"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> ONLINE</span>
+</div>
+<p class="text-[10px] text-on-surface-variant">Runway South • -1.4°C • 76% • gerade eben</p>
+</div>
+<div class="bg-error-container/10 border border-error/30 p-sm">
+<div class="flex items-center justify-between gap-sm">
+<p class="text-xs font-bold">RUN-N-402</p>
+<span class="inline-flex items-center gap-1 text-[10px] text-error font-bold"><span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span> OFFLINE</span>
+</div>
+<p class="text-[10px] text-on-surface-variant">Runway North • keine Daten • 14 Min. her</p>
+</div>
+<div class="bg-background border border-outline-variant p-sm">
+<div class="flex items-center justify-between gap-sm">
+<p class="text-xs font-bold">TAXI-W-03</p>
+<span class="inline-flex items-center gap-1 text-[10px] text-secondary font-bold"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> ONLINE</span>
+</div>
+<p class="text-[10px] text-on-surface-variant">Taxiway West G4 • +0.2°C • 89% • vor 3 Sek.</p>
+</div>
+<div class="bg-tertiary-container/10 border border-tertiary/30 p-sm">
+<div class="flex items-center justify-between gap-sm">
+<p class="text-xs font-bold">GATE-B-08</p>
+<span class="inline-flex items-center gap-1 text-[10px] text-tertiary font-bold"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> WARNUNG</span>
+</div>
+<p class="text-[10px] text-on-surface-variant">Terminal B • -2.1°C • 94% • vor 12 Sek.</p>
 </div>
 </div>
-<!-- Sensor Types -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+</div>
+</div>
+</div>
+<!-- Sensor Details -->
 <section class="bg-surface-container border border-outline-variant p-md">
 <div class="flex items-center justify-between mb-md">
-<span class="font-label-caps text-label-caps">Sensorarten im System</span>
-<span class="material-symbols-outlined text-primary">sensors</span>
+<span class="font-label-caps text-label-caps">Ausführliche Sensordaten</span>
+<span class="material-symbols-outlined text-primary">analytics</span>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
-<div class="bg-background border border-outline-variant p-sm">
-<div class="flex items-center gap-xs mb-xs">
-<span class="material-symbols-outlined text-secondary text-sm">device_thermostat</span>
-<p class="text-xs font-bold">Oberflächentemperatur</p>
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-sm">
+<article class="bg-background border border-outline-variant p-md">
+<div class="flex items-start justify-between mb-sm">
+<div>
+<p class="text-xs font-bold">RUN-S-101</p>
+<p class="text-[11px] text-on-surface-variant">RWY 12/30 Süd - Oberfläche</p>
 </div>
-<p class="text-[11px] text-on-surface-variant">Misst die Temperatur direkt in oder auf der Startbahnoberfläche. Wichtig für Frost- und Eisbildung.</p>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">ONLINE</span>
 </div>
-<div class="bg-background border border-outline-variant p-sm">
-<div class="flex items-center gap-xs mb-xs">
-<span class="material-symbols-outlined text-tertiary text-sm">humidity_percentage</span>
-<p class="text-xs font-bold">Feuchte / Taupunkt</p>
+<div class="grid grid-cols-2 gap-xs text-[11px]">
+<span class="text-on-surface-variant">Typ</span><span class="font-data-label text-right">Temperatur</span>
+<span class="text-on-surface-variant">Temperatur</span><span class="font-data-label text-right text-secondary">-1.4°C</span>
+<span class="text-on-surface-variant">Feuchte</span><span class="font-data-label text-right">76%</span>
+<span class="text-on-surface-variant">Koordinaten</span><span class="font-data-label text-right">50.265179, 10.992805</span>
+<span class="text-on-surface-variant">Gateway</span><span class="font-data-label text-right">Alpha-4</span>
+<span class="text-on-surface-variant">Signal</span><span class="font-data-label text-right text-secondary">98%</span>
+<span class="text-on-surface-variant">Akku</span><span class="font-data-label text-right">91%</span>
+<span class="text-on-surface-variant">Wartung</span><span class="font-data-label text-right">in 18 Tagen</span>
 </div>
-<p class="text-[11px] text-on-surface-variant">Erkennt hohe Luftfeuchte, Taupunktnähe und Kondensation als Frühindikator für Vereisung.</p>
+</article>
+<article class="bg-error-container/10 border border-error/30 p-md">
+<div class="flex items-start justify-between mb-sm">
+<div>
+<p class="text-xs font-bold">RUN-N-402</p>
+<p class="text-[11px] text-on-surface-variant">RWY 12/30 Mitte - Eisdetektion</p>
 </div>
-<div class="bg-background border border-outline-variant p-sm">
-<div class="flex items-center gap-xs mb-xs">
-<span class="material-symbols-outlined text-primary text-sm">air</span>
-<p class="text-xs font-bold">Wind &amp; Böen</p>
+<span class="px-2 py-0.5 rounded-full bg-error text-on-error text-[10px] font-bold">OFFLINE</span>
 </div>
-<p class="text-[11px] text-on-surface-variant">Liefert Windrichtung, mittlere Windstärke und Böen für Landefreigaben und Räumplanung.</p>
+<div class="grid grid-cols-2 gap-xs text-[11px]">
+<span class="text-on-surface-variant">Typ</span><span class="font-data-label text-right">Eisdetektion</span>
+<span class="text-on-surface-variant">Temperatur</span><span class="font-data-label text-right">N/A</span>
+<span class="text-on-surface-variant">Eisstatus</span><span class="font-data-label text-right text-error">Keine Daten</span>
+<span class="text-on-surface-variant">Koordinaten</span><span class="font-data-label text-right">50.265612, 10.993044</span>
+<span class="text-on-surface-variant">Gateway</span><span class="font-data-label text-right">Alpha-4</span>
+<span class="text-on-surface-variant">Signal</span><span class="font-data-label text-right text-error">0%</span>
+<span class="text-on-surface-variant">Fehler</span><span class="font-data-label text-right text-error">Stromausfall</span>
+<span class="text-on-surface-variant">Priorität</span><span class="font-data-label text-right text-error">Sofort</span>
 </div>
-<div class="bg-background border border-outline-variant p-sm">
-<div class="flex items-center gap-xs mb-xs">
-<span class="material-symbols-outlined text-secondary text-sm">water_drop</span>
-<p class="text-xs font-bold">Niederschlag</p>
+</article>
+<article class="bg-tertiary-container/10 border border-tertiary/30 p-md">
+<div class="flex items-start justify-between mb-sm">
+<div>
+<p class="text-xs font-bold">GATE-B-08</p>
+<p class="text-[11px] text-on-surface-variant">Vorfeld B - Feuchte/Taupunkt</p>
 </div>
-<p class="text-[11px] text-on-surface-variant">Unterscheidet Regen, Schneeregen und Schnee. Unterstützt die Entscheidung für Streu- oder Räumfahrten.</p>
+<span class="px-2 py-0.5 rounded-full bg-tertiary text-[#271900] text-[10px] font-bold">WARNUNG</span>
 </div>
-<div class="bg-background border border-outline-variant p-sm">
-<div class="flex items-center gap-xs mb-xs">
-<span class="material-symbols-outlined text-tertiary text-sm">ac_unit</span>
-<p class="text-xs font-bold">Eisdetektion</p>
+<div class="grid grid-cols-2 gap-xs text-[11px]">
+<span class="text-on-surface-variant">Typ</span><span class="font-data-label text-right">Feuchte</span>
+<span class="text-on-surface-variant">Temperatur</span><span class="font-data-label text-right">-2.1°C</span>
+<span class="text-on-surface-variant">Feuchte</span><span class="font-data-label text-right text-tertiary">94%</span>
+<span class="text-on-surface-variant">Taupunkt</span><span class="font-data-label text-right">-2.9°C</span>
+<span class="text-on-surface-variant">Koordinaten</span><span class="font-data-label text-right">50.264921, 10.991774</span>
+<span class="text-on-surface-variant">Gateway</span><span class="font-data-label text-right">Beta-1</span>
+<span class="text-on-surface-variant">Signal</span><span class="font-data-label text-right">87%</span>
+<span class="text-on-surface-variant">Wartung</span><span class="font-data-label text-right text-tertiary">in 48 h</span>
 </div>
-<p class="text-[11px] text-on-surface-variant">Meldet direkte Eisbildung auf kritischen Bahnsegmenten und priorisiert rote Warnpunkte.</p>
-</div>
-<div class="bg-background border border-outline-variant p-sm">
-<div class="flex items-center gap-xs mb-xs">
-<span class="material-symbols-outlined text-primary text-sm">visibility</span>
-<p class="text-xs font-bold">Sichtweite</p>
-</div>
-<p class="text-[11px] text-on-surface-variant">Überwacht Nebel, Schneefall und Sichtverschlechterung im Anflug- und Bahnbereich.</p>
-</div>
-</div>
-</section>
-<section class="bg-surface-container border border-outline-variant p-md">
-<div class="flex items-center justify-between mb-md">
-<span class="font-label-caps text-label-caps">Handlungsempfehlungen</span>
-<span class="material-symbols-outlined text-tertiary">rule</span>
-</div>
-<div class="space-y-sm">
-<div class="bg-error-container/20 border border-error/30 p-sm">
-<p class="text-xs font-bold text-error">Sofort prüfen: R2-F-Zentral</p>
-<p class="text-[11px] text-on-surface-variant">Keine Daten seit 12:44. Stromversorgung und Gateway Alpha-4 vor nächster Landung prüfen.</p>
-</div>
-<div class="bg-tertiary-container/20 border border-tertiary/30 p-sm">
-<p class="text-xs font-bold text-tertiary">Wartung in 48 h: Feuchtesensoren West</p>
-<p class="text-[11px] text-on-surface-variant">Kalibrierung empfohlen, weil mehrere Werte über 90% liegen und die Taupunktprognose empfindlicher wird.</p>
-</div>
-<div class="bg-surface-container-lowest border border-outline-variant p-sm">
-<p class="text-xs font-bold">Batteriewechsel planen: Taxiway W4-G</p>
-<p class="text-[11px] text-on-surface-variant">Akkustand kritisch. Ersatzmodul in die nächste Winterdienst-Runde aufnehmen.</p>
-</div>
-<div class="bg-surface-container-lowest border border-outline-variant p-sm">
-<p class="text-xs font-bold">Neue Sensorposition vorschlagen</p>
-<p class="text-[11px] text-on-surface-variant">Zwischen RWY Mitte und West fehlt ein redundanter Eisdetektor. Standortprüfung mit Koordinaten ergänzen.</p>
-</div>
+</article>
 </div>
 </section>
-</div>
-<!-- Detailed Data Grid -->
-<div class="bg-surface-container-low border border-outline-variant">
-<div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container">
-<span class="font-label-caps text-label-caps">Sensor-Audit-Liste</span>
-<div class="flex gap-sm">
-<input class="bg-background border border-outline-variant text-[10px] px-2 py-1 w-48 focus:border-secondary outline-none" placeholder="Suchen..." type="text"/>
-<button class="bg-secondary-container text-on-secondary-container p-1 rounded">
-<span class="material-symbols-outlined text-sm">filter_list</span>
-</button>
-</div>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full text-left border-collapse">
-<thead class="bg-surface-container sticky top-0 z-10">
-<tr>
-<th class="p-md text-[10px] font-bold text-on-surface-variant border-b border-outline-variant">SENSOR ID</th>
-<th class="p-md text-[10px] font-bold text-on-surface-variant border-b border-outline-variant">STANDORT</th>
-<th class="p-md text-[10px] font-bold text-on-surface-variant border-b border-outline-variant">STATUS</th>
-<th class="p-md text-[10px] font-bold text-on-surface-variant border-b border-outline-variant">TEMP.</th>
-<th class="p-md text-[10px] font-bold text-on-surface-variant border-b border-outline-variant">FEUCHTE</th>
-<th class="p-md text-[10px] font-bold text-on-surface-variant border-b border-outline-variant">LETZTES SIGNAL</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-outline-variant" id="sensorAuditBody">
-<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer group">
-<td class="p-md font-data-label text-xs">RUN-S-101</td>
-<td class="p-md text-xs">Runway South (Entrance)</td>
-<td class="p-md">
-<span class="inline-flex items-center gap-1 text-[10px] text-secondary font-bold">
-<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> ONLINE
-                                    </span>
-</td>
-<td class="p-md font-data-label text-xs">-1.4°C</td>
-<td class="p-md font-data-label text-xs">76%</td>
-<td class="p-md text-[10px] text-on-surface-variant">Gerade eben</td>
-</tr>
-<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer bg-error-container/10">
-<td class="p-md font-data-label text-xs">RUN-N-402</td>
-<td class="p-md text-xs">Runway North (Zentral)</td>
-<td class="p-md">
-<span class="inline-flex items-center gap-1 text-[10px] text-error font-bold">
-<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span> OFFLINE
-                                    </span>
-</td>
-<td class="p-md font-data-label text-xs">N/A</td>
-<td class="p-md font-data-label text-xs">N/A</td>
-<td class="p-md text-[10px] text-on-surface-variant">14 Min. her</td>
-</tr>
-<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer">
-<td class="p-md font-data-label text-xs">TAXI-W-03</td>
-<td class="p-md text-xs">Taxiway West G4</td>
-<td class="p-md">
-<span class="inline-flex items-center gap-1 text-[10px] text-secondary font-bold">
-<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> ONLINE
-                                    </span>
-</td>
-<td class="p-md font-data-label text-xs">+0.2°C</td>
-<td class="p-md font-data-label text-xs">89%</td>
-<td class="p-md text-[10px] text-on-surface-variant">vor 3 Sek.</td>
-</tr>
-<tr class="hover:bg-surface-container-highest transition-colors cursor-pointer">
-<td class="p-md font-data-label text-xs">GATE-B-08</td>
-<td class="p-md text-xs">Terminal B (Vorfeld)</td>
-<td class="p-md">
-<span class="inline-flex items-center gap-1 text-[10px] text-tertiary font-bold">
-<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> WARNUNG
-                                    </span>
-</td>
-<td class="p-md font-data-label text-xs">-2.1°C</td>
-<td class="p-md font-data-label text-xs">94%</td>
-<td class="p-md text-[10px] text-on-surface-variant">vor 12 Sek.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 </div>
 <!-- Sticky FAB for Action -->
 <div class="fixed bottom-lg right-lg z-50">
@@ -2407,19 +2358,16 @@
             addSensorForm.addEventListener('submit', (event) => {
                 event.preventDefault();
                 const formData = new FormData(addSensorForm);
-                const row = document.createElement('tr');
-                row.className = 'hover:bg-surface-container-highest transition-colors cursor-pointer bg-secondary-container/10';
+                const row = document.createElement('div');
+                row.className = 'bg-secondary-container/10 border border-secondary/30 p-sm';
                 row.innerHTML = `
-                    <td class="p-md font-data-label text-xs">${formData.get('sensorId')}</td>
-                    <td class="p-md text-xs">${formData.get('location')}</td>
-                    <td class="p-md">
+                    <div class="flex items-center justify-between gap-sm">
+                        <p class="text-xs font-bold">${formData.get('sensorId')}</p>
                         <span class="inline-flex items-center gap-1 text-[10px] text-secondary font-bold">
                             <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> NEU
                         </span>
-                    </td>
-                    <td class="p-md font-data-label text-xs">--</td>
-                    <td class="p-md font-data-label text-xs">--</td>
-                    <td class="p-md text-[10px] text-on-surface-variant">${formData.get('sensorType')} • ${formData.get('gateway')}</td>
+                    </div>
+                    <p class="text-[10px] text-on-surface-variant">${formData.get('location')} • ${formData.get('sensorType')} • ${formData.get('gateway')}</p>
                 `;
                 sensorAuditBody.prepend(row);
                 addSensorForm.reset();
