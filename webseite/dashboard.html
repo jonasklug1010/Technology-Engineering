@@ -217,7 +217,7 @@
 </button>
 </div>
 <div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-highest p-1 rounded-lg transition-colors active:scale-95" id="profileMenuButton" role="button" tabindex="0" aria-haspopup="dialog">
-<img alt="Aktives Profil" class="w-9 h-9 rounded-full border-2 border-outline-variant object-cover bg-surface-container-high" id="activeProfileImage" src="https://api.dicebear.com/9.x/notionists/svg?seed=IT-Engineer&amp;backgroundColor=1f6feb&amp;radius=50"/>
+<img alt="Aktives Profil" class="w-9 h-9 rounded-full border-2 border-outline-variant object-cover bg-surface-container-high" id="activeProfileImage" src="assets/profiles/it.png"/>
 <span class="font-label-caps text-label-caps text-on-surface hidden lg:block" id="activeProfileName">IT</span>
 </div>
 </div>
@@ -673,14 +673,14 @@
         let flightAlarmSnoozedUntil = 0;
         let flightAlarmHasShaken = false;
         const profiles = [
-            { name: 'IT', subtitle: 'Technischer Betrieb', icon: 'dns', color: '1f6feb', seed: 'IT-Engineer' },
-            { name: 'Management', subtitle: 'Leitung', icon: 'business_center', color: '7c3aed', seed: 'Executive-Manager' },
-            { name: 'Winterdienst', subtitle: 'Einsatzleitung Schnee', icon: 'ac_unit', color: 'f97316', seed: 'Winter-Service-Orange-Jacket' },
-            { name: 'Fluglotsen', subtitle: 'Tower / Funk', icon: 'settings_input_antenna', color: '16a34a', seed: 'Air-Traffic-Controller-Headset' },
-            { name: 'Controlling', subtitle: 'Kennzahlen', icon: 'query_stats', color: 'f59e0b', seed: 'Finance-Controller' },
-            { name: 'Luftfahrtbehörde', subtitle: 'Aufsicht', icon: 'gavel', color: '64748b', seed: 'Aviation-Authority-Officer' },
-            { name: 'Entwicklungsteam', subtitle: 'Software', icon: 'code', color: 'db2777', seed: 'Developer-Team-Member' },
-            { name: 'Sicherheitsabteilung', subtitle: 'Safety / Security', icon: 'shield', color: 'dc2626', seed: 'Airport-Security-Uniform' }
+            { name: 'IT', subtitle: 'Technischer Betrieb', icon: 'dns', image: 'assets/profiles/it.png' },
+            { name: 'Management', subtitle: 'Leitung', icon: 'business_center', image: 'assets/profiles/management.png' },
+            { name: 'Winterdienst', subtitle: 'Einsatzleitung Schnee', icon: 'ac_unit', image: 'assets/profiles/winterdienst.png' },
+            { name: 'Fluglotsen', subtitle: 'Tower / Funk', icon: 'settings_input_antenna', image: 'assets/profiles/fluglotsen.png' },
+            { name: 'Controlling', subtitle: 'Kennzahlen', icon: 'query_stats', image: 'assets/profiles/controlling.png' },
+            { name: 'Luftfahrtbehörde', subtitle: 'Aufsicht', icon: 'gavel', image: 'assets/profiles/luftfahrtbehoerde.png' },
+            { name: 'Entwicklungsteam', subtitle: 'Software', icon: 'code', image: 'assets/profiles/entwicklungsteam.png' },
+            { name: 'Sicherheitsabteilung', subtitle: 'Safety / Security', icon: 'shield', image: 'assets/profiles/sicherheitsabteilung.png' }
         ];
         const runwaySignalStates = {
             green: {
@@ -728,7 +728,7 @@
         }
 
         function profileImageUrl(profile) {
-            return `https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(profile.seed)}&backgroundColor=${profile.color}&radius=50`;
+            return profile.image;
         }
 
         function renderProfiles() {
