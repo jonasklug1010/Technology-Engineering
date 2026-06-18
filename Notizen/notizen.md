@@ -84,3 +84,31 @@ Warum?
 Unterstützt Fehlersuche, Audits und regulatorische Nachweise.
 
 
+
+
+Nicht-funktionale Anforderungen: Frontend & Integration
+NFF-01 Minimale Systemlatenz (Realitätsnah)
+Das Frontend und die Integrationsebene müssen die Datenströme so performant verarbeiten, dass Verzögerungen zwischen der Messung und der Darstellung minimiert werden.
+Anforderungen:
+• Latenz so gering wie möglich halten (Echtzeit-Datenaktualisierung)
+• Verzögerungsfreie Bereitstellung und Anzeige von Oberflächentemperatur, Feuchtigkeit, Luftdruck, Taupunkt und Niederschlagsart
+Warum?
+Fluglotsen und der Winterdienst benötigen die Messwerte direkt und ohne Zeitverzug, um auf kritische Bahnzustände rechtzeitig reagieren zu können.
+
+NFF-02 Multimodale Alarmierung (Bedienbarkeit & Usability)
+Kritische Vereisungsalarme müssen über mehrere menschliche Sinneskanäle gleichzeitig wahrnehmbar aufbereitet werden.
+Anforderungen:
+• Visuelle Warnung (auffällige farbliche Hervorhebung auf dem Dashboard)
+• Akustische Warnung (akustisch wahrnehmbarer Warnton bei kritischen Risikostufen)
+Warum?
+Die Bedienbarkeit und Usability fordern, dass ein Alarm auf mehreren Sinnen erkennbar sein muss, damit er auch unter Ablenkung oder hohem Zeitdruck im Tower sofort registriert wird.
+
+NFF-03 Menschliche Letztentscheidung (Sicherheit)
+Das UI-Design und die Systemintegration müssen so restriktiv umgesetzt werden, dass fehlerhafte, automatisierte Systemaktionen ausgeschlossen sind.
+Anforderungen:
+• Gewährleistung einer 100%igen menschlichen Entscheidungshoheit über die Benutzeroberfläche
+• 0% softwareseitig zulässige automatisierte Freigabe der Startbahn 
+• Integration zwingender manueller Quittierungs- und Bestätigungsdialoge für operative Freigabebefehle
+Warum?
+Die Sicherheitsbeauftragte schreibt unmissverständlich vor, dass das System niemals eine automatische Freigabe der Startbahn erteilen darf und die Verantwortung zwingend beim Menschen bleiben muss.
+

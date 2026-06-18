@@ -14,7 +14,7 @@ Verantwortlich für:
 -	Meetings
 -	Hindernisse
 -	Teamorganisation
-3.	Entwicklungsteam: Roman, Ekaterina, Mohammad, Karina, Fabi, Jonas, Lenni
+3.	Entwicklungsteam: Ekaterina, Mohammad, Karina, Fabi, Jonas, Lenni
 Verantwortlich für:
 -	Frontend
 -	Dashboards
@@ -45,3 +45,14 @@ Verantwortlich für:
 # To do
 - Abgleich, ob Liveanzeige durch Sensoren erreicht werden können 
 - Wurde bei dem UI jeder stake holder mit rein genommen?
+
+##	Besprechung #1 18.06.2026
+
+### Log
+
+- Einteilung Vretreter für gruppenübergreifende Kommunikation
+- Abklärung des weiteren Arbeitsablaufs
+    -> Priorität auf Festlegung der Daten, die vom Backend angefordert werden
+    -> Abstimmen der UI auf die Bedürfnisse der einzelnen Stakeholder
+- Besprechung mit Orga-Beauftragten der Backend- & Sensorgruppe, Abklärung offener Fragen, Rollenverteilung innerhalb der Teams
+- Erstellen einer Struktur für die UI

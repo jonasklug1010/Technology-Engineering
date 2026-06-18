@@ -31,3 +31,12 @@ https://hscoburgde-my.sharepoint.com/:i:/g/personal/jon7242s_hs-coburg_de/IQAVVo
 https://hscoburgde-my.sharepoint.com/:i:/g/personal/jon7242s_hs-coburg_de/IQAVVoMWvi56QIshri9kCXA8AQ1k5skstobBNz8Vf_hnwKw?e=BP46we
 
 # Settings
+
+
+# Stakeholder
+
+## IT
+- Konstanten Anpassen (Settings)
+
+## Winterdienst
+- 

@@ -133,14 +133,22 @@
         background: #30363d;
         border-radius: 2px;
       }
-      .radar-map iframe {
-        filter: saturate(0.85) brightness(0.82) contrast(1.08);
-      }
       .risk-trend-grid {
         background-image:
           linear-gradient(to right, rgba(197, 198, 203, 0.08) 1px, transparent 1px),
           linear-gradient(to bottom, rgba(197, 198, 203, 0.08) 1px, transparent 1px);
         background-size: 20% 100%, 100% 25%;
+      }
+      @keyframes flight-alert-shake {
+        0%, 100% { transform: translateX(0); }
+        15% { transform: translateX(-8px); }
+        30% { transform: translateX(8px); }
+        45% { transform: translateX(-6px); }
+        60% { transform: translateX(6px); }
+        75% { transform: translateX(-3px); }
+      }
+      .flight-alert-shake {
+        animation: flight-alert-shake 520ms ease-in-out;
       }
     </style>
 </head>
@@ -162,32 +170,14 @@
 </li>
 <li>
 <a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-variant px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="#">
-<span class="material-symbols-outlined">flight_takeoff</span>
-<span class="font-label-caps text-label-caps">Runways</span>
-</a>
-</li>
-<li>
-<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-variant px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="#">
 <span class="material-symbols-outlined">router</span>
 <span class="font-label-caps text-label-caps">Sensors</span>
 </a>
 </li>
 <li>
 <a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-variant px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="#">
-<span class="material-symbols-outlined">notifications_active</span>
-<span class="font-label-caps text-label-caps">Alarms</span>
-</a>
-</li>
-<li>
-<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-variant px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="#">
 <span class="material-symbols-outlined">history</span>
 <span class="font-label-caps text-label-caps">History</span>
-</a>
-</li>
-<li>
-<a class="text-on-surface-variant hover:text-on-surface hover:bg-surface-variant px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="#">
-<span class="material-symbols-outlined">assessment</span>
-<span class="font-label-caps text-label-caps">Reports</span>
 </a>
 </li>
 <li>
@@ -226,31 +216,29 @@
 <span class="material-symbols-outlined">sensors</span>
 </button>
 </div>
-<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-highest p-1 rounded-lg transition-colors active:scale-95">
-<img alt="Chief Safety Officer Profile" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZIGWY65ddl-yF9-uDAPKrO1kur-UaZV0VW_mUb--ALipPDVxkpnCT4jN_985h4IyjGD5Igp_qIxlq7V5Clo1_xEnJ_0jcQGFo8a-tn1SChEKOrHku-fPCgVZNMA2nh7Sk572rwYOwIv3j-uK_mcAMFzeToKWmkV39Sku2Bg3-lZPDltLXLjbxWedoDoE6QvQHrIs55OGybDITvLrh1rMn-_erZOa2UpiLpCCxAEUucM22M8LQPI8OL5iwy7rrCzzCADfi8OkPYcT4"/>
-<span class="font-label-caps text-label-caps text-on-surface hidden lg:block">Profile</span>
+<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-highest p-1 rounded-lg transition-colors active:scale-95" id="profileMenuButton" role="button" tabindex="0" aria-haspopup="dialog">
+<img alt="Aktives Profil" class="w-9 h-9 rounded-full border-2 border-outline-variant object-cover bg-surface-container-high" id="activeProfileImage" src="https://api.dicebear.com/9.x/notionists/svg?seed=IT-Engineer&amp;backgroundColor=1f6feb&amp;radius=50"/>
+<span class="font-label-caps text-label-caps text-on-surface hidden lg:block" id="activeProfileName">IT</span>
 </div>
 </div>
 </header>
+<div class="fixed inset-0 z-[90] hidden items-center justify-center bg-black/60 p-lg" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileModalTitle">
+<section class="w-full max-w-3xl rounded-xl border border-outline-variant bg-surface-container shadow-2xl overflow-hidden">
+<div class="flex items-center justify-between border-b border-outline-variant p-md">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface" id="profileModalTitle">Profil auswählen</h2>
+<p class="text-sm text-on-surface-variant mt-xs">Rolle für Ansicht, Verantwortlichkeit und Bedienkontext wechseln.</p>
+</div>
+<button class="w-10 h-10 rounded-lg border border-outline-variant bg-surface hover:bg-surface-variant active:scale-95 transition-all flex items-center justify-center" id="profileModalClose" type="button" aria-label="Profilfenster schließen">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-sm p-md" id="profileOptions"></div>
+</section>
+</div>
 <!-- Main Content Canvas -->
 <main class="pl-64 min-h-screen">
 <div class="p-md md:p-lg space-y-md">
-<!-- Alert Banner: High Contrast Risk State -->
-<section class="w-full bg-[#161B22] border border-[#30363D] p-md rounded-xl flex flex-col md:flex-row items-center justify-between gap-md critical-glow">
-<div class="flex items-center gap-lg">
-<div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center text-secondary border-2 border-secondary/20">
-<span class="material-symbols-outlined !text-4xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-</div>
-<div>
-<h1 class="font-headline-lg text-headline-lg text-on-surface">VEREISUNGSRISIKO: <span class="text-secondary">NIEDRIG</span></h1>
-<p class="text-on-surface-variant font-body-md">Aktualisiert vor 12 Sekunden • EDQC / QRQ • Standort: 50.265179, 10.992805 • Alle Sensoren liefern nominale Werte.</p>
-</div>
-</div>
-<button class="bg-[#238636] text-white px-lg py-sm rounded-lg font-bold hover:brightness-110 active:scale-95 transition-all flex items-center gap-sm">
-<span class="material-symbols-outlined">done_all</span>
-                    BESTÄTIGEN
-</button>
-</section>
 <!-- Forecast Weather Risk -->
 <section class="w-full bg-tertiary-container/30 border border-tertiary/30 p-md rounded-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-md">
 <div class="flex items-start gap-md">
@@ -277,6 +265,37 @@
 <div class="bg-[#161B22] border border-[#30363D] p-sm min-w-24">
 <p class="font-label-caps text-[10px] text-on-surface-variant">FEUCHTE</p>
 <p class="font-data-display text-data-display text-on-surface">91%</p>
+</div>
+</div>
+</section>
+<!-- Runway Traffic Light Status -->
+<section class="w-full bg-[#161B22] border border-[#30363D] rounded-xl overflow-hidden" id="runwaySignalPanel">
+<div class="p-md border-b border-[#30363D] flex flex-col lg:flex-row lg:items-center justify-between gap-md bg-surface-container">
+<div>
+<div class="flex flex-wrap items-center gap-sm mb-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Landebahnstatus</h2>
+<span class="bg-secondary-container/20 text-secondary px-sm py-xs rounded font-label-caps text-[10px] border border-secondary/20" id="runwaySignalBadge">LANDUNG MÖGLICH</span>
+</div>
+<p class="text-on-surface-variant font-body-md" id="runwaySignalText">Keine Eisbildung erkannt. RWY 12/30 ist für Landungen freigegeben.</p>
+</div>
+<div class="flex flex-wrap gap-sm">
+<button class="bg-surface-container-high border border-outline-variant px-md py-sm rounded font-label-caps text-label-caps hover:bg-surface-variant active:scale-95 transition-all" data-runway-state="green" type="button">GRÜN</button>
+<button class="bg-surface-container-high border border-outline-variant px-md py-sm rounded font-label-caps text-label-caps hover:bg-surface-variant active:scale-95 transition-all" data-runway-state="yellow" type="button">GELB</button>
+<button class="bg-surface-container-high border border-outline-variant px-md py-sm rounded font-label-caps text-label-caps hover:bg-surface-variant active:scale-95 transition-all" data-runway-state="red" type="button">ROT</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-md p-md items-center">
+<div class="bg-[#0d141c] border border-[#30363D] rounded-lg p-md flex items-center justify-center gap-md">
+<span class="w-12 h-12 rounded-full bg-error/25 border border-error/30 opacity-30 transition-all" data-runway-light="red"></span>
+<span class="w-12 h-12 rounded-full bg-tertiary/25 border border-tertiary/30 opacity-30 transition-all" data-runway-light="yellow"></span>
+<span class="w-12 h-12 rounded-full bg-secondary/25 border border-secondary/30 opacity-30 transition-all" data-runway-light="green"></span>
+</div>
+<div class="bg-[#0d141c] border border-[#30363D] rounded-lg p-md">
+<p class="font-label-caps text-label-caps text-on-surface-variant">STATUSWORT</p>
+<div class="flex flex-wrap items-end gap-md mt-xs">
+<span class="font-data-display text-headline-lg text-secondary" id="runwaySignalWord">FREI</span>
+<span class="text-on-surface-variant font-body-md" id="runwaySignalHint">Landung möglich</span>
+</div>
 </div>
 </div>
 </section>
@@ -338,62 +357,76 @@
 </div>
 <p class="text-[10px] text-on-surface-variant mt-xs">Luftfeuchtigkeit: 84%</p>
 </div>
-<!-- Rain Radar Card -->
-<div class="bg-[#161B22] border border-[#30363D] rounded-lg overflow-hidden">
-<div class="p-sm flex items-center justify-between border-b border-[#30363D]">
-<div>
-<h3 class="font-label-caps text-label-caps text-on-surface-variant">REGENRADAR</h3>
-<p class="text-[10px] text-on-surface-variant mt-xs">Radarbereich Coburg / EDQC</p>
-</div>
-<span class="material-symbols-outlined text-secondary text-sm">radar</span>
-</div>
-<div class="radar-map h-44 bg-surface-container-low">
-<iframe class="w-full h-full border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://embed.windy.com/embed2.html?lat=50.265&amp;lon=10.993&amp;detailLat=50.265&amp;detailLon=10.993&amp;width=650&amp;height=450&amp;zoom=8&amp;level=surface&amp;overlay=radar&amp;product=radar&amp;menu=&amp;message=true&amp;marker=true&amp;calendar=now&amp;pressure=&amp;type=map&amp;location=coordinates&amp;detail=true&amp;metricWind=kt&amp;metricTemp=%C2%B0C&amp;radarRange=-1" title="Regenradar Coburg EDQC"></iframe>
-</div>
-<div class="p-sm flex items-center justify-between gap-sm">
-<p class="font-data-label text-[10px] text-on-surface-variant">Live-Radar • 50.265179, 10.992805</p>
-<a class="font-label-caps text-[10px] text-secondary-fixed hover:underline" href="https://www.windy.com/?radar,50.265,10.993,8" rel="noopener" target="_blank">WINDY</a>
-</div>
-</div>
 </div>
 <!-- Center Column: Runway Visualization -->
 <div class="col-span-12 lg:col-span-6 space-y-gutter">
 <h3 class="font-label-caps text-label-caps text-on-surface-variant mb-xs">STARTBAHN-ÜBERSICHT (RWY 12/30)</h3>
 <div class="bg-[#161B22] border border-[#30363D] p-lg rounded-xl h-[500px] flex flex-col justify-center relative overflow-hidden">
-<!-- Technical Map Background Pattern -->
-<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: radial-gradient(#30363D 1px, transparent 1px); background-size: 20px 20px;"></div>
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: linear-gradient(to right, #30363D 1px, transparent 1px), linear-gradient(to bottom, #30363D 1px, transparent 1px); background-size: 42px 42px;"></div>
+<div class="absolute left-8 right-8 top-10 h-12 rounded-full bg-secondary/5 blur-xl"></div>
 <div class="relative z-10 flex flex-col items-center gap-xl w-full">
-<!-- Runway Body -->
-<div class="w-full h-24 bg-[#0d141c] border-y-2 border-[#30363D] flex relative">
-<!-- Zone A -->
-<div class="runway-zone flex-1 border-r border-outline-variant/30 flex flex-col items-center justify-center group cursor-crosshair transition-colors relative">
-<span class="absolute top-2 left-2 text-[10px] font-bold text-outline">ZONE A</span>
-<div class="w-3 h-3 bg-secondary rounded-full critical-glow"></div>
-<div class="mt-2 text-center">
-<p class="text-[10px] font-mono text-on-surface-variant">SENS-01</p>
-<p class="font-data-label text-secondary">0.9°C</p>
+<div class="w-full flex items-center justify-between text-[10px] font-data-label text-on-surface-variant">
+<span>ANFLUG 12</span>
+<span>RWY 12/30 · 632 m · Sensorverbund aktiv</span>
+<span>ABFLUG 30</span>
+</div>
+<div class="relative w-full max-w-[620px] h-64">
+<div class="absolute left-1/2 top-1/2 h-40 w-[112%] -translate-x-1/2 -translate-y-1/2 -rotate-6 rounded-[18px] border border-outline-variant/50 bg-[#101820] shadow-2xl">
+<div class="absolute inset-3 rounded-[14px] border border-white/10 bg-[#0b1118] overflow-hidden">
+<div class="absolute inset-y-0 left-0 w-16 bg-white/8"></div>
+<div class="absolute inset-y-0 right-0 w-16 bg-white/8"></div>
+<div class="absolute left-5 top-4 bottom-4 grid grid-cols-3 gap-1">
+<span class="w-2 bg-white/70"></span><span class="w-2 bg-white/70"></span><span class="w-2 bg-white/70"></span>
+</div>
+<div class="absolute right-5 top-4 bottom-4 grid grid-cols-3 gap-1">
+<span class="w-2 bg-white/70"></span><span class="w-2 bg-white/70"></span><span class="w-2 bg-white/70"></span>
+</div>
+<div class="absolute left-20 right-20 top-1/2 -translate-y-1/2 flex justify-between">
+<span class="h-1 w-10 rounded bg-white/70"></span>
+<span class="h-1 w-10 rounded bg-white/70"></span>
+<span class="h-1 w-10 rounded bg-white/70"></span>
+<span class="h-1 w-10 rounded bg-white/70"></span>
+<span class="h-1 w-10 rounded bg-white/70"></span>
+</div>
+<div class="absolute inset-y-0 left-1/3 w-px bg-tertiary/30"></div>
+<div class="absolute inset-y-0 left-2/3 w-px bg-tertiary/30"></div>
+<div class="absolute left-6 top-1/2 -translate-y-1/2 text-3xl font-black text-white/15">12</div>
+<div class="absolute right-6 top-1/2 -translate-y-1/2 rotate-180 text-3xl font-black text-white/15">30</div>
 </div>
 </div>
-<!-- Zone B -->
-<div class="runway-zone flex-1 border-r border-outline-variant/30 flex flex-col items-center justify-center group cursor-crosshair transition-colors relative">
-<span class="absolute top-2 left-2 text-[10px] font-bold text-outline">ZONE B</span>
-<div class="w-3 h-3 bg-secondary rounded-full critical-glow"></div>
-<div class="mt-2 text-center">
-<p class="text-[10px] font-mono text-on-surface-variant">SENS-02</p>
-<p class="font-data-label text-secondary">0.7°C</p>
+<div class="absolute left-[18%] top-[39%] group cursor-crosshair">
+<span class="absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] font-bold text-outline whitespace-nowrap">ZONE A</span>
+<div class="w-4 h-4 bg-secondary rounded-full critical-glow transition-all ring-4 ring-[#161B22]" data-runway-sensor-dot="A"></div>
+<div class="pointer-events-none absolute bottom-full left-1/2 z-20 mb-sm w-44 -translate-x-1/2 rounded-lg border border-secondary/30 bg-[#0d141c] p-sm text-left opacity-0 shadow-xl transition-opacity group-hover:opacity-100" data-runway-sensor-card="A">
+<p class="font-label-caps text-[10px] text-secondary" data-runway-sensor-status="A">ONLINE</p>
+<p class="mt-xs text-xs font-bold text-on-surface">SENS-ZONE-A-01</p>
+<p class="mt-xs text-[11px] text-on-surface-variant">Temp. 0.9°C · Feuchte 82%</p>
+<p class="text-[11px] text-on-surface-variant">Kalibrierung nominal</p>
 </div>
+<p class="mt-2 -translate-x-5 text-[10px] font-mono text-on-surface-variant">SENS-01</p>
 </div>
-<!-- Zone C -->
-<div class="runway-zone flex-1 flex flex-col items-center justify-center group cursor-crosshair transition-colors relative">
-<span class="absolute top-2 left-2 text-[10px] font-bold text-outline">ZONE C</span>
-<div class="w-3 h-3 bg-secondary rounded-full critical-glow"></div>
-<div class="mt-2 text-center">
-<p class="text-[10px] font-mono text-on-surface-variant">SENS-03</p>
-<p class="font-data-label text-secondary">0.8°C</p>
+<div class="absolute left-[50%] top-[50%] group cursor-crosshair">
+<span class="absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] font-bold text-outline whitespace-nowrap">ZONE B</span>
+<div class="w-4 h-4 bg-secondary rounded-full critical-glow transition-all ring-4 ring-[#161B22]" data-runway-sensor-dot="B"></div>
+<div class="pointer-events-none absolute bottom-full left-1/2 z-20 mb-sm w-44 -translate-x-1/2 rounded-lg border border-tertiary/30 bg-[#0d141c] p-sm text-left opacity-0 shadow-xl transition-opacity group-hover:opacity-100" data-runway-sensor-card="B">
+<p class="font-label-caps text-[10px] text-tertiary" data-runway-sensor-status="B">PRÜFEN</p>
+<p class="mt-xs text-xs font-bold text-on-surface">SENS-ZONE-B-02</p>
+<p class="mt-xs text-[11px] text-on-surface-variant">Temp. 0.7°C · Feuchte 88%</p>
+<p class="text-[11px] text-on-surface-variant">Sichtwert beobachten</p>
 </div>
+<p class="mt-2 -translate-x-5 text-[10px] font-mono text-on-surface-variant">SENS-02</p>
 </div>
-<!-- Centerline Markings -->
-<div class="absolute top-1/2 left-0 w-full h-[2px] border-t-2 border-dashed border-outline-variant/40 -translate-y-1/2"></div>
+<div class="absolute right-[18%] top-[61%] group cursor-crosshair">
+<span class="absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] font-bold text-outline whitespace-nowrap">ZONE C</span>
+<div class="w-4 h-4 bg-secondary rounded-full critical-glow transition-all ring-4 ring-[#161B22]" data-runway-sensor-dot="C"></div>
+<div class="pointer-events-none absolute bottom-full left-1/2 z-20 mb-sm w-44 -translate-x-1/2 rounded-lg border border-secondary/30 bg-[#0d141c] p-sm text-left opacity-0 shadow-xl transition-opacity group-hover:opacity-100" data-runway-sensor-card="C">
+<p class="font-label-caps text-[10px] text-secondary" data-runway-sensor-status="C">ONLINE</p>
+<p class="mt-xs text-xs font-bold text-on-surface">SENS-ZONE-C-03</p>
+<p class="mt-xs text-[11px] text-on-surface-variant">Temp. 0.8°C · Feuchte 80%</p>
+<p class="text-[11px] text-on-surface-variant">Grip-Level stabil</p>
+</div>
+<p class="mt-2 -translate-x-5 text-[10px] font-mono text-on-surface-variant">SENS-03</p>
+</div>
 </div>
 <!-- Dashboard Info Underneath -->
 <div class="grid grid-cols-3 gap-md w-full">
@@ -414,36 +447,10 @@
 </div>
 </div>
 </div>
-<div class="absolute bottom-4 right-4 flex gap-sm">
-<span class="bg-[#161B22] border border-[#30363D] text-[10px] px-2 py-1 rounded">Vollbild</span>
-<span class="bg-[#161B22] border border-[#30363D] text-[10px] px-2 py-1 rounded">3D Ansicht</span>
-</div>
 </div>
 </div>
 <!-- Right Column: Alarms & Status -->
 <div class="col-span-12 lg:col-span-3 space-y-gutter">
-<div>
-<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-xs">LETZTE ALARME</h3>
-<div class="bg-[#161B22] border border-[#30363D] rounded-lg overflow-hidden divide-y divide-[#30363D]">
-<div class="p-sm flex items-start gap-sm hover:bg-[#21262D] transition-colors">
-<div class="w-1.5 h-1.5 rounded-full bg-error mt-2"></div>
-<div class="flex-1">
-<p class="text-xs font-bold text-on-surface">Warnung: Reifansatz Zone B</p>
-<p class="text-[10px] text-on-surface-variant">Vor 45 Min • Behoben</p>
-</div>
-</div>
-<div class="p-sm flex items-start gap-sm hover:bg-[#21262D] transition-colors">
-<div class="w-1.5 h-1.5 rounded-full bg-tertiary mt-2"></div>
-<div class="flex-1">
-<p class="text-xs font-bold text-on-surface">Wartung fällig: SENS-04</p>
-<p class="text-[10px] text-on-surface-variant">Vor 2 Std • Ausstehend</p>
-</div>
-</div>
-<div class="p-sm text-center">
-<button class="text-[10px] font-bold text-secondary-fixed hover:underline">Alle Alarme anzeigen</button>
-</div>
-</div>
-</div>
 <div>
 <div class="flex items-center justify-between mb-xs">
 <h3 class="font-label-caps text-label-caps text-on-surface-variant">RISIKOTREND</h3>
@@ -502,31 +509,6 @@
 </div>
 </div>
 </div>
-<div>
-<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-xs">SENSORSTATUS</h3>
-<div class="bg-[#161B22] border border-[#30363D] rounded-lg p-sm space-y-sm max-h-[300px] overflow-y-auto custom-scrollbar">
-<div class="flex justify-between items-center text-xs">
-<span class="text-on-surface-variant font-mono">SENS-ZONE-A-01</span>
-<span class="bg-secondary-container/20 text-secondary px-xs py-[2px] rounded text-[10px] font-bold">ONLINE</span>
-</div>
-<div class="flex justify-between items-center text-xs">
-<span class="text-on-surface-variant font-mono">SENS-ZONE-B-02</span>
-<span class="bg-secondary-container/20 text-secondary px-xs py-[2px] rounded text-[10px] font-bold">ONLINE</span>
-</div>
-<div class="flex justify-between items-center text-xs">
-<span class="text-on-surface-variant font-mono">SENS-ZONE-C-03</span>
-<span class="bg-secondary-container/20 text-secondary px-xs py-[2px] rounded text-[10px] font-bold">ONLINE</span>
-</div>
-<div class="flex justify-between items-center text-xs">
-<span class="text-on-surface-variant font-mono">SENS-WETTER-01</span>
-<span class="bg-secondary-container/20 text-secondary px-xs py-[2px] rounded text-[10px] font-bold">ONLINE</span>
-</div>
-<div class="flex justify-between items-center text-xs">
-<span class="text-on-surface-variant font-mono">SENS-GRIP-MTR</span>
-<span class="bg-surface-variant text-on-surface-variant px-xs py-[2px] rounded text-[10px] font-bold">OFFLINE</span>
-</div>
-</div>
-</div>
 <!-- Small Live Action Card -->
 <div class="bg-secondary-container/10 border border-secondary/20 p-sm rounded-lg">
 <div class="flex items-center gap-sm">
@@ -537,8 +519,76 @@
 </div>
 </div>
 </div>
+<!-- Flight Plan Safety Check -->
+<section class="w-full bg-[#161B22] border border-[#30363D] rounded-xl overflow-hidden" id="flightCheckPanel">
+<div class="p-md border-b border-[#30363D] flex flex-col lg:flex-row lg:items-center justify-between gap-md bg-surface-container">
+<div>
+<div class="flex flex-wrap items-center gap-sm mb-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Flugplan-Sicherheitscheck</h2>
+<span class="bg-secondary-container/20 text-secondary px-sm py-xs rounded font-label-caps text-[10px] border border-secondary/20" id="flightCheckBadge">BEREIT</span>
+</div>
+<p class="text-on-surface-variant font-body-md" id="flightCheckSummary">30 Minuten vor Start erscheint automatisch eine Bestätigung für Wetter und Gefahrenlage.</p>
+</div>
+<button class="bg-tertiary text-[#271900] px-lg py-sm rounded-lg font-bold hover:brightness-110 active:scale-95 transition-all flex items-center gap-sm" id="flightAlarmTest" type="button">
+<span class="material-symbols-outlined">notifications</span>
+                    ALARM TESTEN
+</button>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-[1.1fr_0.9fr] gap-md p-md">
+<div class="space-y-sm" id="flightScheduleList"></div>
+<form class="bg-[#0d141c] border border-[#30363D] rounded-lg p-md space-y-md" id="flightCheckForm">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">BESTÄTIGUNG</p>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-xs" id="flightCheckTitle">Kein Flug fällig</h3>
+<p class="text-[12px] text-on-surface-variant mt-xs" id="flightCheckText">Sobald ein Flug in der 30-Minuten-Prüffrist liegt, kann die Lage bestätigt werden.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+<label class="space-y-xs">
+<span class="font-label-caps text-[10px] text-on-surface-variant">WETTERSTATUS</span>
+<select class="w-full bg-surface border border-outline-variant text-on-surface rounded px-sm py-sm outline-none focus:border-secondary" id="flightWeatherState" disabled>
+<option>Flugbetrieb möglich</option>
+<option>Beobachten</option>
+<option>Flugbetrieb einschränken</option>
+</select>
+</label>
+<label class="space-y-xs">
+<span class="font-label-caps text-[10px] text-on-surface-variant">GEFAHRENLAGE</span>
+<select class="w-full bg-surface border border-outline-variant text-on-surface rounded px-sm py-sm outline-none focus:border-secondary" id="flightHazardState" disabled>
+<option>Keine Gefahr erkannt</option>
+<option>Vereisungsrisiko</option>
+<option>FOD / Hindernis</option>
+<option>Starker Wind</option>
+<option>Sicht eingeschränkt</option>
+</select>
+</label>
+</div>
+<label class="space-y-xs block">
+<span class="font-label-caps text-[10px] text-on-surface-variant">NOTIZ</span>
+<textarea class="w-full min-h-20 bg-surface border border-outline-variant text-on-surface rounded px-sm py-sm outline-none focus:border-secondary resize-y" id="flightOperatorNote" placeholder="Kurze Lageeinschätzung" disabled></textarea>
+</label>
+<button class="w-full bg-secondary text-on-secondary px-lg py-sm rounded-lg font-bold hover:brightness-110 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed" id="flightConfirmButton" type="submit" disabled>
+                    WETTER UND GEFAHREN BESTÄTIGEN
+</button>
+</form>
+</div>
+</section>
 </div>
 </main>
+<aside class="fixed bottom-5 right-5 z-[80] w-[min(420px,calc(100vw-40px))] bg-error-container border border-error border-l-4 border-l-error rounded-xl shadow-2xl p-md hidden" id="flightAlarmPopup" role="alertdialog" aria-labelledby="flightAlarmTitle" aria-describedby="flightAlarmMessage">
+<div class="flex items-start gap-sm">
+<div class="w-10 h-10 rounded-lg bg-error text-on-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">notification_important</span>
+</div>
+<div class="flex-1">
+<h3 class="font-headline-sm text-headline-sm text-error" id="flightAlarmTitle">Flugcheck erforderlich</h3>
+<p class="text-on-surface text-sm mt-xs" id="flightAlarmMessage">Ein Flug startet in weniger als 30 Minuten. Wetter und Gefahrenlage müssen bestätigt werden.</p>
+</div>
+</div>
+<div class="flex justify-end gap-sm mt-md">
+<button class="bg-error text-on-error px-md py-sm rounded font-label-caps text-label-caps hover:brightness-110 active:scale-95 transition-all" id="flightAlarmOpen" type="button">PRÜFUNG ÖFFNEN</button>
+<button class="bg-surface-container-high border border-error/40 text-on-surface px-md py-sm rounded font-label-caps text-label-caps hover:bg-surface-variant active:scale-95 transition-all" id="flightAlarmSnooze" type="button">5 MIN SPÄTER</button>
+</div>
+</aside>
 <!-- Micro-Interaction Script -->
 <script>
         // Simulate real-time sensor jitter for a technical feel
@@ -581,6 +631,345 @@
 
         updateForecastTimes();
         setInterval(updateForecastTimes, 60000);
+
+        const flightScheduleList = document.getElementById('flightScheduleList');
+        const flightCheckBadge = document.getElementById('flightCheckBadge');
+        const flightCheckSummary = document.getElementById('flightCheckSummary');
+        const flightCheckTitle = document.getElementById('flightCheckTitle');
+        const flightCheckText = document.getElementById('flightCheckText');
+        const flightCheckForm = document.getElementById('flightCheckForm');
+        const flightWeatherState = document.getElementById('flightWeatherState');
+        const flightHazardState = document.getElementById('flightHazardState');
+        const flightOperatorNote = document.getElementById('flightOperatorNote');
+        const flightConfirmButton = document.getElementById('flightConfirmButton');
+        const flightAlarmTest = document.getElementById('flightAlarmTest');
+        const flightAlarmPopup = document.getElementById('flightAlarmPopup');
+        const flightAlarmMessage = document.getElementById('flightAlarmMessage');
+        const flightAlarmOpen = document.getElementById('flightAlarmOpen');
+        const flightAlarmSnooze = document.getElementById('flightAlarmSnooze');
+        const runwaySignalBadge = document.getElementById('runwaySignalBadge');
+        const runwaySignalText = document.getElementById('runwaySignalText');
+        const runwaySignalWord = document.getElementById('runwaySignalWord');
+        const runwaySignalHint = document.getElementById('runwaySignalHint');
+        const runwaySignalButtons = document.querySelectorAll('[data-runway-state]');
+        const runwaySignalLights = document.querySelectorAll('[data-runway-light]');
+        const runwaySensorDots = document.querySelectorAll('[data-runway-sensor-dot]');
+        const runwaySensorCards = document.querySelectorAll('[data-runway-sensor-card]');
+        const runwaySensorStatuses = document.querySelectorAll('[data-runway-sensor-status]');
+        const profileMenuButton = document.getElementById('profileMenuButton');
+        const profileModal = document.getElementById('profileModal');
+        const profileModalClose = document.getElementById('profileModalClose');
+        const profileOptions = document.getElementById('profileOptions');
+        const activeProfileImage = document.getElementById('activeProfileImage');
+        const activeProfileName = document.getElementById('activeProfileName');
+
+        const flightPlanStart = new Date();
+        const flightPlan = [
+            createFlight('QC 104', 'Coburg EDQC → Nürnberg EDDN', 42, 'D-ECQB', 'RWY 12/30'),
+            createFlight('QC 218', 'Coburg EDQC → Erfurt EDDE', 85, 'D-EVLP', 'RWY 12/30'),
+            createFlight('QC 331', 'Coburg EDQC → Hof EDQM', 140, 'D-MEDX', 'RWY 12/30')
+        ];
+        let activeFlightId = null;
+        let flightAlarmSnoozedUntil = 0;
+        let flightAlarmHasShaken = false;
+        const profiles = [
+            { name: 'IT', subtitle: 'Technischer Betrieb', icon: 'dns', color: '1f6feb', seed: 'IT-Engineer' },
+            { name: 'Management', subtitle: 'Leitung', icon: 'business_center', color: '7c3aed', seed: 'Executive-Manager' },
+            { name: 'Winterdienst', subtitle: 'Einsatzleitung Schnee', icon: 'ac_unit', color: 'f97316', seed: 'Winter-Service-Orange-Jacket' },
+            { name: 'Fluglotsen', subtitle: 'Tower / Funk', icon: 'settings_input_antenna', color: '16a34a', seed: 'Air-Traffic-Controller-Headset' },
+            { name: 'Controlling', subtitle: 'Kennzahlen', icon: 'query_stats', color: 'f59e0b', seed: 'Finance-Controller' },
+            { name: 'Luftfahrtbehörde', subtitle: 'Aufsicht', icon: 'gavel', color: '64748b', seed: 'Aviation-Authority-Officer' },
+            { name: 'Entwicklungsteam', subtitle: 'Software', icon: 'code', color: 'db2777', seed: 'Developer-Team-Member' },
+            { name: 'Sicherheitsabteilung', subtitle: 'Safety / Security', icon: 'shield', color: 'dc2626', seed: 'Airport-Security-Uniform' }
+        ];
+        const runwaySignalStates = {
+            green: {
+                word: 'FREI',
+                hint: 'Landung möglich',
+                badge: 'LANDUNG MÖGLICH',
+                text: 'Keine Eisbildung erkannt. RWY 12/30 ist für Landungen freigegeben.',
+                wordClass: 'font-data-display text-headline-lg text-secondary',
+                badgeClass: 'bg-secondary-container/20 text-secondary px-sm py-xs rounded font-label-caps text-[10px] border border-secondary/20',
+                color: '#7bdb80',
+                shadow: '0 0 18px rgba(123, 219, 128, 0.75)'
+            },
+            yellow: {
+                word: 'SICHT',
+                hint: 'Prüfung erforderlich',
+                badge: 'PRÜFEN',
+                text: 'Landung grundsätzlich möglich. Sicht und Oberfläche vor Freigabe prüfen.',
+                wordClass: 'font-data-display text-headline-lg text-tertiary',
+                badgeClass: 'bg-tertiary-container/30 text-tertiary px-sm py-xs rounded font-label-caps text-[10px] border border-tertiary/30',
+                color: '#fabc45',
+                shadow: '0 0 18px rgba(250, 188, 69, 0.75)'
+            },
+            red: {
+                word: 'EIS',
+                hint: 'Landung nicht möglich',
+                badge: 'GESPERRT',
+                text: 'Eisbildung erkannt. Landungen sind bis zur Räumung und erneuten Prüfung nicht möglich.',
+                wordClass: 'font-data-display text-headline-lg text-error',
+                badgeClass: 'bg-error-container/40 text-error px-sm py-xs rounded font-label-caps text-[10px] border border-error/30',
+                color: '#ffb4ab',
+                shadow: '0 0 18px rgba(255, 180, 171, 0.75)'
+            }
+        };
+
+        function createFlight(number, route, minutesFromNow, aircraft, runway) {
+            return {
+                id: number.replace(/\s+/g, '-'),
+                number,
+                route,
+                aircraft,
+                runway,
+                time: new Date(flightPlanStart.getTime() + minutesFromNow * 60000),
+                confirmed: false
+            };
+        }
+
+        function profileImageUrl(profile) {
+            return `https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(profile.seed)}&backgroundColor=${profile.color}&radius=50`;
+        }
+
+        function renderProfiles() {
+            profileOptions.innerHTML = '';
+            profiles.forEach((profile) => {
+                const button = document.createElement('button');
+                button.className = 'rounded-lg border border-outline-variant bg-surface p-md text-left hover:bg-surface-variant active:scale-[0.98] transition-all';
+                button.type = 'button';
+                button.innerHTML = `
+                    <img class="w-20 h-20 rounded-xl border border-outline-variant mb-sm object-cover bg-surface-container-high" alt="${profile.name} Profilbild" src="${profileImageUrl(profile)}">
+                    <div class="flex items-center gap-xs text-on-surface">
+                        <span class="material-symbols-outlined text-sm">${profile.icon}</span>
+                        <span class="font-bold text-sm">${profile.name}</span>
+                    </div>
+                    <p class="text-[11px] text-on-surface-variant mt-xs">${profile.subtitle}</p>
+                `;
+                button.addEventListener('click', () => {
+                    activeProfileImage.src = profileImageUrl(profile);
+                    activeProfileImage.alt = `${profile.name} Profil`;
+                    activeProfileName.textContent = profile.name;
+                    closeProfileModal();
+                });
+                profileOptions.appendChild(button);
+            });
+        }
+
+        function openProfileModal() {
+            profileModal.classList.remove('hidden');
+            profileModal.classList.add('flex');
+        }
+
+        function closeProfileModal() {
+            profileModal.classList.add('hidden');
+            profileModal.classList.remove('flex');
+        }
+
+        function setRunwaySignal(stateName) {
+            const state = runwaySignalStates[stateName];
+            if (!state) return;
+
+            runwaySignalWord.textContent = state.word;
+            runwaySignalWord.className = state.wordClass;
+            runwaySignalHint.textContent = state.hint;
+            runwaySignalBadge.textContent = state.badge;
+            runwaySignalBadge.className = state.badgeClass;
+            runwaySignalText.textContent = state.text;
+
+            runwaySignalLights.forEach((light) => {
+                light.style.opacity = '0.3';
+                light.style.boxShadow = 'none';
+                light.style.backgroundColor = '';
+                if (light.dataset.runwayLight === stateName) {
+                    light.style.opacity = '1';
+                    light.style.boxShadow = state.shadow;
+                    light.style.backgroundColor = state.color;
+                }
+            });
+
+            runwaySensorDots.forEach((dot) => {
+                const isYellowSensor = stateName === 'yellow' && dot.dataset.runwaySensorDot === 'B';
+                const dotColor = stateName === 'red'
+                    ? runwaySignalStates.red.color
+                    : isYellowSensor
+                        ? runwaySignalStates.yellow.color
+                        : runwaySignalStates.green.color;
+                const dotShadow = stateName === 'red'
+                    ? runwaySignalStates.red.shadow
+                    : isYellowSensor
+                        ? runwaySignalStates.yellow.shadow
+                        : runwaySignalStates.green.shadow;
+
+                dot.style.backgroundColor = dotColor;
+                dot.style.boxShadow = dotShadow;
+            });
+
+            runwaySensorStatuses.forEach((status) => {
+                const isYellowSensor = stateName === 'yellow' && status.dataset.runwaySensorStatus === 'B';
+                const sensorStatus = stateName === 'red'
+                    ? { label: 'EIS', color: runwaySignalStates.red.color }
+                    : isYellowSensor
+                        ? { label: 'PRÜFEN', color: runwaySignalStates.yellow.color }
+                        : { label: 'ONLINE', color: runwaySignalStates.green.color };
+
+                status.textContent = sensorStatus.label;
+                status.style.color = sensorStatus.color;
+            });
+
+            runwaySensorCards.forEach((card) => {
+                const isYellowSensor = stateName === 'yellow' && card.dataset.runwaySensorCard === 'B';
+                const borderColor = stateName === 'red'
+                    ? runwaySignalStates.red.color
+                    : isYellowSensor
+                        ? runwaySignalStates.yellow.color
+                        : runwaySignalStates.green.color;
+
+                card.style.borderColor = borderColor;
+            });
+        }
+
+        function formatFlightTime(date) {
+            return date.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function minutesUntilFlight(date) {
+            return Math.ceil((date.getTime() - Date.now()) / 60000);
+        }
+
+        function getDueFlight() {
+            return flightPlan.find((flight) => {
+                const minutes = minutesUntilFlight(flight.time);
+                return minutes <= 30 && minutes >= 0 && !flight.confirmed;
+            });
+        }
+
+        function renderFlightPlan() {
+            flightScheduleList.innerHTML = '';
+            flightPlan.forEach((flight) => {
+                const minutes = minutesUntilFlight(flight.time);
+                const due = minutes <= 30 && minutes >= 0 && !flight.confirmed;
+                const statusClass = flight.confirmed
+                    ? 'bg-secondary-container/20 text-secondary border-secondary/20'
+                    : due
+                        ? 'bg-tertiary-container/30 text-tertiary border-tertiary/30'
+                        : 'bg-surface-container-high text-on-surface-variant border-outline-variant';
+                const statusText = flight.confirmed ? 'BESTÄTIGT' : due ? 'CHECK FÄLLIG' : `IN ${Math.max(minutes, 0)} MIN`;
+
+                const card = document.createElement('article');
+                card.className = `border rounded-lg p-sm grid grid-cols-[72px_1fr_auto] gap-sm items-center ${due ? 'border-tertiary bg-tertiary-container/10' : 'border-[#30363D] bg-[#0d141c]'}`;
+                card.innerHTML = `
+                    <div class="font-data-display text-headline-md text-on-surface">${formatFlightTime(flight.time)}</div>
+                    <div>
+                        <p class="font-bold text-on-surface">${flight.number} · ${flight.route}</p>
+                        <p class="text-[11px] text-on-surface-variant mt-xs">${flight.aircraft} · ${flight.runway} · Check 30 min vor Start</p>
+                    </div>
+                    <span class="font-label-caps text-[10px] px-sm py-xs rounded border ${statusClass}">${statusText}</span>
+                `;
+                flightScheduleList.appendChild(card);
+            });
+        }
+
+        function setFlightFormState(flight) {
+            activeFlightId = flight ? flight.id : null;
+            const disabled = !flight;
+            flightWeatherState.disabled = disabled;
+            flightHazardState.disabled = disabled;
+            flightOperatorNote.disabled = disabled;
+            flightConfirmButton.disabled = disabled;
+
+            if (flight) {
+                flightCheckTitle.textContent = `${flight.number} um ${formatFlightTime(flight.time)}`;
+                flightCheckText.textContent = 'Bitte aktuelle Sensordaten prüfen und Wetter/Gefahrenlage bestätigen.';
+                flightCheckBadge.textContent = 'AKTION NÖTIG';
+                flightCheckBadge.className = 'bg-tertiary-container/30 text-tertiary px-sm py-xs rounded font-label-caps text-[10px] border border-tertiary/30';
+                flightCheckSummary.textContent = `${flight.number} startet in ${minutesUntilFlight(flight.time)} Minuten. Bestätigung fehlt.`;
+            } else {
+                flightCheckTitle.textContent = 'Kein Flug fällig';
+                flightCheckText.textContent = 'Sobald ein Flug in der 30-Minuten-Prüffrist liegt, kann die Lage bestätigt werden.';
+                flightCheckBadge.textContent = 'BEREIT';
+                flightCheckBadge.className = 'bg-secondary-container/20 text-secondary px-sm py-xs rounded font-label-caps text-[10px] border border-secondary/20';
+                flightCheckSummary.textContent = '30 Minuten vor Start erscheint automatisch eine Bestätigung für Wetter und Gefahrenlage.';
+            }
+        }
+
+        function showFlightAlarm(flight) {
+            if (!flight || Date.now() < flightAlarmSnoozedUntil) return;
+            flightAlarmMessage.textContent = `${flight.number} startet um ${formatFlightTime(flight.time)}. Wetter und Gefahrenlage müssen bestätigt werden.`;
+            const wasHidden = flightAlarmPopup.classList.contains('hidden');
+            flightAlarmPopup.classList.remove('hidden');
+            if (wasHidden && !flightAlarmHasShaken) {
+                flightAlarmPopup.classList.remove('flight-alert-shake');
+                void flightAlarmPopup.offsetWidth;
+                flightAlarmPopup.classList.add('flight-alert-shake');
+                flightAlarmHasShaken = true;
+            }
+        }
+
+        function updateFlightChecks() {
+            const dueFlight = getDueFlight();
+            renderFlightPlan();
+            setFlightFormState(dueFlight);
+            if (dueFlight) {
+                showFlightAlarm(dueFlight);
+            } else {
+                flightAlarmPopup.classList.add('hidden');
+            }
+        }
+
+        flightAlarmTest.addEventListener('click', () => {
+            const nextOpenFlight = flightPlan.find((flight) => !flight.confirmed);
+            if (!nextOpenFlight) return;
+            nextOpenFlight.time = new Date(Date.now() + 25 * 60000);
+            flightAlarmSnoozedUntil = 0;
+            flightAlarmHasShaken = false;
+            updateFlightChecks();
+        });
+
+        flightAlarmOpen.addEventListener('click', () => {
+            flightAlarmPopup.classList.add('hidden');
+            document.getElementById('flightCheckPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        flightAlarmSnooze.addEventListener('click', () => {
+            flightAlarmSnoozedUntil = Date.now() + 5 * 60000;
+            flightAlarmPopup.classList.add('hidden');
+        });
+
+        flightCheckForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const flight = flightPlan.find((item) => item.id === activeFlightId);
+            if (!flight) return;
+            flight.confirmed = true;
+            flightOperatorNote.value = '';
+            flightAlarmPopup.classList.add('hidden');
+            updateFlightChecks();
+        });
+
+        runwaySignalButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                setRunwaySignal(button.dataset.runwayState);
+            });
+        });
+
+        profileMenuButton.addEventListener('click', openProfileModal);
+        profileMenuButton.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openProfileModal();
+            }
+        });
+        profileModalClose.addEventListener('click', closeProfileModal);
+        profileModal.addEventListener('click', (event) => {
+            if (event.target === profileModal) closeProfileModal();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') closeProfileModal();
+        });
+
+        renderProfiles();
+        setRunwaySignal('green');
+        updateFlightChecks();
+        setInterval(updateFlightChecks, 1000);
     </script>
 <script src="navigation.js"></script>
 </body></html>

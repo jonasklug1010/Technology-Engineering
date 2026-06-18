@@ -5,89 +5,728 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link href="favicon.svg?v=3" rel="icon" type="image/svg+xml">
   <link href="favicon.svg?v=3" rel="shortcut icon" type="image/svg+xml">
-  <title>Design System — Starter</title>
+  <title>Flugplan Sicherheitscheck</title>
   <style>
     :root {
-      --bg: #f7f7fa;
-      --surface: #fff;
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --surface-soft: #eef2f6;
       --text: #111827;
-      --muted: #6b7280;
-      --primary: #2563eb;
+      --muted: #64748b;
+      --line: #d8dee8;
+      --primary: #1f6feb;
+      --success: #17803d;
+      --warning: #b7791f;
+      --danger: #c24135;
+      --danger-soft: #fde8e5;
+      --warning-soft: #fff4d8;
+      --success-soft: #e6f6ed;
       --radius: 8px;
-      --gap: 16px;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.14);
     }
+
     [data-theme="dark"] {
-      --bg:#0b1220;
-      --surface:#0f1724;
-      --text:#e6eef8;
-      --muted:#9aa6bf;
-      --primary:#60a5fa;
+      --bg: #0b1220;
+      --surface: #111827;
+      --surface-soft: #182235;
+      --text: #e6eef8;
+      --muted: #9aa6bf;
+      --line: #293548;
+      --primary: #60a5fa;
+      --success: #7bdb80;
+      --warning: #fabc45;
+      --danger: #ff8f83;
+      --danger-soft: rgba(255, 143, 131, 0.15);
+      --warning-soft: rgba(250, 188, 69, 0.14);
+      --success-soft: rgba(123, 219, 128, 0.12);
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
     }
-    *{box-sizing:border-box}
-    body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--text);padding:24px;margin:0}
-    .container{max-width:960px;margin:0 auto;background:var(--surface);padding:24px;border-radius:var(--radius);box-shadow:0 2px 8px rgba(0,0,0,0.06);gap:var(--gap);display:flex;flex-direction:column}
-    .header{display:flex;justify-content:space-between;align-items:center}
-    .controls{display:flex;gap:8px;align-items:center}
-    .btn{background:var(--primary);color:white;padding:10px 14px;border-radius:6px;border:0;cursor:pointer}
-    .btn.ghost{background:transparent;border:1px solid rgba(0,0,0,0.08);color:var(--text)}
-    .input{padding:10px;border-radius:6px;border:1px solid rgba(0,0,0,0.08);width:220px}
-    .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-    .swatches{display:flex;gap:8px;align-items:center}
-    .swatch{width:40px;height:40px;border-radius:6px;border:1px solid rgba(0,0,0,0.06)}
-    .kv{font-size:12px;color:var(--muted)}
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    button, input, select, textarea { font: inherit; }
+
+    .app {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 40px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .title-block h1 {
+      margin: 0;
+      font-size: clamp(26px, 3vw, 40px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .title-block p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 7px;
+      padding: 10px 14px;
+      color: #fff;
+      background: var(--primary);
+      cursor: pointer;
+      font-weight: 700;
+      min-height: 40px;
+      transition: transform 120ms ease, filter 120ms ease, background 120ms ease;
+    }
+
+    .btn:hover { filter: brightness(1.05); }
+    .btn:active { transform: scale(0.98); }
+    .btn.ghost {
+      background: var(--surface);
+      border-color: var(--line);
+      color: var(--text);
+    }
+    .btn.success { background: var(--success); }
+    .btn.warning { background: var(--warning); color: #111827; }
+    .btn.danger { background: var(--danger); }
+
+    .status-banner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--success);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+      margin-bottom: 16px;
+    }
+
+    .status-banner.alert {
+      border-left-color: var(--warning);
+      background: var(--warning-soft);
+    }
+
+    .status-banner strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 18px;
+    }
+
+    .status-banner span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface-soft);
+    }
+
+    .panel-header h2 {
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+
+    .panel-header small {
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 11px;
+    }
+
+    .flight-list {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .flight-card {
+      display: grid;
+      grid-template-columns: 92px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface);
+    }
+
+    .flight-card.due {
+      border-color: var(--warning);
+      background: var(--warning-soft);
+    }
+
+    .flight-card.confirmed {
+      border-color: rgba(23, 128, 61, 0.45);
+      background: var(--success-soft);
+    }
+
+    .flight-time {
+      font-size: 28px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .flight-route {
+      margin: 0;
+      font-weight: 800;
+    }
+
+    .flight-meta {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      border: 1px solid var(--line);
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .badge.warning {
+      color: var(--warning);
+      background: var(--warning-soft);
+      border-color: rgba(183, 121, 31, 0.45);
+    }
+
+    .badge.success {
+      color: var(--success);
+      background: var(--success-soft);
+      border-color: rgba(23, 128, 61, 0.4);
+    }
+
+    .sensor-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .sensor-card {
+      min-height: 112px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface);
+    }
+
+    .sensor-card strong {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .sensor-value {
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+      font-size: 30px;
+      line-height: 1;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sensor-value span {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .sensor-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .check-panel {
+      padding: 16px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .check-panel .empty {
+      color: var(--muted);
+      padding: 20px;
+      border: 1px dashed var(--line);
+      border-radius: 7px;
+      text-align: center;
+    }
+
+    .form-row {
+      display: grid;
+      gap: 7px;
+    }
+
+    .form-row label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .input {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface);
+      color: var(--text);
+      padding: 10px 12px;
+      resize: vertical;
+    }
+
+    .confirm-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .notification {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: min(430px, calc(100% - 40px));
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid rgba(183, 121, 31, 0.55);
+      border-left: 6px solid var(--warning);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      transform: translateY(24px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms ease, transform 180ms ease;
+      z-index: 10;
+    }
+
+    .notification.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .notification h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .notification p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .notification-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 860px) {
+      .topbar, .status-banner {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+
+      .toolbar {
+        justify-content: flex-start;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flight-card {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .sensor-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container" id="app">
-    <div class="header">
-      <h1>Design System — Starter</h1>
-      <div class="controls">
-        <button class="btn" id="themeToggle">Toggle Theme</button>
+  <main class="app" id="app">
+    <header class="topbar">
+      <div class="title-block">
+        <h1>Flugplan Sicherheitscheck</h1>
+        <p>Automatische Wetter- und Gefahrenbestätigung 30 Minuten vor jedem geplanten Flug.</p>
+      </div>
+      <div class="toolbar">
+        <button class="btn ghost" id="themeToggle" type="button">Theme</button>
+        <button class="btn" id="demoAlarm" type="button">Alarm testen</button>
+      </div>
+    </header>
+
+    <section class="status-banner" id="statusBanner" aria-live="polite">
+      <div>
+        <strong id="statusTitle">Alle Flüge im Zeitplan</strong>
+        <span id="statusText">Der nächste Sicherheitscheck wird automatisch 30 Minuten vor dem Flug geöffnet.</span>
+      </div>
+      <span class="badge success" id="systemBadge">Sensoren online</span>
+    </section>
+
+    <div class="grid">
+      <section class="panel" aria-labelledby="flightPlanTitle">
+        <div class="panel-header">
+          <h2 id="flightPlanTitle">Flugplan heute</h2>
+          <small id="currentTime">--:--:--</small>
+        </div>
+        <div class="flight-list" id="flightList"></div>
+      </section>
+
+      <div class="side-column">
+        <section class="panel" aria-labelledby="sensorTitle">
+          <div class="panel-header">
+            <h2 id="sensorTitle">Aktuelle Sensordaten</h2>
+            <small id="sensorUpdated">Live</small>
+          </div>
+          <div class="sensor-grid">
+            <article class="sensor-card">
+              <strong>Lufttemperatur</strong>
+              <div class="sensor-value"><output id="airTemp">--</output><span>°C</span></div>
+              <p>Sensor WX-01 am Tower</p>
+            </article>
+            <article class="sensor-card">
+              <strong>Oberfläche RWY</strong>
+              <div class="sensor-value"><output id="surfaceTemp">--</output><span>°C</span></div>
+              <p>Messpunkte Zone A bis C</p>
+            </article>
+            <article class="sensor-card">
+              <strong>Wind</strong>
+              <div class="sensor-value"><output id="wind">--</output><span>kt</span></div>
+              <p><output id="windDirection">--</output> Grad, Böenüberwachung aktiv</p>
+            </article>
+            <article class="sensor-card">
+              <strong>Sichtweite</strong>
+              <div class="sensor-value"><output id="visibility">--</output><span>m</span></div>
+              <p>Nebel- und Niederschlagsprüfung</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel" style="margin-top:16px" aria-labelledby="checkTitle">
+          <div class="panel-header">
+            <h2 id="checkTitle">Bestätigung</h2>
+            <small id="checkState">Wartet</small>
+          </div>
+          <form class="check-panel" id="checkForm">
+            <div class="empty" id="emptyCheck">Noch kein Flug innerhalb der 30-Minuten-Prüffrist.</div>
+            <div id="activeCheck" hidden>
+              <div class="form-row">
+                <label for="weatherState">Wetterstatus</label>
+                <select class="input" id="weatherState" required>
+                  <option value="Flugbetrieb möglich">Flugbetrieb möglich</option>
+                  <option value="Beobachten">Beobachten</option>
+                  <option value="Flugbetrieb einschränken">Flugbetrieb einschränken</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label for="hazardState">Gefahrenlage</label>
+                <select class="input" id="hazardState" required>
+                  <option value="Keine Gefahr erkannt">Keine Gefahr erkannt</option>
+                  <option value="Vereisungsrisiko">Vereisungsrisiko</option>
+                  <option value="FOD / Hindernis">FOD / Hindernis</option>
+                  <option value="Starker Wind">Starker Wind</option>
+                  <option value="Sicht eingeschränkt">Sicht eingeschränkt</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label for="operatorNote">Notiz</label>
+                <textarea class="input" id="operatorNote" rows="3" placeholder="Kurze Lageeinschätzung"></textarea>
+              </div>
+              <div class="confirm-actions">
+                <button class="btn success" type="submit">Bestätigen</button>
+              </div>
+            </div>
+          </form>
+        </section>
       </div>
     </div>
+  </main>
 
-    <section>
-      <h2>Buttons</h2>
-      <div class="row">
-        <button class="btn">Primary</button>
-        <button class="btn ghost">Ghost</button>
-        <button class="btn" style="background:#10b981">Success</button>
-        <button class="btn" style="background:#ef4444">Danger</button>
-      </div>
-    </section>
-
-    <section>
-      <h2>Form Controls</h2>
-      <div class="row">
-        <input class="input" placeholder="Text input">
-        <select class="input">
-          <option>Option A</option><option>Option B</option>
-        </select>
-      </div>
-    </section>
-
-    <section>
-      <h2>Color Tokens</h2>
-      <div class="row swatches">
-        <div><div class="swatch" style="background:var(--primary)"></div><div class="kv">--primary</div></div>
-        <div><div class="swatch" style="background:var(--surface)"></div><div class="kv">--surface</div></div>
-        <div><div class="swatch" style="background:var(--bg)"></div><div class="kv">--bg</div></div>
-      </div>
-    </section>
-
-    <footer style="margin-top:18px;color:var(--muted);font-size:13px">Starter template — erweitere Komponenten nach Bedarf.</footer>
-  </div>
+  <aside class="notification" id="alarmNotification" role="alertdialog" aria-labelledby="alarmTitle" aria-describedby="alarmText">
+    <h3 id="alarmTitle">Flugcheck erforderlich</h3>
+    <p id="alarmText">Ein geplanter Flug startet in weniger als 30 Minuten. Wetter und Gefahrenlage müssen bestätigt werden.</p>
+    <div class="notification-actions">
+      <button class="btn ghost" id="openCheck" type="button">Prüfung öffnen</button>
+      <button class="btn warning" id="snoozeAlarm" type="button">5 min später</button>
+    </div>
+  </aside>
 
   <script>
-    const btn=document.getElementById('themeToggle');
-    btn.addEventListener('click', ()=>{
-      const el=document.documentElement;
-      if(el.getAttribute('data-theme')==='dark'){
-        el.removeAttribute('data-theme');
+    const themeButton = document.getElementById('themeToggle');
+    const demoAlarmButton = document.getElementById('demoAlarm');
+    const flightList = document.getElementById('flightList');
+    const currentTime = document.getElementById('currentTime');
+    const statusBanner = document.getElementById('statusBanner');
+    const statusTitle = document.getElementById('statusTitle');
+    const statusText = document.getElementById('statusText');
+    const systemBadge = document.getElementById('systemBadge');
+    const checkState = document.getElementById('checkState');
+    const emptyCheck = document.getElementById('emptyCheck');
+    const activeCheck = document.getElementById('activeCheck');
+    const checkForm = document.getElementById('checkForm');
+    const alarmNotification = document.getElementById('alarmNotification');
+    const alarmText = document.getElementById('alarmText');
+    const openCheckButton = document.getElementById('openCheck');
+    const snoozeAlarmButton = document.getElementById('snoozeAlarm');
+
+    const sensorOutputs = {
+      airTemp: document.getElementById('airTemp'),
+      surfaceTemp: document.getElementById('surfaceTemp'),
+      wind: document.getElementById('wind'),
+      windDirection: document.getElementById('windDirection'),
+      visibility: document.getElementById('visibility'),
+      sensorUpdated: document.getElementById('sensorUpdated')
+    };
+
+    const now = new Date();
+    const flights = [
+      createFlight('QC 104', 'Coburg EDQC -> Nürnberg EDDN', 28, 'D-ECQB', 'RWY 12/30'),
+      createFlight('QC 218', 'Coburg EDQC -> Erfurt EDDE', 74, 'D-EVLP', 'RWY 12/30'),
+      createFlight('QC 331', 'Coburg EDQC -> Hof EDQM', 135, 'D-MEDX', 'RWY 12/30'),
+      createFlight('QC 415', 'Coburg EDQC -> Würzburg EDFW', 210, 'D-KURS', 'RWY 12/30')
+    ];
+
+    let activeFlightId = null;
+    let snoozeUntil = 0;
+
+    function createFlight(number, route, minutesFromNow, aircraft, runway) {
+      return {
+        id: number.replace(/\s+/g, '-'),
+        number,
+        route,
+        aircraft,
+        runway,
+        time: new Date(now.getTime() + minutesFromNow * 60 * 1000),
+        confirmed: false,
+        confirmation: null
+      };
+    }
+
+    function formatTime(date, withSeconds = false) {
+      return date.toLocaleTimeString('de-DE', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: withSeconds ? '2-digit' : undefined
+      });
+    }
+
+    function minutesUntil(date) {
+      return Math.ceil((date.getTime() - Date.now()) / 60000);
+    }
+
+    function getDueFlight() {
+      return flights.find((flight) => {
+        const minutes = minutesUntil(flight.time);
+        return minutes <= 30 && minutes >= 0 && !flight.confirmed;
+      });
+    }
+
+    function renderFlights() {
+      flightList.innerHTML = '';
+      flights.forEach((flight) => {
+        const minutes = minutesUntil(flight.time);
+        const isDue = minutes <= 30 && minutes >= 0 && !flight.confirmed;
+        const card = document.createElement('article');
+        card.className = 'flight-card';
+        if (isDue) card.classList.add('due');
+        if (flight.confirmed) card.classList.add('confirmed');
+
+        const status = flight.confirmed
+          ? 'Bestätigt'
+          : isDue
+            ? 'Check fällig'
+            : `in ${Math.max(minutes, 0)} min`;
+
+        card.innerHTML = `
+          <div class="flight-time">${formatTime(flight.time)}</div>
+          <div>
+            <p class="flight-route">${flight.number} · ${flight.route}</p>
+            <p class="flight-meta">${flight.aircraft} · ${flight.runway} · Wettercheck 30 min vorher</p>
+          </div>
+          <span class="badge ${flight.confirmed ? 'success' : isDue ? 'warning' : ''}">${status}</span>
+        `;
+        flightList.appendChild(card);
+      });
+    }
+
+    function updateCheckPanel(flight) {
+      activeFlightId = flight ? flight.id : null;
+      emptyCheck.hidden = Boolean(flight);
+      activeCheck.hidden = !flight;
+      checkState.textContent = flight ? `${flight.number} fällig` : 'Wartet';
+    }
+
+    function showAlarm(flight) {
+      if (!flight || Date.now() < snoozeUntil) return;
+      alarmText.textContent = `${flight.number} startet um ${formatTime(flight.time)}. Bitte aktuelle Sensordaten prüfen und Wetter/Gefahrenlage bestätigen.`;
+      alarmNotification.classList.add('visible');
+    }
+
+    function hideAlarm() {
+      alarmNotification.classList.remove('visible');
+    }
+
+    function updateStatus() {
+      const dueFlight = getDueFlight();
+      renderFlights();
+      updateCheckPanel(dueFlight);
+
+      if (dueFlight) {
+        statusBanner.classList.add('alert');
+        statusTitle.textContent = `Check für ${dueFlight.number} erforderlich`;
+        statusText.textContent = `Start um ${formatTime(dueFlight.time)}. Bestätigung von Wetter und Gefahrenlage fehlt.`;
+        systemBadge.className = 'badge warning';
+        systemBadge.textContent = 'Aktion notwendig';
+        showAlarm(dueFlight);
       } else {
-        el.setAttribute('data-theme','dark');
+        statusBanner.classList.remove('alert');
+        statusTitle.textContent = 'Alle Flüge im Zeitplan';
+        statusText.textContent = 'Der nächste Sicherheitscheck wird automatisch 30 Minuten vor dem Flug geöffnet.';
+        systemBadge.className = 'badge success';
+        systemBadge.textContent = 'Sensoren online';
+        hideAlarm();
+      }
+    }
+
+    function updateSensors() {
+      const air = 1.1 + (Math.random() - 0.5) * 0.6;
+      const surface = 0.6 + (Math.random() - 0.5) * 0.5;
+      const wind = 8 + Math.round(Math.random() * 7);
+      const direction = 230 + Math.round((Math.random() - 0.5) * 18);
+      const visibility = 7800 + Math.round((Math.random() - 0.5) * 700);
+
+      sensorOutputs.airTemp.value = air.toFixed(1);
+      sensorOutputs.surfaceTemp.value = surface.toFixed(1);
+      sensorOutputs.wind.value = wind;
+      sensorOutputs.windDirection.value = direction;
+      sensorOutputs.visibility.value = visibility;
+      sensorOutputs.sensorUpdated.textContent = `Live ${formatTime(new Date())}`;
+    }
+
+    themeButton.addEventListener('click', () => {
+      const root = document.documentElement;
+      if (root.getAttribute('data-theme') === 'dark') {
+        root.removeAttribute('data-theme');
+      } else {
+        root.setAttribute('data-theme', 'dark');
       }
     });
+
+    demoAlarmButton.addEventListener('click', () => {
+      const firstOpenFlight = flights.find((flight) => !flight.confirmed);
+      if (!firstOpenFlight) return;
+      firstOpenFlight.time = new Date(Date.now() + 25 * 60 * 1000);
+      snoozeUntil = 0;
+      updateStatus();
+    });
+
+    openCheckButton.addEventListener('click', () => {
+      hideAlarm();
+      document.getElementById('checkTitle').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    snoozeAlarmButton.addEventListener('click', () => {
+      snoozeUntil = Date.now() + 5 * 60 * 1000;
+      hideAlarm();
+    });
+
+    checkForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const flight = flights.find((item) => item.id === activeFlightId);
+      if (!flight) return;
+
+      flight.confirmed = true;
+      flight.confirmation = {
+        weather: document.getElementById('weatherState').value,
+        hazard: document.getElementById('hazardState').value,
+        note: document.getElementById('operatorNote').value.trim(),
+        time: new Date()
+      };
+
+      document.getElementById('operatorNote').value = '';
+      hideAlarm();
+      updateStatus();
+    });
+
+    setInterval(() => {
+      currentTime.textContent = formatTime(new Date(), true);
+      updateStatus();
+    }, 1000);
+
+    updateSensors();
+    updateStatus();
+    currentTime.textContent = formatTime(new Date(), true);
+    setInterval(updateSensors, 3000);
   </script>
 </body>
 </html>
