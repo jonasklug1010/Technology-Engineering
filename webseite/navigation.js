@@ -4,10 +4,51 @@ function getRoute(element) {
   if (label.includes('alle alarme anzeigen')) return 'alarms.html';
   if (label.includes('dashboard') || label.includes('dash')) return 'dashboard.html';
   if (label.includes('runways') || label.includes('flight_takeoff')) return 'runways.html';
-  if (label.includes('sensors') || label.includes('router')) return 'sensors.html';
-  if (label.includes('alarms') || label.includes('notifications_active')) return 'alarms.html';
+  if (label.includes('sensors') || label.includes('sensoren') || label.includes('router')) return 'sensors.html';
+  if (label.includes('alarms') || label.includes('alarme') || label.includes('notifications_active')) return 'alarms.html';
 
   return null;
+}
+
+function initResponsiveShell() {
+  const style = document.createElement('style');
+  style.textContent = `
+    /* Anforderungen 1, 2 und 6: browserbasierte Responsive-Navigation ohne separate App. */
+    @media (max-width: 767px) {
+      body { padding-bottom: 72px; overflow-x: hidden; }
+      body > aside[class*="w-64"] { display: none !important; }
+      body > main { margin-left: 0 !important; padding-left: 0 !important; width: 100% !important; }
+      header { padding-left: 16px !important; padding-right: 16px !important; }
+      .top-action-icons { display: none !important; }
+    }
+  `;
+  document.head.appendChild(style);
+
+  if (document.querySelector('[data-mobile-main-nav]')) return;
+
+  const nav = document.createElement('nav');
+  nav.className = 'md:hidden fixed bottom-0 left-0 right-0 z-[90] bg-surface-container border-t border-outline-variant px-xs py-xs grid grid-cols-4 gap-xs';
+  nav.setAttribute('aria-label', 'Mobile Hauptnavigation');
+  nav.setAttribute('data-mobile-main-nav', '');
+  nav.innerHTML = `
+    <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="dashboard.html">
+      <span class="material-symbols-outlined">dashboard</span>
+      <span class="text-[10px]">Dashboard</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="sensors.html">
+      <span class="material-symbols-outlined">router</span>
+      <span class="text-[10px]">Sensoren</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+      <span class="material-symbols-outlined">history</span>
+      <span class="text-[10px]">Historie</span>
+    </a>
+    <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+      <span class="material-symbols-outlined">settings</span>
+      <span class="text-[10px]">Einstellungen</span>
+    </a>
+  `;
+  document.body.appendChild(nav);
 }
 
 const profileChoices = [
@@ -198,6 +239,8 @@ function initSharedProfiles() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initResponsiveShell();
+
   document.querySelectorAll('a, button').forEach((element) => {
     const href = getRoute(element);
 
