@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="dark" lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="favicon.svg?v=3" rel="icon" type="image/svg+xml"/>
+<link href="favicon.svg?v=3" rel="shortcut icon" type="image/svg+xml"/>
+<title>Einstellungen - VLP Coburg EDQC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface": "#0b141c",
+        "surface-container": "#182028",
+        "surface-container-low": "#141c24",
+        "surface-container-lowest": "#060f16",
+        "surface-container-highest": "#2d363e",
+        "background": "#0b141c",
+        "outline-variant": "#45474b",
+        "on-surface": "#dae3ee",
+        "on-surface-variant": "#c5c6cb",
+        "secondary": "#7bdb80",
+        "on-secondary": "#00390e",
+        "tertiary": "#fabc45",
+        "error": "#ffb4ab"
+      },
+      spacing: { xs: "4px", sm: "8px", md: "16px", lg: "24px", xl: "40px", gutter: "16px" },
+      fontFamily: { "data-display": ["JetBrains Mono"], "headline-md": ["Inter"], "headline-sm": ["Inter"], "body-md": ["Inter"], "label-caps": ["Inter"] },
+      fontSize: {
+        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+        "data-display": ["18px", {"lineHeight": "24px", "fontWeight": "500"}]
+      }
+    }
+  }
+}
+</script>
+<style>
+body { background-color: #0b141c; color: #dae3ee; font-family: "Inter", sans-serif; overflow-x: hidden; }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+@media (max-width: 767px) { body { padding-bottom: 72px; } }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden h-screen flex">
+<aside class="flex flex-col h-screen pt-16 bg-surface-container h-full w-64 fixed left-0 top-0 border-r border-outline-variant z-50">
+<div class="px-lg pb-lg">
+<h1 class="font-headline-sm text-headline-sm text-on-surface">EDQC-System</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant opacity-70">Coburg Monitoring</p>
+</div>
+<nav class="flex-1 space-y-xs">
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="dashboard.html"><span class="material-symbols-outlined">dashboard</span><span class="font-label-caps text-label-caps">Dashboard</span></a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="sensors.html"><span class="material-symbols-outlined">router</span><span class="font-label-caps text-label-caps">Sensoren</span></a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="history.html"><span class="material-symbols-outlined">history</span><span class="font-label-caps text-label-caps">Historie</span></a>
+<a class="text-secondary font-bold border-l-4 border-secondary bg-surface-container-highest px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="settings.html"><span class="material-symbols-outlined">settings</span><span class="font-label-caps text-label-caps">Einstellungen</span></a>
+</nav>
+<div class="p-lg border-t border-outline-variant flex items-center gap-md">
+<div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-on-secondary"><span class="material-symbols-outlined text-sm">admin_panel_settings</span></div>
+<div><p class="text-xs font-bold">Konfiguration</p><p class="text-[10px] text-secondary">Rollenbasiert</p></div>
+</div>
+</aside>
+<main class="flex-1 ml-64 flex flex-col h-screen overflow-hidden">
+<header class="flex justify-between items-center px-lg w-full sticky top-0 z-50 bg-surface border-b border-outline-variant h-16">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-extrabold text-on-surface tracking-tight">VLP Coburg EDQC</span>
+<div class="h-6 w-[1px] bg-outline-variant hidden md:block ml-md"></div>
+<span class="hidden md:block font-label-caps text-label-caps text-secondary font-bold">MONITORING</span>
+</div>
+<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-highest p-1 rounded-lg transition-colors active:scale-95" data-profile-trigger>
+<img alt="IT Profil" class="w-9 h-9 rounded-full border-2 border-outline-variant object-cover bg-surface-container-highest" data-profile-image src="assets/profiles/it.png"/>
+<span class="font-label-caps text-label-caps text-on-surface hidden lg:block" data-profile-name>IT</span>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto bg-background p-md lg:p-lg space-y-gutter text-on-surface">
+<section class="rounded-xl border border-outline-variant bg-surface-container p-lg shadow-sm">
+<p class="font-label-caps text-label-caps text-secondary">Systemeinstellungen</p>
+<h1 class="mt-xs font-headline-md text-headline-md text-on-surface">Systemeinstellungen</h1>
+<p class="mt-xs text-sm text-on-surface-variant">Rolle: IT-Administrator / Lead Integration | Modus: Water-Scrum-Fall Schnittstelle</p>
+</section>
+<section class="grid grid-cols-1 xl:grid-cols-4 gap-gutter">
+<article class="rounded-xl border border-outline-variant bg-surface-container p-md shadow-sm" data-role-section="alarm-logic">
+<div class="mb-md flex items-start justify-between gap-sm">
+<div>
+<p class="font-label-caps text-label-caps text-secondary">Schwellwerte &amp; Alarm-Logik</p>
+<h2 class="mt-xs font-headline-sm text-headline-sm text-on-surface">Vereisungslogik</h2>
+</div>
+<span class="material-symbols-outlined text-secondary">tune</span>
+</div>
+<div class="space-y-sm">
+<label class="block"><span class="text-xs font-bold text-on-surface-variant">Warnstufe GELB (Pre-Icing) - Oberflächentemperatur ≤ °C</span><input class="mt-xs w-full rounded-lg border border-outline-variant bg-background px-md py-sm text-on-surface outline-none focus:border-secondary" data-role-action="save-logic edit-settings" value="2,0"/></label>
+<label class="block"><span class="text-xs font-bold text-on-surface-variant">Warnstufe ROT (Akute Vereisung) - Oberflächentemperatur ≤ °C</span><input class="mt-xs w-full rounded-lg border border-outline-variant bg-background px-md py-sm text-on-surface outline-none focus:border-secondary" data-role-action="save-logic edit-settings" value="0,0"/></label>
+<label class="block"><span class="text-xs font-bold text-on-surface-variant">Kritische Oberflächenfeuchte &gt;</span><select class="mt-xs w-full rounded-lg border border-outline-variant bg-background px-md py-sm text-on-surface outline-none focus:border-secondary" data-role-action="save-logic edit-settings"><option>80 %</option><option>85 %</option><option>90 %</option></select></label>
+<label class="flex items-start gap-sm rounded-lg border border-outline-variant bg-surface-container-low p-sm text-sm text-on-surface"><input checked class="mt-1 rounded border-outline-variant text-secondary" data-role-action="save-logic edit-settings" type="checkbox"/><span>Akustischen Alarm im Tower erzwingen</span></label>
+<button class="w-full rounded-lg bg-secondary px-md py-sm font-bold text-on-secondary hover:brightness-110 active:scale-[0.98] transition-all" data-role-action="save-logic" id="saveLogicButton" type="button">Logik speichern</button>
+<p class="hidden rounded-lg border border-outline-variant bg-surface-container-low px-sm py-xs text-xs text-secondary" id="logicStatus">Schwellwertänderung im Audit-Log dokumentiert.</p>
+</div>
+</article>
+<article class="rounded-xl border border-outline-variant bg-surface-container p-md shadow-sm" data-role-section="sensor-admin">
+<div class="mb-md flex items-start justify-between gap-sm">
+<div>
+<p class="font-label-caps text-label-caps text-secondary">Sensor-Knoten Verwaltung</p>
+<h2 class="mt-xs font-headline-sm text-headline-sm text-on-surface">Installierte Sensoren</h2>
+</div>
+<span class="material-symbols-outlined text-secondary">router</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead class="text-on-surface-variant"><tr><th class="border-b border-outline-variant py-xs">ID / MAC</th><th class="border-b border-outline-variant py-xs">Standort</th><th class="border-b border-outline-variant py-xs">Status</th></tr></thead>
+<tbody>
+<tr><td class="py-sm font-mono">00:1B:44:11:3A:B7</td><td>Runway North</td><td><span class="rounded-full bg-secondary-container/30 px-xs py-[2px] font-bold text-secondary">Online</span></td></tr>
+<tr><td class="py-sm font-mono">00:1B:44:11:3A:C2</td><td>Runway Center</td><td><span class="rounded-full bg-secondary-container/30 px-xs py-[2px] font-bold text-secondary">Online</span></td></tr>
+<tr><td class="py-sm font-mono">00:1B:44:11:3A:E9</td><td>Taxiway A</td><td><span class="rounded-full bg-error-container/40 px-xs py-[2px] font-bold text-error">Offline (R2)</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="mt-sm rounded-lg border border-error/40 bg-error-container/20 p-sm text-xs text-error">Taxiway A: Sensorverbindung prüfen. Wartungseinsatz erforderlich.</div>
+<button class="mt-md w-full rounded-lg bg-secondary px-md py-sm font-bold text-on-secondary hover:brightness-110 active:scale-[0.98] transition-all" data-role-action="register-node add-sensor" id="registerNodeButton" type="button">+ Neuen Knoten registrieren</button>
+<p class="hidden mt-sm rounded-lg border border-outline-variant bg-surface-container-low px-sm py-xs text-xs text-secondary" id="nodeStatus">Registrierungsdialog vorbereitet.</p>
+</article>
+<article class="rounded-xl border border-outline-variant bg-surface-container p-md shadow-sm" data-role-section="api-backend">
+<div class="mb-md flex items-start justify-between gap-sm">
+<div>
+<p class="font-label-caps text-label-caps text-secondary">API &amp; Backend-Schnittstelle</p>
+<h2 class="mt-xs font-headline-sm text-headline-sm text-on-surface">Telemetry Gateway</h2>
+</div>
+<span class="rounded-full bg-secondary-container/30 px-sm py-xs text-xs font-bold text-secondary">Verbunden (24ms)</span>
+</div>
+<div class="space-y-sm">
+<label class="block"><span class="text-xs font-bold text-on-surface-variant">Backend-Endpunkt (REST URL)</span><input class="mt-xs w-full rounded-lg border border-outline-variant bg-background px-md py-sm text-on-surface" data-role-action="test-api edit-settings" value="https://api.anr-airport.local/v1/telemetry"/></label>
+<label class="block"><span class="text-xs font-bold text-on-surface-variant">Abfrage-Intervall (Polling in ms)</span><input class="mt-xs w-full rounded-lg border border-outline-variant bg-background px-md py-sm text-on-surface" data-role-action="test-api edit-settings" value="500"/></label>
+<label class="block"><span class="text-xs font-bold text-on-surface-variant">Authentifizierung (Bearer Token)</span><input class="mt-xs w-full rounded-lg border border-outline-variant bg-background px-md py-sm text-on-surface" data-role-action="test-api edit-settings" type="password" value="anr-integration-token"/></label>
+<button class="w-full rounded-lg bg-secondary px-md py-sm font-bold text-on-secondary hover:brightness-110 active:scale-[0.98] transition-all" data-role-action="test-api" id="testApiButton" type="button">Verbindung testen</button>
+<p class="hidden rounded-lg border border-secondary/30 bg-secondary-container/20 px-sm py-xs text-xs text-secondary" id="apiStatus">Verbindung erfolgreich getestet.</p>
+</div>
+</article>
+<article class="rounded-xl border border-outline-variant bg-surface-container p-md shadow-sm" data-role-section="compliance">
+<div class="mb-md flex items-start justify-between gap-sm">
+<div>
+<p class="font-label-caps text-label-caps text-error">Compliance &amp; Sicherheit</p>
+<h2 class="mt-xs font-headline-sm text-headline-sm text-on-surface">Restriktionen</h2>
+</div>
+<span class="material-symbols-outlined text-error">lock</span>
+</div>
+<p class="rounded-lg border border-error/40 bg-error-container/20 p-sm text-xs font-bold text-error">Diese Parameter sind durch die Sicherheitsabteilung systemseitig fixiert und können im Frontend nicht überschrieben werden.</p>
+<div class="mt-md space-y-sm">
+<label class="block"><span class="text-xs font-bold text-on-surface-variant">System-Modus (Automation Level)</span><input class="mt-xs w-full rounded-lg border border-outline-variant bg-surface-container-low px-md py-sm text-on-surface-variant" readonly value="Nur Beobachtung &amp; Warnung"/></label>
+<label class="block"><span class="text-xs font-bold text-on-surface-variant">Letzte Freigabe-Autorisierung</span><input class="mt-xs w-full rounded-lg border border-outline-variant bg-surface-container-low px-md py-sm text-on-surface-variant" readonly value="Zwingend durch menschlichen Operator"/></label>
+<label class="block"><span class="text-xs font-bold text-on-surface-variant">Auto-Clearance Override (Sicherheits-Lock)</span><input class="mt-xs w-full rounded-lg border border-outline-variant bg-surface-container-low px-md py-sm font-bold text-error" readonly value="DEAKTIVIERT (Hardcoded)"/></label>
+</div>
+<button class="mt-md w-full rounded-lg bg-secondary px-md py-sm font-bold text-on-secondary hover:brightness-110 active:scale-[0.98] transition-all" data-role-action="export-report" id="exportAuditButton" type="button">Audit-Log exportieren (.csv)</button>
+<p class="hidden mt-sm rounded-lg border border-outline-variant bg-surface-container-low px-sm py-xs text-xs text-secondary" id="auditStatus">Audit-Export vorbereitet.</p>
+</article>
+</section>
+</div>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const saveLogicButton = document.getElementById('saveLogicButton');
+  const registerNodeButton = document.getElementById('registerNodeButton');
+  const testApiButton = document.getElementById('testApiButton');
+  const exportAuditButton = document.getElementById('exportAuditButton');
+
+  saveLogicButton?.addEventListener('click', () => {
+    document.getElementById('logicStatus')?.classList.remove('hidden');
+  });
+
+  registerNodeButton?.addEventListener('click', () => {
+    document.getElementById('nodeStatus')?.classList.remove('hidden');
+  });
+
+  testApiButton?.addEventListener('click', () => {
+    const status = document.getElementById('apiStatus');
+    if (!status) return;
+    status.textContent = 'Verbindung erfolgreich getestet.';
+    status.classList.remove('hidden');
+  });
+
+  exportAuditButton?.addEventListener('click', () => {
+    document.getElementById('auditStatus')?.classList.remove('hidden');
+  });
+});
+</script>
+<script src="navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="dark" lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="favicon.svg?v=3" rel="icon" type="image/svg+xml"/>
+<link href="favicon.svg?v=3" rel="shortcut icon" type="image/svg+xml"/>
+<title>Profil entsperren - VLP Coburg EDQC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface": "#0b141c",
+        "surface-container": "#182028",
+        "surface-container-low": "#141c24",
+        "surface-container-highest": "#2d363e",
+        "background": "#0b141c",
+        "outline-variant": "#45474b",
+        "on-surface": "#dae3ee",
+        "on-surface-variant": "#c5c6cb",
+        "secondary": "#7bdb80",
+        "on-secondary": "#00390e",
+        "tertiary": "#fabc45",
+        "error": "#ffb4ab",
+        "error-container": "#93000a"
+      },
+      spacing: { xs: "4px", sm: "8px", md: "16px", lg: "24px", xl: "40px", gutter: "16px" },
+      fontFamily: { "data-display": ["JetBrains Mono"], "headline": ["Inter"], "body": ["Inter"], "label-caps": ["Inter"] },
+      fontSize: {
+        "headline-lg": ["34px", {"lineHeight": "42px", "fontWeight": "800"}],
+        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+      }
+    }
+  }
+}
+</script>
+<style>
+body {
+  min-height: 100vh;
+  background:
+    linear-gradient(135deg, rgba(123, 219, 128, 0.10), transparent 32%),
+    radial-gradient(circle at 80% 20%, rgba(250, 188, 69, 0.16), transparent 28%),
+    #0b141c;
+  color: #dae3ee;
+  font-family: "Inter", sans-serif;
+}
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+.profile-tile[data-selected="true"] {
+  border-color: #7bdb80;
+  background: rgba(123, 219, 128, 0.12);
+  box-shadow: 0 0 0 1px rgba(123, 219, 128, 0.25), 0 20px 70px rgba(0, 0, 0, 0.3);
+}
+</style>
+</head>
+<body class="font-body overflow-hidden">
+<main class="min-h-screen grid grid-cols-1 xl:grid-cols-[1fr_420px]">
+<section class="flex flex-col justify-between p-md md:p-xl">
+<header class="flex items-center justify-between">
+<div>
+<p class="font-label-caps text-label-caps text-secondary">VLP Coburg EDQC</p>
+<h1 class="font-headline text-headline-lg mt-xs">Profil entsperren</h1>
+</div>
+<div class="hidden md:flex items-center gap-sm rounded-xl border border-outline-variant bg-surface-container/80 px-md py-sm">
+<span class="material-symbols-outlined text-secondary">desktop_windows</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Startbildschirm</span>
+</div>
+</header>
+
+<div class="my-xl">
+<p class="text-on-surface-variant max-w-2xl">Wähle dein Profil aus und entsperre die Ansicht mit dem Profilnamen als Passwort.</p>
+<div class="mt-lg grid grid-cols-2 md:grid-cols-4 gap-md" id="profileGrid"></div>
+</div>
+
+<footer class="text-xs text-on-surface-variant">
+Keine automatische Start- oder Landebahnfreigabe. Die finale Entscheidung trifft immer eine autorisierte Person.
+</footer>
+</section>
+
+<aside class="bg-surface-container/90 border-l border-outline-variant p-md md:p-lg flex items-center">
+<form class="w-full rounded-2xl border border-outline-variant bg-surface shadow-2xl overflow-hidden" id="unlockForm">
+<div class="p-lg border-b border-outline-variant">
+<p class="font-label-caps text-label-caps text-secondary">Ausgewähltes Profil</p>
+<div class="mt-md flex items-center gap-md">
+<img alt="Profilbild" class="h-20 w-20 rounded-2xl border border-outline-variant object-cover bg-surface-container-highest" id="selectedProfileImage" src="assets/profiles/fluglotsen.png"/>
+<div>
+<h2 class="font-headline text-headline-sm" id="selectedProfileName">Fluglotsen</h2>
+<p class="text-sm text-on-surface-variant" id="selectedProfileSubtitle">Tower / Funk</p>
+</div>
+</div>
+</div>
+<div class="p-lg space-y-md">
+<label class="block">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Passwort</span>
+<input class="mt-xs w-full rounded-xl border border-outline-variant bg-background px-md py-sm text-on-surface outline-none focus:border-secondary" id="passwordInput" autocomplete="off" type="password" placeholder="Profilname eingeben"/>
+</label>
+<p class="hidden rounded-lg border border-error/40 bg-error-container/30 px-sm py-xs text-sm text-error" id="passwordError">Falsches Passwort. Das Passwort ist der Profilname.</p>
+<button class="w-full rounded-xl bg-secondary px-md py-sm font-bold text-on-secondary hover:brightness-110 active:scale-[0.98] transition-all" type="submit">
+Profil entsperren
+</button>
+<p class="text-xs text-on-surface-variant" id="targetHint">Nach dem Entsperren öffnet sich das Dashboard.</p>
+</div>
+</form>
+</aside>
+</main>
+<script>
+const profiles = [
+  { name: 'IT', subtitle: 'Technischer Betrieb', icon: 'dns', image: 'assets/profiles/it.png', target: 'sensors.html' },
+  { name: 'Management', subtitle: 'Leitung', icon: 'business_center', image: 'assets/profiles/management.png', target: 'dashboard.html' },
+  { name: 'Winterdienst', subtitle: 'Einsatzleitung Schnee', icon: 'ac_unit', image: 'assets/profiles/winterdienst.png', target: 'dashboard.html' },
+  { name: 'Fluglotsen', subtitle: 'Tower / Funk', icon: 'settings_input_antenna', image: 'assets/profiles/fluglotsen.png', target: 'dashboard.html' },
+  { name: 'Controlling', subtitle: 'Kennzahlen', icon: 'query_stats', image: 'assets/profiles/controlling.png', target: 'dashboard.html' },
+  { name: 'Luftfahrtbehörde', subtitle: 'Aufsicht', icon: 'gavel', image: 'assets/profiles/luftfahrtbehoerde.png', target: 'history.html' },
+  { name: 'Entwicklungsteam', subtitle: 'Software', icon: 'code', image: 'assets/profiles/entwicklungsteam.png', target: 'dashboard.html' },
+  { name: 'Sicherheitsabteilung', subtitle: 'Safety / Security', icon: 'shield', image: 'assets/profiles/sicherheitsabteilung.png', target: 'dashboard.html' }
+];
+
+const profileGrid = document.getElementById('profileGrid');
+const selectedProfileImage = document.getElementById('selectedProfileImage');
+const selectedProfileName = document.getElementById('selectedProfileName');
+const selectedProfileSubtitle = document.getElementById('selectedProfileSubtitle');
+const passwordInput = document.getElementById('passwordInput');
+const passwordError = document.getElementById('passwordError');
+const unlockForm = document.getElementById('unlockForm');
+const targetHint = document.getElementById('targetHint');
+let selectedProfile = profiles.find((profile) => profile.name === localStorage.getItem('selectedProfile')) || profiles.find((profile) => profile.name === 'Fluglotsen');
+
+function renderProfiles() {
+  profileGrid.innerHTML = '';
+  profiles.forEach((profile) => {
+    const button = document.createElement('button');
+    button.className = 'profile-tile rounded-2xl border border-outline-variant bg-surface-container/80 p-sm text-left transition-all hover:bg-surface-container-highest active:scale-[0.98]';
+    button.type = 'button';
+    button.dataset.selected = String(profile.name === selectedProfile.name);
+    button.innerHTML = `
+      <img class="h-24 w-full rounded-xl border border-outline-variant object-cover bg-surface-container-highest" alt="${profile.name} Profilbild" src="${profile.image}">
+      <div class="mt-sm flex items-center gap-xs">
+        <span class="material-symbols-outlined text-sm text-secondary">${profile.icon}</span>
+        <span class="text-sm font-bold">${profile.name}</span>
+      </div>
+      <p class="mt-xs text-[11px] text-on-surface-variant">${profile.subtitle}</p>
+    `;
+    button.addEventListener('click', () => {
+      selectedProfile = profile;
+      passwordInput.value = '';
+      passwordError.classList.add('hidden');
+      updateSelectedProfile();
+      renderProfiles();
+      passwordInput.focus();
+    });
+    profileGrid.appendChild(button);
+  });
+}
+
+function updateSelectedProfile() {
+  selectedProfileImage.src = selectedProfile.image;
+  selectedProfileImage.alt = `${selectedProfile.name} Profil`;
+  selectedProfileName.textContent = selectedProfile.name;
+  selectedProfileSubtitle.textContent = selectedProfile.subtitle;
+  const targetLabel = selectedProfile.target.includes('sensor') ? 'Sensoren' : selectedProfile.target.includes('history') ? 'Historie' : 'Dashboard';
+  targetHint.textContent = `Nach dem Entsperren öffnet sich ${targetLabel}.`;
+}
+
+unlockForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  if (passwordInput.value.trim() !== selectedProfile.name) {
+    passwordError.classList.remove('hidden');
+    passwordInput.select();
+    passwordInput.focus();
+    return;
+  }
+  localStorage.setItem('selectedProfile', selectedProfile.name);
+  window.location.href = selectedProfile.target;
+});
+
+updateSelectedProfile();
+renderProfiles();
+passwordInput.focus();
+</script>
+</body>
+</html>

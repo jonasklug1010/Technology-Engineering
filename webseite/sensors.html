@@ -199,7 +199,7 @@
 <!-- Sensor Status Overview (Bento Grid Style) -->
 <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
 <!-- Map Section -->
-<div class="md:col-span-8 bg-surface-container-low border border-outline-variant p-sm flex flex-col min-h-[400px]">
+<div class="md:col-span-8 bg-surface-container-low border border-outline-variant p-sm flex flex-col min-h-[400px]" data-role-section="sensor-map">
 <div class="flex justify-between items-center px-sm py-xs mb-sm">
 <div class="flex items-center gap-sm">
 <span class="material-symbols-outlined text-primary">map</span>
@@ -251,7 +251,7 @@
 </div>
 </div>
 <!-- Status Panel (Right) -->
-<div class="md:col-span-4 space-y-gutter">
+<div class="md:col-span-4 space-y-gutter" data-role-section="sensor-defects sensor-audit">
 <!-- Defect List -->
 <div class="bg-surface-container-high border border-outline-variant p-md flex-1">
 <div class="flex justify-between items-center mb-md">
@@ -265,7 +265,7 @@
 <p class="text-xs font-bold">R2-F-Zentral</p>
 <p class="text-[10px] text-on-surface-variant">Seit 12:44 • Keine Daten</p>
 </div>
-<button class="bg-error px-2 py-1 text-[10px] font-bold text-white uppercase rounded-sm">Fix</button>
+<button class="bg-error px-2 py-1 text-[10px] font-bold text-white uppercase rounded-sm" data-role-action="sensor-fix" type="button">Fix</button>
 </div>
 <!-- Error Item 2 -->
 <div class="bg-surface-container-lowest border-l-4 border-error p-sm flex justify-between items-center">
@@ -273,7 +273,7 @@
 <p class="text-xs font-bold">R1-K-Anflug</p>
 <p class="text-[10px] text-on-surface-variant">Seit 08:12 • Kurzschluss</p>
 </div>
-<button class="bg-error px-2 py-1 text-[10px] font-bold text-white uppercase rounded-sm">Fix</button>
+<button class="bg-error px-2 py-1 text-[10px] font-bold text-white uppercase rounded-sm" data-role-action="sensor-fix" type="button">Fix</button>
 </div>
 <!-- Error Item 3 -->
 <div class="bg-surface-container-lowest border-l-4 border-error p-sm flex justify-between items-center">
@@ -281,12 +281,12 @@
 <p class="text-xs font-bold">W4-G-Taxiway</p>
 <p class="text-[10px] text-on-surface-variant">Seit 01:20 • Akku kritisch</p>
 </div>
-<button class="bg-error px-2 py-1 text-[10px] font-bold text-white uppercase rounded-sm">Fix</button>
+<button class="bg-error px-2 py-1 text-[10px] font-bold text-white uppercase rounded-sm" data-role-action="sensor-fix" type="button">Fix</button>
 </div>
 </div>
 </div>
 <!-- Audit Log -->
-<div class="bg-surface-container-low border border-outline-variant p-md">
+<div class="bg-surface-container-low border border-outline-variant p-md" data-role-section="sensor-audit">
 <div class="flex items-center justify-between mb-md">
 <span class="font-label-caps text-label-caps">Sensor-Auditlog</span>
 <span class="material-symbols-outlined text-primary text-sm">manage_search</span>
@@ -325,7 +325,7 @@
 </div>
 </div>
 <!-- Sensor Details -->
-<section class="bg-surface-container border border-outline-variant p-md">
+<section class="bg-surface-container border border-outline-variant p-md" data-role-section="sensor-details">
 <div class="flex items-center justify-between mb-md">
 <span class="font-label-caps text-label-caps">Ausführliche Sensordaten</span>
 <span class="material-symbols-outlined text-primary">analytics</span>
@@ -393,7 +393,7 @@
 </div>
 <!-- Sticky FAB for Action -->
 <div class="fixed bottom-lg right-lg z-50">
-<button class="bg-secondary p-4 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all text-on-secondary flex items-center gap-2 group" id="addSensorButton" type="button">
+<button class="bg-secondary p-4 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all text-on-secondary flex items-center gap-2 group" data-role-action="add-sensor" id="addSensorButton" type="button">
 <span class="material-symbols-outlined" data-weight="fill">add_circle</span>
 <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 font-bold text-xs uppercase whitespace-nowrap">Neuer Sensor</span>
 </button>

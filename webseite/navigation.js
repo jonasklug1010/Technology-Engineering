@@ -7,6 +7,7 @@ function getRoute(element) {
   if (label.includes('sensors') || label.includes('sensoren') || label.includes('router')) return 'sensors.html';
   if (label.includes('history') || label.includes('historie')) return 'history.html';
   if (label.includes('alarms') || label.includes('alarme') || label.includes('notifications_active')) return 'alarms.html';
+  if (label.includes('settings') || label.includes('einstellungen')) return 'settings.html';
 
   return null;
 }
@@ -44,7 +45,7 @@ function initResponsiveShell() {
       <span class="material-symbols-outlined">history</span>
       <span class="text-[10px]">Historie</span>
     </a>
-    <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+    <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="settings.html">
       <span class="material-symbols-outlined">settings</span>
       <span class="text-[10px]">Einstellungen</span>
     </a>
@@ -63,8 +64,203 @@ const profileChoices = [
   { name: 'Sicherheitsabteilung', subtitle: 'Safety / Security', icon: 'shield', image: 'assets/profiles/sicherheitsabteilung.png' }
 ];
 
+// Rollenmatrix: legt zentral fest, welche Bereiche, Inhalte und Aktionen pro Profil sichtbar oder erlaubt sind.
+const roleRules = {
+  IT: {
+    pages: ['sensors', 'history', 'settings'],
+    sections: ['sensor-map', 'sensor-defects', 'sensor-audit', 'sensor-details', 'sensor-history', 'technical-settings', 'alarm-logic', 'sensor-admin', 'api-backend', 'compliance', 'roles-admin', 'system-status'],
+    actions: ['sensor-fix', 'add-sensor', 'edit-settings', 'save-logic', 'register-node', 'test-api', 'export-report', 'manage-roles'],
+    summary: 'Technische Diagnose, Sensorstatus, Logs und Konfiguration. Keine operative Runway-Quittierung.'
+  },
+  Management: {
+    pages: ['dashboard', 'history'],
+    sections: ['overview-status', 'runway-status', 'forecast', 'weather-data', 'runway-map', 'risk-trend', 'flight-check', 'management-kpis', 'measurement-history', 'runway-history', 'alarm-history'],
+    actions: ['view-report'],
+    summary: 'Verdichtete Lage, Prognose und Historie zur Betriebsbewertung ohne operative oder technische Eingriffe.'
+  },
+  Winterdienst: {
+    pages: ['dashboard', 'sensors', 'history'],
+    sections: ['overview-status', 'runway-status', 'forecast', 'weather-data', 'runway-map', 'risk-trend', 'flight-check', 'management-kpis', 'sensor-map', 'sensor-details', 'measurement-history', 'runway-history', 'alarm-history'],
+    actions: ['ack-warning', 'flight-check', 'runway-state', 'document-action'],
+    summary: 'Live-Wetterdaten, kritische Bereiche und Warnungen für Einsatzplanung und dokumentierte Reaktion.'
+  },
+  Fluglotsen: {
+    pages: ['dashboard', 'history'],
+    sections: ['overview-status', 'runway-status', 'forecast', 'weather-data', 'runway-map', 'risk-trend', 'flight-check', 'management-kpis', 'runway-history', 'alarm-history'],
+    actions: ['flight-check', 'comment-operation'],
+    summary: 'Schnelle Betriebslage, Flugzeiten, Prognose und Warnungsgrund ohne technische Detailbearbeitung.'
+  },
+  Controlling: {
+    pages: ['dashboard', 'history'],
+    sections: ['overview-status', 'runway-status', 'forecast', 'weather-data', 'runway-map', 'risk-trend', 'flight-check', 'management-kpis', 'measurement-history', 'runway-history', 'alarm-history'],
+    actions: ['view-report', 'export-report'],
+    summary: 'Kennzahlen, Sperrzeiten, Fehlalarme und Kostenbetrachtung ohne operative Bedienung.'
+  },
+  Luftfahrtbehörde: {
+    pages: ['history', 'settings'],
+    sections: ['measurement-history', 'sensor-history', 'runway-history', 'alarm-history', 'compliance'],
+    actions: ['view-report', 'export-report'],
+    summary: 'Nachweis- und Kontrollsicht mit Leserechten, Auditdaten und Entscheidungsprotokollen.'
+  },
+  Entwicklungsteam: {
+    pages: ['dashboard', 'sensors', 'history', 'settings'],
+    sections: ['overview-status', 'runway-status', 'forecast', 'weather-data', 'runway-map', 'risk-trend', 'flight-check', 'management-kpis', 'sensor-map', 'sensor-defects', 'sensor-audit', 'sensor-details', 'measurement-history', 'sensor-history', 'runway-history', 'alarm-history', 'compliance', 'technical-settings', 'alarm-logic', 'sensor-admin', 'api-backend', 'roles-admin', 'system-status'],
+    actions: ['ack-warning', 'flight-check', 'runway-state', 'document-action', 'document-decision', 'comment-operation', 'view-report', 'export-report', 'sensor-fix', 'add-sensor', 'edit-settings', 'save-logic', 'register-node', 'test-api', 'manage-roles', 'run-analysis'],
+    summary: 'Vollzugriff für Entwicklung, Tests, Analyse, Konfiguration und technische Fehlersuche.'
+  },
+  Sicherheitsabteilung: {
+    pages: ['dashboard', 'history', 'settings'],
+    sections: ['overview-status', 'runway-status', 'forecast', 'weather-data', 'runway-map', 'risk-trend', 'flight-check', 'management-kpis', 'measurement-history', 'runway-history', 'alarm-history', 'alarm-logic', 'compliance'],
+    actions: ['ack-warning', 'document-decision', 'runway-state', 'export-report'],
+    summary: 'Risikobewertung, Alarmgründe und dokumentierte Entscheidungen ohne technische Admin-Funktionen.'
+  }
+};
+
 function getStoredProfile() {
-  return profileChoices.find((profile) => profile.name === localStorage.getItem('selectedProfile')) || profileChoices[0];
+  return profileChoices.find((profile) => profile.name === localStorage.getItem('selectedProfile')) || profileChoices.find((profile) => profile.name === 'Fluglotsen') || profileChoices[0];
+}
+
+function getPageKey() {
+  const fileName = window.location.pathname.split('/').pop() || 'dashboard.html';
+  if (fileName.includes('start') || fileName.includes('index')) return 'start';
+  if (fileName.includes('dashboard') || fileName.includes('Design')) return 'dashboard';
+  if (fileName.includes('sensor')) return 'sensors';
+  if (fileName.includes('history')) return 'history';
+  if (fileName.includes('settings')) return 'settings';
+  if (fileName.includes('alarm')) return 'history';
+  return 'dashboard';
+}
+
+function getPageUrl(pageKey) {
+  return {
+    dashboard: 'dashboard.html',
+    sensors: 'sensors.html',
+    history: 'history.html',
+    settings: 'settings.html'
+  }[pageKey] || 'dashboard.html';
+}
+
+function getNavKey(element) {
+  const route = getRoute(element);
+  if (route?.includes('dashboard')) return 'dashboard';
+  if (route?.includes('sensor')) return 'sensors';
+  if (route?.includes('history')) return 'history';
+  if (route?.includes('settings')) return 'settings';
+  return null;
+}
+
+function includesAny(ruleValues, requiredValues) {
+  return requiredValues.some((value) => ruleValues.includes(value));
+}
+
+function getRoleRule(profileName) {
+  return roleRules[profileName] || roleRules.IT;
+}
+
+function ensureRoleSummary(profile, rule) {
+  const contentRoot = document.querySelector('main > div[class*="p-md"], main > div[class*="overflow-y-auto"], main');
+  if (!contentRoot) return;
+
+  let summary = document.querySelector('[data-role-summary]');
+  if (!summary) {
+    summary = document.createElement('section');
+    summary.setAttribute('data-role-summary', '');
+    summary.className = 'bg-surface-container-low border border-outline-variant p-md rounded-lg';
+    contentRoot.prepend(summary);
+  }
+
+  summary.innerHTML = `
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-sm">
+      <div>
+        <p class="font-label-caps text-label-caps text-secondary">Rollenbasierte Ansicht</p>
+        <p class="text-sm text-on-surface-variant mt-xs">${rule.summary}</p>
+      </div>
+      <span class="inline-flex items-center gap-xs rounded-lg border border-outline-variant bg-surface-container px-sm py-xs text-xs font-bold text-on-surface">
+        <span class="material-symbols-outlined text-sm">${profile.icon}</span>${profile.name}
+      </span>
+    </div>
+  `;
+}
+
+function applyRoleNavigation(rule) {
+  document.querySelectorAll('nav a').forEach((link) => {
+    const navKey = getNavKey(link);
+    if (!navKey) return;
+
+    const isAllowed = rule.pages.includes(navKey);
+    const container = link.closest('li') || link;
+    container.classList.toggle('hidden', !isAllowed);
+    link.setAttribute('aria-hidden', String(!isAllowed));
+    link.tabIndex = isAllowed ? 0 : -1;
+  });
+
+  document.querySelectorAll('[data-mobile-main-nav]').forEach((nav) => {
+    const visibleLinks = [...nav.querySelectorAll('a')].filter((link) => !link.classList.contains('hidden'));
+    nav.style.gridTemplateColumns = `repeat(${Math.max(visibleLinks.length, 1)}, minmax(0, 1fr))`;
+  });
+}
+
+function applyRoleSections(rule) {
+  document.querySelectorAll('[data-role-section]').forEach((section) => {
+    const requiredSections = section.dataset.roleSection.split(/\s+/).filter(Boolean);
+    const isAllowed = includesAny(rule.sections, requiredSections);
+    section.classList.toggle('hidden', !isAllowed);
+    section.setAttribute('aria-hidden', String(!isAllowed));
+  });
+}
+
+function applyRoleActions(rule) {
+  document.querySelectorAll('[data-role-action]').forEach((element) => {
+    const requiredActions = element.dataset.roleAction.split(/\s+/).filter(Boolean);
+    const isAllowed = includesAny(rule.actions, requiredActions);
+
+    element.disabled = !isAllowed;
+    element.classList.toggle('opacity-40', !isAllowed);
+    element.classList.toggle('cursor-not-allowed', !isAllowed);
+    element.title = isAllowed ? '' : 'Für dieses Profil gesperrt';
+    element.setAttribute('aria-disabled', String(!isAllowed));
+  });
+}
+
+function roleAllowsAction(element, profile = getStoredProfile()) {
+  const requiredActions = element.dataset.roleAction?.split(/\s+/).filter(Boolean) || [];
+  return !requiredActions.length || includesAny(getRoleRule(profile.name).actions, requiredActions);
+}
+
+function applyRoleAccess(profile = getStoredProfile()) {
+  const rule = getRoleRule(profile.name);
+  const pageKey = getPageKey();
+
+  if (pageKey === 'start') return;
+
+  if (!rule.pages.includes(pageKey)) {
+    window.location.href = getPageUrl(rule.pages[0]);
+    return;
+  }
+
+  ensureRoleSummary(profile, rule);
+  applyRoleNavigation(rule);
+  applyRoleSections(rule);
+  applyRoleActions(rule);
+}
+
+window.applyRoleAccess = applyRoleAccess;
+
+function initStartScreenShortcut() {
+  if (getPageKey() === 'start' || document.querySelector('[data-start-screen-shortcut]')) return;
+
+  const headerRight = document.querySelector('header > div:last-child');
+  if (!headerRight) return;
+
+  const button = document.createElement('a');
+  button.href = 'start.html';
+  button.setAttribute('data-start-screen-shortcut', '');
+  button.className = 'w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95 text-on-surface-variant';
+  button.title = 'Zum Startbildschirm';
+  button.setAttribute('aria-label', 'Zum Startbildschirm');
+  button.innerHTML = '<span class="material-symbols-outlined">desktop_windows</span>';
+
+  headerRight.prepend(button);
 }
 
 function requestProfilePassword(profile) {
@@ -213,6 +409,8 @@ function initSharedProfiles() {
         name.textContent = profile.name;
       }
     });
+    applyRoleAccess(profile);
+    window.dispatchEvent(new CustomEvent('profile-changed', { detail: profile }));
   }
 
   triggers.forEach((trigger) => {
@@ -241,6 +439,7 @@ function initSharedProfiles() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initResponsiveShell();
+  initStartScreenShortcut();
 
   document.querySelectorAll('a, button').forEach((element) => {
     const href = getRoute(element);
@@ -258,4 +457,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   initSharedProfiles();
+  applyRoleAccess(getStoredProfile());
+
+  document.addEventListener('click', (event) => {
+    const restrictedElement = event.target.closest('[data-role-action]');
+    if (!restrictedElement || roleAllowsAction(restrictedElement)) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    applyRoleAccess(getStoredProfile());
+  }, true);
+
+  document.addEventListener('submit', (event) => {
+    const restrictedSubmit = event.submitter?.closest('[data-role-action]');
+    if (!restrictedSubmit || roleAllowsAction(restrictedSubmit)) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    applyRoleAccess(getStoredProfile());
+  }, true);
 });
