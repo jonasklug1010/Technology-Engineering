@@ -5,6 +5,7 @@ function getRoute(element) {
   if (label.includes('dashboard') || label.includes('dash')) return 'dashboard.html';
   if (label.includes('runways') || label.includes('flight_takeoff')) return 'runways.html';
   if (label.includes('sensors') || label.includes('sensoren') || label.includes('router')) return 'sensors.html';
+  if (label.includes('history') || label.includes('historie')) return 'history.html';
   if (label.includes('alarms') || label.includes('alarme') || label.includes('notifications_active')) return 'alarms.html';
 
   return null;
@@ -39,7 +40,7 @@ function initResponsiveShell() {
       <span class="material-symbols-outlined">router</span>
       <span class="text-[10px]">Sensoren</span>
     </a>
-    <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+    <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="history.html">
       <span class="material-symbols-outlined">history</span>
       <span class="text-[10px]">Historie</span>
     </a>

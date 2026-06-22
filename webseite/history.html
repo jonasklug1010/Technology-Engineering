@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html class="dark" lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="favicon.svg?v=3" rel="icon" type="image/svg+xml"/>
+<link href="favicon.svg?v=3" rel="shortcut icon" type="image/svg+xml"/>
+<title>Historie - VLP Coburg EDQC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface": "#0b141c",
+              "surface-container": "#182028",
+              "surface-container-low": "#141c24",
+              "surface-container-lowest": "#060f16",
+              "surface-container-high": "#222b33",
+              "surface-container-highest": "#2d363e",
+              "background": "#0b141c",
+              "outline-variant": "#45474b",
+              "on-surface": "#dae3ee",
+              "on-surface-variant": "#c5c6cb",
+              "secondary": "#7bdb80",
+              "secondary-container": "#007124",
+              "on-secondary": "#00390e",
+              "tertiary": "#fabc45",
+              "tertiary-container": "#261800",
+              "error": "#ffb4ab",
+              "error-container": "#93000a"
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem"
+            },
+            spacing: {
+              xs: "4px",
+              sm: "8px",
+              md: "16px",
+              lg: "24px",
+              xl: "40px",
+              gutter: "16px"
+            },
+            fontFamily: {
+              "data-display": ["JetBrains Mono"],
+              "data-label": ["JetBrains Mono"],
+              "headline-md": ["Inter"],
+              "headline-sm": ["Inter"],
+              "headline-lg": ["Inter"],
+              "body-md": ["Inter"],
+              "label-caps": ["Inter"]
+            },
+            fontSize: {
+              "data-display": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+              "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+              "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+              "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+              "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+              "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+              "data-label": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+      body {
+        background-color: #0b141c;
+        color: #dae3ee;
+        font-family: "Inter", sans-serif;
+        overflow-x: hidden;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        vertical-align: middle;
+      }
+      .history-table th,
+      .history-table td {
+        border-bottom: 1px solid #45474b;
+        padding: 12px;
+      }
+      @media (max-width: 767px) {
+        body {
+          padding-bottom: 72px;
+        }
+      }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden h-screen flex">
+<aside class="flex flex-col h-screen pt-16 bg-surface-container h-full w-64 fixed left-0 top-0 border-r border-outline-variant z-50">
+<div class="px-lg pb-lg">
+<h1 class="font-headline-sm text-headline-sm text-on-surface">EDQC-System</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant opacity-70">Coburg Monitoring</p>
+</div>
+<nav class="flex-1 space-y-xs">
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="dashboard.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="sensors.html">
+<span class="material-symbols-outlined">router</span>
+<span class="font-label-caps text-label-caps">Sensoren</span>
+</a>
+<a class="text-secondary font-bold border-l-4 border-secondary bg-surface-container-highest px-4 py-3 flex items-center gap-md transition-all active:opacity-80" href="history.html">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-caps text-label-caps">Historie</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface px-4 py-3 flex items-center gap-md hover:bg-surface-variant transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps text-label-caps">Einstellungen</span>
+</a>
+</nav>
+<div class="p-lg border-t border-outline-variant flex items-center gap-md">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+</div>
+<div>
+<p class="text-xs font-bold">History-Archiv</p>
+<p class="text-[10px] text-secondary">Nachvollziehbar</p>
+</div>
+</div>
+</aside>
+<main class="flex-1 ml-64 flex flex-col h-screen overflow-hidden">
+<header class="flex justify-between items-center px-lg w-full sticky top-0 z-50 bg-surface border-b border-outline-variant h-16">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-extrabold text-on-surface tracking-tight">VLP Coburg EDQC</span>
+<div class="h-6 w-[1px] bg-outline-variant hidden md:block ml-md"></div>
+<div class="hidden md:flex gap-md ml-md">
+<span class="font-label-caps text-label-caps text-secondary font-bold">MONITORING</span>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex gap-sm">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95 text-on-surface-variant" type="button">
+<span class="material-symbols-outlined">schedule</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-highest transition-colors cursor-pointer active:scale-95 text-on-surface-variant" type="button">
+<span class="material-symbols-outlined">sensors</span>
+</button>
+</div>
+<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-highest p-1 rounded-lg transition-colors active:scale-95" data-profile-trigger>
+<img alt="IT Profil" class="w-9 h-9 rounded-full border-2 border-outline-variant object-cover bg-surface-container-high" data-profile-image src="assets/profiles/it.png"/>
+<span class="font-label-caps text-label-caps text-on-surface hidden lg:block" data-profile-name>IT</span>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-md lg:p-lg space-y-gutter bg-background">
+<section class="grid grid-cols-1 gap-gutter">
+<article class="bg-surface-container border border-outline-variant p-md">
+<div class="flex items-center justify-between mb-md">
+<span class="font-label-caps text-label-caps">Langzeitverlauf der Messwerte</span>
+<span class="material-symbols-outlined text-primary">monitoring</span>
+</div>
+<div class="overflow-x-auto">
+<table class="history-table w-full text-left text-sm">
+<thead class="text-on-surface-variant">
+<tr>
+<th>Messwert</th>
+<th class="text-right">Aktueller Wert</th>
+<th class="text-right">7-Tage-Min.</th>
+<th class="text-right">7-Tage-Max.</th>
+<th>Auffälligkeit</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Oberflächentemperatur</td><td class="text-right font-data-label text-tertiary">2,1 °C</td><td class="text-right">-3,4 °C</td><td class="text-right">11,8 °C</td><td>mehrfach nahe Gefrierpunkt</td></tr>
+<tr><td>Taupunkt</td><td class="text-right font-data-label">0,6 °C</td><td class="text-right">-5,2 °C</td><td class="text-right">7,9 °C</td><td>oft nahe Lufttemperatur</td></tr>
+<tr><td>Lufttemperatur</td><td class="text-right font-data-label">3,8 °C</td><td class="text-right">-2,1 °C</td><td class="text-right">13,4 °C</td><td>stabil steigend</td></tr>
+<tr><td>Niederschlag</td><td class="text-right font-data-label text-tertiary">0,4 mm/h</td><td class="text-right">0,0 mm/h</td><td class="text-right">6,8 mm/h</td><td>Starkregen am 16.06.</td></tr>
+</tbody>
+</table>
+</div>
+</article>
+</section>
+<section class="grid grid-cols-1 xl:grid-cols-2 gap-gutter">
+<article class="bg-surface-container border border-outline-variant p-md">
+<div class="flex items-center justify-between mb-md">
+<span class="font-label-caps text-label-caps">Beispielhafte Verlaufseinträge</span>
+<span class="material-symbols-outlined text-primary">table_chart</span>
+</div>
+<div class="overflow-x-auto">
+<table class="history-table w-full text-left text-sm">
+<thead class="text-on-surface-variant">
+<tr><th>Zeitpunkt</th><th class="text-right">Oberfläche</th><th class="text-right">Taupunkt</th><th class="text-right">Lufttemp.</th><th class="text-right">Niederschlag</th></tr>
+</thead>
+<tbody>
+<tr><td>18.06.2026, 06:00</td><td class="text-right">-0,8 °C</td><td class="text-right">-1,1 °C</td><td class="text-right">0,4 °C</td><td class="text-right">0,0 mm/h</td></tr>
+<tr><td>18.06.2026, 07:00</td><td class="text-right">-0,3 °C</td><td class="text-right">-0,6 °C</td><td class="text-right">1,0 °C</td><td class="text-right">0,1 mm/h</td></tr>
+<tr><td>18.06.2026, 08:00</td><td class="text-right">0,9 °C</td><td class="text-right">0,1 °C</td><td class="text-right">2,4 °C</td><td class="text-right">0,0 mm/h</td></tr>
+<tr><td>18.06.2026, 09:00</td><td class="text-right text-tertiary">2,1 °C</td><td class="text-right">0,6 °C</td><td class="text-right">3,8 °C</td><td class="text-right text-tertiary">0,4 mm/h</td></tr>
+</tbody>
+</table>
+</div>
+</article>
+<article class="bg-surface-container border border-outline-variant p-md">
+<div class="flex items-center justify-between mb-md">
+<span class="font-label-caps text-label-caps">Langzeitverlauf der Sensoren</span>
+<span class="material-symbols-outlined text-primary">router</span>
+</div>
+<div class="overflow-x-auto">
+<table class="history-table w-full text-left text-sm">
+<thead class="text-on-surface-variant">
+<tr><th>Sensor</th><th class="text-right">Verfügbarkeit</th><th class="text-right">Ausfälle</th><th>Letzter Ausfall</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr><td>Oberflächentemperatur-Sensor</td><td class="text-right text-secondary">99,2 %</td><td class="text-right">2</td><td>14.06.2026, 03:20</td><td>Stabil</td></tr>
+<tr><td>Taupunkt-Sensor</td><td class="text-right text-tertiary">97,8 %</td><td class="text-right">5</td><td>17.06.2026, 22:10</td><td>Beobachten</td></tr>
+<tr><td>Lufttemperatur-Sensor</td><td class="text-right text-secondary">99,8 %</td><td class="text-right">1</td><td>08.06.2026, 11:40</td><td>Stabil</td></tr>
+<tr><td>Niederschlagssensor</td><td class="text-right text-error">92,4 %</td><td class="text-right">11</td><td>19.06.2026, 05:15</td><td>Kritisch</td></tr>
+<tr><td>Runway-Zustandssensor</td><td class="text-right text-secondary">98,9 %</td><td class="text-right">3</td><td>16.06.2026, 14:00</td><td>Stabil</td></tr>
+</tbody>
+</table>
+</div>
+</article>
+</section>
+<section class="grid grid-cols-1 xl:grid-cols-2 gap-gutter">
+<article class="bg-surface-container border border-outline-variant p-md">
+<div class="flex items-center justify-between mb-md">
+<span class="font-label-caps text-label-caps">Sensor-History</span>
+<span class="material-symbols-outlined text-tertiary">manage_search</span>
+</div>
+<div class="space-y-sm">
+<div class="bg-surface-container-lowest border border-outline-variant p-sm"><p class="text-xs font-bold">19.06.2026, 05:15 · Niederschlagssensor</p><p class="text-[11px] text-on-surface-variant">Warnung: Keine Aktualisierung für 15 Minuten</p></div>
+<div class="bg-surface-container-lowest border border-outline-variant p-sm"><p class="text-xs font-bold">17.06.2026, 22:10 · Taupunkt-Sensor</p><p class="text-[11px] text-on-surface-variant">Offline: Signalverlust</p></div>
+<div class="bg-surface-container-lowest border border-outline-variant p-sm"><p class="text-xs font-bold">16.06.2026, 14:00 · Runway-Zustandssensor</p><p class="text-[11px] text-on-surface-variant">Prüfung: Werte unplausibel</p></div>
+<div class="bg-surface-container-lowest border border-outline-variant p-sm"><p class="text-xs font-bold">14.06.2026, 03:20 · Oberflächentemperatur-Sensor</p><p class="text-[11px] text-on-surface-variant">Offline: kurzzeitiger Ausfall</p></div>
+</div>
+</article>
+<article class="bg-surface-container border border-outline-variant p-md">
+<div class="flex items-center justify-between mb-md">
+<span class="font-label-caps text-label-caps">Runway-History</span>
+<span class="material-symbols-outlined text-primary">flight_takeoff</span>
+</div>
+<div class="overflow-x-auto">
+<table class="history-table w-full text-left text-sm">
+<thead class="text-on-surface-variant"><tr><th>Datum</th><th>Zeitraum</th><th>Dauer</th><th>Status</th><th>Grund</th></tr></thead>
+<tbody>
+<tr><td>18.06.2026</td><td>06:20-07:05</td><td>45 min</td><td class="text-error">Gesperrt</td><td>Glättegefahr</td></tr>
+<tr><td>16.06.2026</td><td>14:10-14:35</td><td>25 min</td><td class="text-error">Gesperrt</td><td>Starkregen</td></tr>
+<tr><td>13.06.2026</td><td>09:00-09:20</td><td>20 min</td><td class="text-tertiary">Eingeschränkt</td><td>Sensorprüfung</td></tr>
+<tr><td>10.06.2026</td><td>21:40-22:30</td><td>50 min</td><td class="text-error">Gesperrt</td><td>Nebel</td></tr>
+<tr><td>07.06.2026</td><td>05:50-06:15</td><td>25 min</td><td class="text-error">Gesperrt</td><td>Vereisungsgefahr</td></tr>
+</tbody>
+</table>
+</div>
+<p class="text-sm text-on-surface-variant mt-md">In den letzten 30 Tagen war die Runway insgesamt <strong class="text-on-surface">3 Stunden und 25 Minuten</strong> gesperrt oder eingeschränkt nutzbar. Häufigste Gründe waren Glättegefahr, Nebel und starker Niederschlag.</p>
+</article>
+</section>
+<section class="bg-surface-container border border-outline-variant p-md">
+<div class="flex items-center justify-between mb-md">
+<span class="font-label-caps text-label-caps">Alarmverlauf und Details</span>
+<span class="material-symbols-outlined text-error">notifications_active</span>
+</div>
+<div class="overflow-x-auto">
+<table class="history-table w-full text-left text-sm">
+<thead class="text-on-surface-variant">
+<tr><th>Zeitpunkt</th><th>Alarmtyp</th><th>Auslösender Messwert</th><th class="text-right">Wert</th><th class="text-right">Schwellwert</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr><td>18.06.2026, 06:18</td><td>Glättegefahr</td><td>Oberflächentemperatur</td><td class="text-right text-error">-0,8 °C</td><td class="text-right">&lt; 0,0 °C</td><td>bestätigt</td></tr>
+<tr><td>16.06.2026, 14:08</td><td>Starkregen</td><td>Niederschlag</td><td class="text-right text-tertiary">6,8 mm/h</td><td class="text-right">&gt; 5,0 mm/h</td><td>bearbeitet</td></tr>
+<tr><td>10.06.2026, 21:35</td><td>Nebelgefahr</td><td>Taupunkt / Lufttemperatur</td><td class="text-right">Differenz 0,4 °C</td><td class="text-right">&lt; 1,0 °C</td><td>bestätigt</td></tr>
+<tr><td>07.06.2026, 05:47</td><td>Vereisungsgefahr</td><td>Oberflächentemperatur</td><td class="text-right text-error">-1,2 °C</td><td class="text-right">&lt; 0,0 °C</td><td>bearbeitet</td></tr>
+<tr><td>03.06.2026, 23:12</td><td>Sensorfehler</td><td>Niederschlagssensor</td><td class="text-right">Kein Signal</td><td class="text-right">&gt; 10 min Ausfall</td><td>Technik geprüft</td></tr>
+</tbody>
+</table>
+</div>
+<div class="mt-md bg-surface-container-lowest border border-outline-variant p-md">
+<p class="font-label-caps text-label-caps text-error">Alarmdetail: Glättegefahr</p>
+<p class="text-sm text-on-surface-variant mt-xs"><strong class="text-on-surface">Ausgelöst:</strong> 18.06.2026, 06:18 · <strong class="text-on-surface">Messwert:</strong> Oberflächentemperatur -0,8 °C · <strong class="text-on-surface">Folge:</strong> Runway von 06:20 bis 07:05 gesperrt · <strong class="text-on-surface">Status:</strong> bestätigt und abgeschlossen · <strong class="text-on-surface">Handlung:</strong> Sichtprüfung durchgeführt, Betrieb nach Temperaturanstieg wieder aus Wettersicht möglich.</p>
+</div>
+</section>
+</div>
+</main>
+<script src="navigation.js"></script>
+</body>
+</html>
