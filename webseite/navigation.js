@@ -266,12 +266,12 @@ function initStartScreenShortcut() {
 function requestProfilePassword(profile) {
   return new Promise((resolve) => {
     const modal = document.createElement('div');
-    modal.className = 'fixed inset-0 flex items-center justify-center bg-scrim/75 px-md';
+    modal.className = 'fixed inset-0 flex items-center justify-center bg-scrim/75 px-md backdrop-blur-md backdrop-saturate-75';
     modal.style.zIndex = '9999';
     modal.setAttribute('role', 'dialog');
     modal.setAttribute('aria-modal', 'true');
     modal.innerHTML = `
-      <form class="w-full max-w-md rounded-xl border border-outline-variant bg-surface-container shadow-2xl overflow-hidden" data-password-form>
+      <form class="w-full max-w-md rounded-xl border border-outline-variant bg-surface-container/95 shadow-2xl overflow-hidden ring-1 ring-white/5" data-password-form>
         <div class="flex items-center justify-between border-b border-outline-variant p-md">
           <div>
             <p class="font-label-caps text-label-caps text-secondary">Geschütztes Profil</p>
@@ -328,11 +328,11 @@ function requestProfilePassword(profile) {
 
 function createProfileModal(onSelect) {
   const modal = document.createElement('div');
-  modal.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-scrim/70 px-md';
+  modal.className = 'fixed inset-0 z-50 hidden items-center justify-center bg-scrim/75 px-md backdrop-blur-md backdrop-saturate-75';
   modal.setAttribute('role', 'dialog');
   modal.setAttribute('aria-modal', 'true');
   modal.innerHTML = `
-    <div class="w-full max-w-4xl rounded-xl border border-outline-variant bg-surface-container shadow-2xl overflow-hidden">
+    <div class="w-full max-w-4xl rounded-xl border border-outline-variant bg-surface-container/95 shadow-2xl overflow-hidden ring-1 ring-white/5">
       <div class="flex items-center justify-between border-b border-outline-variant p-md">
         <div>
           <p class="font-label-caps text-label-caps text-primary">Profil wechseln</p>

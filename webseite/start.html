@@ -59,6 +59,9 @@ body {
   background: rgba(123, 219, 128, 0.12);
   box-shadow: 0 0 0 1px rgba(123, 219, 128, 0.25), 0 20px 70px rgba(0, 0, 0, 0.3);
 }
+.profile-image {
+  object-position: center 28%;
+}
 </style>
 </head>
 <body class="font-body overflow-hidden">
@@ -76,7 +79,7 @@ body {
 </header>
 
 <div class="my-xl">
-<p class="text-on-surface-variant max-w-2xl">Wähle dein Profil aus und entsperre die Ansicht mit dem Profilnamen als Passwort.</p>
+<p class="text-on-surface-variant max-w-2xl">Wähle dein Profil aus und entsperre die Ansicht mit deinem Passwort.</p>
 <div class="mt-lg grid grid-cols-2 md:grid-cols-4 gap-md" id="profileGrid"></div>
 </div>
 
@@ -100,9 +103,9 @@ Keine automatische Start- oder Landebahnfreigabe. Die finale Entscheidung trifft
 <div class="p-lg space-y-md">
 <label class="block">
 <span class="font-label-caps text-label-caps text-on-surface-variant">Passwort</span>
-<input class="mt-xs w-full rounded-xl border border-outline-variant bg-background px-md py-sm text-on-surface outline-none focus:border-secondary" id="passwordInput" autocomplete="off" type="password" placeholder="Profilname eingeben"/>
+<input class="mt-xs w-full rounded-xl border border-outline-variant bg-background px-md py-sm text-on-surface outline-none focus:border-secondary" id="passwordInput" autocomplete="off" type="password" placeholder="Passwort eingeben"/>
 </label>
-<p class="hidden rounded-lg border border-error/40 bg-error-container/30 px-sm py-xs text-sm text-error" id="passwordError">Falsches Passwort. Das Passwort ist der Profilname.</p>
+<p class="hidden rounded-lg border border-error/40 bg-error-container/30 px-sm py-xs text-sm text-error" id="passwordError">Falsches Passwort. Bitte erneut eingeben.</p>
 <button class="w-full rounded-xl bg-secondary px-md py-sm font-bold text-on-secondary hover:brightness-110 active:scale-[0.98] transition-all" type="submit">
 Profil entsperren
 </button>
@@ -141,7 +144,7 @@ function renderProfiles() {
     button.type = 'button';
     button.dataset.selected = String(profile.name === selectedProfile.name);
     button.innerHTML = `
-      <img class="h-24 w-full rounded-xl border border-outline-variant object-cover bg-surface-container-highest" alt="${profile.name} Profilbild" src="${profile.image}">
+      <img class="profile-image h-24 w-full rounded-xl border border-outline-variant object-cover bg-surface-container-highest" alt="${profile.name} Profilbild" src="${profile.image}">
       <div class="mt-sm flex items-center gap-xs">
         <span class="material-symbols-outlined text-sm text-secondary">${profile.icon}</span>
         <span class="text-sm font-bold">${profile.name}</span>
